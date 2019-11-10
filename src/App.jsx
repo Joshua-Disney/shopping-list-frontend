@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import LoginForm from "./components/Login/LoginForm";
 import logo from "./logo.svg";
+import { getThing } from "./store/actions";
+import LoginForm from "./components/Login/LoginForm";
+
 import "./App.css";
 
 class App extends Component {
@@ -31,4 +34,15 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    isProcessing: state.isProcessing
+  };
+};
+
+const mapDispatchToProps = { getThing };
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
