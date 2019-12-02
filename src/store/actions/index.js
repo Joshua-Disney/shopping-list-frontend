@@ -12,6 +12,10 @@ export {
   LOGIN_START,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOG_OUT_START,
+  LOG_OUT_SUCCESS,
+  LOG_OUT_FAILURE,
   register,
-  login
+  login,
+  logout
 } from "./loginActions";

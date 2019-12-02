@@ -3,16 +3,9 @@ import { connect } from "react-redux";
 
 import logo from "../logo.svg";
 import LoginForm from "./Login/LoginForm";
-import { getThing } from "../store/actions";
+import { getThing, logout } from "../store/actions";
 
 class Home extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      isLoggedIn: false
-    };
-  }
-
   render() {
     return (
       <div>
@@ -20,8 +13,18 @@ class Home extends React.Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1>Code me, Papi!</h1>
           <p>This should say the word thing: {this.props.thing}</p>
-          {this.state.isLoggedIn ? (
-            <h2>Logged the fuck in my dude!</h2>
+          {this.props.isLoggedIn ? (
+            <div>
+              <h2>Logged the fuck in my dude!</h2>
+              <button
+                onClick={event => {
+                  event.preventDefault();
+                  this.props.logout();
+                }}
+              >
+                Log out
+              </button>
+            </div>
           ) : (
             <LoginForm />
           )}
@@ -31,15 +34,13 @@ class Home extends React.Component {
   }
 }
 
-const mapStateToProps = ({ thingReducer }) => {
+const mapStateToProps = ({ loginReducer, thingReducer }) => {
   return {
+    isLoggedIn: loginReducer.isLoggedIn,
     thing: thingReducer.thing
   };
 };
 
-const mapDispatchToProps = { getThing };
+const mapDispatchToProps = { getThing, logout };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
