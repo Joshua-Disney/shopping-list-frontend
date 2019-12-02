@@ -1,48 +1,24 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import logo from "./logo.svg";
-import { getThing } from "./store/actions";
+import Home from "./components/Home";
 import LoginForm from "./components/Login/LoginForm";
 
 import "./App.css";
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      thing: "thing",
-      isLoggedIn: false
-    };
-  }
-
+class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1>Code me, Papi!</h1>
-          <p>This should say the word thing: {this.state.thing}</p>
-          {this.state.isLoggedIn ? (
-            <h2>Logged the fuck in my dude!</h2>
-          ) : (
-            <LoginForm />
-          )}
-        </header>
-      </div>
+      <Router>
+        <div className="App">
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/login" component={LoginForm} />
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    isProcessing: state.isProcessing
-  };
-};
-
-const mapDispatchToProps = { getThing };
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default App;

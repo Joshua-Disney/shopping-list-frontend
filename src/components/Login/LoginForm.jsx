@@ -1,12 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
+import { connect } from "react-redux";
 
-class LoginForm extends Component {
+import { register, login } from "../../store/actions";
+
+class LoginForm extends React.Component {
   constructor() {
     super();
     this.state = {
       email: "",
       password: "",
-      confirmPassword: "this will be a second password"
+      confirmPassword: ""
     };
   }
 
@@ -20,31 +23,98 @@ class LoginForm extends Component {
     alert(
       "A name was submitted: " +
         this.state.email +
+        " " +
         this.state.password +
+        " " +
         this.state.confirmPassword
     );
+  };
+
+  handleRegister = (event, banana) => {
+    event.preventDefault();
+    console.log("event: ", event);
+    console.log("state: ", { banana });
+
+    // register()
   };
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form
+          onSubmit={
+            event => {
+              event.preventDefault();
+              this.props.register({
+                email: this.state.email,
+                password: this.state.password
+              });
+            }
+            //   event => {
+            //     this.handleRegister(event, {
+            //       email: this.state.email,
+            //       password: this.state.password
+            //     });
+            //   }
+          }
+        >
           <div>
             <input
               type="text"
               name="email"
-              placeholder="email..."
+              placeholder="Email..."
               value={this.state.email}
               onChange={this.handleChange}
             />
             <input
-              type="text"
+              type="password"
               name="password"
-              placeholder="password..."
+              placeholder="Password..."
               value={this.state.password}
               onChange={this.handleChange}
             />
-            <button type="submit">Submit</button>
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm password..."
+              value={this.state.confirmPassword}
+              onChange={this.handleChange}
+            />
+            <button type="submit">Register</button>
+          </div>
+        </form>
+        <form
+          onSubmit={event => {
+            event.preventDefault();
+            this.props.login({
+              email: this.state.email,
+              password: this.state.password
+            });
+          }}
+        >
+          <div>
+            <input
+              type="text"
+              name="email"
+              placeholder="Email..."
+              value={this.state.email}
+              onChange={this.handleChange}
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password..."
+              value={this.state.password}
+              onChange={this.handleChange}
+            />
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm password..."
+              value={this.state.confirmPassword}
+              onChange={this.handleChange}
+            />
+            <button type="submit">Login</button>
           </div>
         </form>
       </div>
@@ -52,4 +122,6 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm;
+const mapDispatchToProps = { register, login };
+
+export default connect(null, mapDispatchToProps)(LoginForm);
