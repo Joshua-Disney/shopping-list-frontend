@@ -1,7 +1,7 @@
 import {
-  FETCH_THING_START,
-  FETCH_THING_SUCCESS,
-  FETCH_THING_FAILURE
+  GET_THING_START,
+  GET_THING_SUCCESS,
+  GET_THING_FAILURE
 } from "../actions";
 
 const initialState = {
@@ -13,20 +13,20 @@ const initialState = {
 
 const thingReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_THING_START:
+    case GET_THING_START:
       return {
         ...state,
         isProcessing: true,
         error: null
       };
-    case FETCH_THING_SUCCESS:
+    case GET_THING_SUCCESS:
       return {
         ...state,
         isProcessing: false,
         things: action.payload,
         error: null
       };
-    case FETCH_THING_FAILURE:
+    case GET_THING_FAILURE:
       return {
         ...state,
         isProcessing: false,

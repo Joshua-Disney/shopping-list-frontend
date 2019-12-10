@@ -15,6 +15,7 @@ const initialState = {
   isLoggingOut: false,
   isLoggingIn: false,
   isLoggedIn: false,
+  account_id: "",
   message: "",
   error: null
 };
@@ -54,6 +55,7 @@ const loginReducer = (state = initialState, action) => {
         ...state,
         isLoggingIn: false,
         isLoggedIn: true,
+        account_id: action.payload.account_id,
         message: action.payload.message,
         error: null
       };
@@ -75,6 +77,7 @@ const loginReducer = (state = initialState, action) => {
         ...state,
         isLoggingOut: false,
         isLoggedIn: false,
+        account_id: "",
         message: action.payload,
         error: null
       };
