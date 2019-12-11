@@ -17,10 +17,10 @@ class Home extends React.Component {
     console.log("this.state: ", this.state);
   }
 
-  componentDidUpdate() {
-    this.setState({ ...this.state, account: this.props.accout });
-    console.log("this.state: ", this.state);
-  }
+  // componentDidUpdate() {
+  //   this.setState({ ...this.state, account: this.props.accout });
+  //   // console.log("this.state: ", this.state);
+  // }
 
   render() {
     return (
@@ -34,7 +34,7 @@ class Home extends React.Component {
             <button
               onClick={event => {
                 event.preventDefault();
-                this.props.logout();
+                this.props.logout(this.props);
               }}
             >
               Log out

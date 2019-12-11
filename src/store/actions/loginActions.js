@@ -43,7 +43,7 @@ export const login = user => async dispatch => {
   }
 };
 
-export const logout = () => dispatch => {
+export const logout = props => dispatch => {
   dispatch({ type: LOG_OUT_START });
   try {
     console.log("logging out");
