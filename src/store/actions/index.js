@@ -22,7 +22,9 @@ export {
   LOG_OUT_START,
   LOG_OUT_SUCCESS,
   LOG_OUT_FAILURE,
+  WELCOME_BACK,
   register,
   login,
-  logout
+  logout,
+  welcomeBack
 } from "./loginActions";

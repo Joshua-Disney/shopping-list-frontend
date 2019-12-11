@@ -12,6 +12,8 @@ export const LOG_OUT_START = "LOG_OUT_START";
 export const LOG_OUT_SUCCESS = "LOG_OUT_SUCCESS";
 export const LOG_OUT_FAILURE = "LOG_OUT_FAILURE";
 
+export const WELCOME_BACK = "WELCOME_BACK";
+
 export const register = newUser => async dispatch => {
   dispatch({ type: REGISTER_START });
   try {
@@ -53,4 +55,8 @@ export const logout = props => dispatch => {
     console.log(error);
     dispatch({ type: LOG_OUT_FAILURE, payload: "Failed to log out." });
   }
+};
+
+export const welcomeBack = () => dispatch => {
+  dispatch({ type: WELCOME_BACK });
 };

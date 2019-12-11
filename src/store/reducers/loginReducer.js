@@ -7,7 +7,8 @@ import {
   LOGIN_FAILURE,
   LOG_OUT_START,
   LOG_OUT_SUCCESS,
-  LOG_OUT_FAILURE
+  LOG_OUT_FAILURE,
+  WELCOME_BACK
 } from "../actions";
 
 const initialState = {
@@ -86,6 +87,12 @@ const loginReducer = (state = initialState, action) => {
         ...state,
         isLoggingOut: false,
         message: action.payload,
+        error: null
+      };
+    case WELCOME_BACK:
+      return {
+        ...state,
+        isLoggedIn: true,
         error: null
       };
     default:

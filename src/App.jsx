@@ -15,7 +15,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log("isLoggedIn", this.props.isLoggedIn);
+    console.log("isLoggedIn: ", this.props.isLoggedIn);
   }
 
   render() {
@@ -23,7 +23,7 @@ class App extends React.Component {
       <Router>
         <div className="App">
           <Switch>
-            <Private path="/home" component={Home} />
+            <Private exact path="/" component={Home} />
             <Route path="/login" component={LoginForm} />
           </Switch>
         </div>

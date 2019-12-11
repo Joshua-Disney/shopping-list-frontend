@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import { register, login } from "../../store/actions";
+import { register, login, welcomeBack } from "../../store/actions";
 
 const LoginForm = props => {
   const [state, setState] = useState({
@@ -13,12 +13,20 @@ const LoginForm = props => {
   const [token] = useState(() => {
     return localStorage.getItem("token");
   });
+
   useEffect(() => {
     console.log("rendering");
     if (token) {
-      props.history.push("/home");
+      props.welcomeBack();
     }
   }, []);
+
+  useEffect(() => {
+    if (props.isLoggedIn) {
+      props.history.push("/");
+    }
+  }, [props.isLoggedIn, props.history]);
+
   console.log("state: ", state);
   console.log("props: ", props);
   console.log("token: ", token);
@@ -44,14 +52,14 @@ const LoginForm = props => {
     <div>
       <form
         onSubmit={
-          handleSubmit
-          // event => {
-          //   event.preventDefault();
-          //   props.register({
-          //     email: state.email,
-          //     password: state.password
-          //   });
-          // }
+          // handleSubmit
+          event => {
+            event.preventDefault();
+            props.register({
+              email: state.email,
+              password: state.password
+            });
+          }
         }
       >
         <div>
@@ -81,14 +89,14 @@ const LoginForm = props => {
       </form>
       <form
         onSubmit={
-          handleSubmit
-          //   event => {
-          //   event.preventDefault();
-          //   props.login({
-          //     email: state.email,
-          //     password: state.password
-          //   });
-          // }
+          // handleSubmit
+          event => {
+            event.preventDefault();
+            props.login({
+              email: state.email,
+              password: state.password
+            });
+          }
         }
       >
         <div>
@@ -120,6 +128,12 @@ const LoginForm = props => {
   );
 };
 
-const mapDispatchToProps = { register, login };
+const mapStateToProps = ({ loginReducer }) => {
+  return {
+    isLoggedIn: loginReducer.isLoggedIn
+  };
+};
 
-export default connect(null, mapDispatchToProps)(LoginForm);
+const mapDispatchToProps = { register, login, welcomeBack };
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
