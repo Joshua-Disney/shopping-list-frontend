@@ -1,127 +1,139 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import { register, login } from "../../store/actions";
+import { register, login, welcomeBack } from "../../store/actions";
 
-class LoginForm extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      email: "",
-      password: "",
-      confirmPassword: ""
-    };
-  }
+const LoginForm = props => {
+  const [state, setState] = useState({
+    email: "",
+    password: "",
+    confirmPassword: ""
+  });
 
-  handleChange = event => {
+  const [token] = useState(() => {
+    return localStorage.getItem("token");
+  });
+
+  useEffect(() => {
+    console.log("rendering");
+    if (token) {
+      props.welcomeBack();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (props.isLoggedIn) {
+      props.history.push("/");
+    }
+  }, [props.isLoggedIn, props.history]);
+
+  console.log("state: ", state);
+  console.log("props: ", props);
+  console.log("token: ", token);
+
+  const handleChange = event => {
     event.preventDefault();
-    this.setState({ [event.target.name]: event.target.value });
+    setState({ ...state, [event.target.name]: event.target.value });
   };
 
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
     alert(
       "A name was submitted: " +
-        this.state.email +
+        state.email +
         " " +
-        this.state.password +
+        state.password +
         " " +
-        this.state.confirmPassword
+        state.confirmPassword
     );
   };
 
-  handleRegister = (event, banana) => {
-    event.preventDefault();
-    console.log("event: ", event);
-    console.log("state: ", { banana });
-
-    // register()
-  };
-
-  render() {
-    return (
-      <div>
-        <form
-          onSubmit={
-            event => {
-              event.preventDefault();
-              this.props.register({
-                email: this.state.email,
-                password: this.state.password
-              });
-            }
-            //   event => {
-            //     this.handleRegister(event, {
-            //       email: this.state.email,
-            //       password: this.state.password
-            //     });
-            //   }
-          }
-        >
-          <div>
-            <input
-              type="text"
-              name="email"
-              placeholder="Email..."
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password..."
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm password..."
-              value={this.state.confirmPassword}
-              onChange={this.handleChange}
-            />
-            <button type="submit">Register</button>
-          </div>
-        </form>
-        <form
-          onSubmit={event => {
+  return (
+    <div>
+      <form
+        onSubmit={
+          // handleSubmit
+          event => {
             event.preventDefault();
-            this.props.login({
-              email: this.state.email,
-              password: this.state.password
+            props.register({
+              email: state.email,
+              password: state.password
             });
-          }}
-        >
-          <div>
-            <input
-              type="text"
-              name="email"
-              placeholder="Email..."
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password..."
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm password..."
-              value={this.state.confirmPassword}
-              onChange={this.handleChange}
-            />
-            <button type="submit">Login</button>
-          </div>
-        </form>
-      </div>
-    );
-  }
-}
+          }
+        }
+      >
+        <div>
+          <input
+            type="text"
+            name="email"
+            placeholder="Email..."
+            value={state.email}
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password..."
+            value={state.password}
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm password..."
+            value={state.confirmPassword}
+            onChange={handleChange}
+          />
+          <button type="submit">Register</button>
+        </div>
+      </form>
+      <form
+        onSubmit={
+          // handleSubmit
+          event => {
+            event.preventDefault();
+            props.login({
+              email: state.email,
+              password: state.password
+            });
+          }
+        }
+      >
+        <div>
+          <input
+            type="text"
+            name="email"
+            placeholder="Email..."
+            value={state.email}
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password..."
+            value={state.password}
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm password..."
+            value={state.confirmPassword}
+            onChange={handleChange}
+          />
+          <button type="submit">Login</button>
+        </div>
+      </form>
+    </div>
+  );
+};
 
-const mapDispatchToProps = { register, login };
+const mapStateToProps = ({ loginReducer }) => {
+  return {
+    isLoggedIn: loginReducer.isLoggedIn
+  };
+};
 
-export default connect(null, mapDispatchToProps)(LoginForm);
+const mapDispatchToProps = { register, login, welcomeBack };
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

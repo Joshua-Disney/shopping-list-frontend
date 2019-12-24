@@ -1,7 +1,14 @@
 export {
-  FETCH_THING_START,
-  FETCH_THING_SUCCESS,
-  FETCH_THING_FAILURE,
+  GET_ACCOUNT_START,
+  GET_ACCOUNT_SUCCESS,
+  GET_ACCOUNT_FAILURE,
+  getAccount
+} from "./accountActions";
+
+export {
+  GET_THING_START,
+  GET_THING_SUCCESS,
+  GET_THING_FAILURE,
   getThing
 } from "./thingActions";
 
@@ -15,7 +22,9 @@ export {
   LOG_OUT_START,
   LOG_OUT_SUCCESS,
   LOG_OUT_FAILURE,
+  WELCOME_BACK,
   register,
   login,
-  logout
+  logout,
+  welcomeBack
 } from "./loginActions";
