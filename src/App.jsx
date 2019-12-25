@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Private from "./components/Helpers/privateRoute";
-import Home from "./components/Home";
+import Home from "./components/Home/Home";
 import LoginForm from "./components/Login/LoginForm";
 
 import "./App.css";

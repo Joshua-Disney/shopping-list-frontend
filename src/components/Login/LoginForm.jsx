@@ -15,7 +15,7 @@ const LoginForm = props => {
   });
 
   useEffect(() => {
-    console.log("rendering");
+    // console.log("rendering");
     if (token) {
       props.welcomeBack();
     }
@@ -27,9 +27,9 @@ const LoginForm = props => {
     }
   }, [props.isLoggedIn, props.history]);
 
-  console.log("state: ", state);
-  console.log("props: ", props);
-  console.log("token: ", token);
+  // console.log("state: ", state);
+  // console.log("props: ", props);
+  // console.log("token: ", token);
 
   const handleChange = event => {
     event.preventDefault();
