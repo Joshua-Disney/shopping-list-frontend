@@ -10,21 +10,26 @@ const Account = props => {
   useEffect(() => {
     console.log("grabbing account info");
     // console.log("account: ", props.account);
-    props.getAccount(props.account_id);
+    if (props.account_id > 0) {
+      props.getAccount(props.account_id);
+    }
   }, [props.account_id]);
 
   useEffect(() => {
-    setAccount({ account: props.account });
-  });
+    setAccount(props.account);
+    console.log("account props: ", props.account);
+  }, [props.account]);
+
+  console.log("account: ", account);
 
   return (
     <div>
       <h2>Account id: {props.account_id}</h2>
       {account ? (
         <div>
-          {account.profiles.forEach(profile => {
+          {/* {account.profiles.map(profile => {
             return <Profile key={profile.id} profile={profile} />;
-          })}
+          })} */}
         </div>
       ) : (
         <h3>This is where profiles would go if they existed.</h3>
