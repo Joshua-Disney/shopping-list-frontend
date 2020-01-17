@@ -1,24 +1,24 @@
 import React from "react";
-// import { connect } from "react-redux";
 
-// import { getAccount } from "../../store/actions";
+import Want from "../Wants/wants";
+import Need from "../Needs/needs";
 
 const Profile = props => {
   return (
     <div>
       <h3>Profile name: {props.profile.name}</h3>
+      <div>
+        {props.profile.needs.map(need => {
+          return <Need key={need.id} need={need} />;
+        })}
+      </div>
+      <div>
+        {props.profile.wants.map(want => {
+          return <Want key={want.id} want={want} />;
+        })}
+      </div>
     </div>
   );
 };
-
-// const mapStateToProps = ({ accountReducer }) => {
-//   return {
-//     account: accountReducer.account
-//   };
-// };
-
-// const mapDispatchToProps = { getAccount };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Profile);
 
 export default Profile;
