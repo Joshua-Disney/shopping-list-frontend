@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
 import { getAccount } from "../../store/actions";
-import Profile from "./Profiles/profile";
+import Profile from "../Profiles/profile";
 
 const Account = props => {
   const [account, setAccount] = useState({});
@@ -27,9 +27,9 @@ const Account = props => {
       <h2>Account id: {props.account_id}</h2>
       {account ? (
         <div>
-          {/* {account.profiles.map(profile => {
+          {account.profiles.map(profile => {
             return <Profile key={profile.id} profile={profile} />;
-          })} */}
+          })}
         </div>
       ) : (
         <h3>This is where profiles would go if they existed.</h3>
