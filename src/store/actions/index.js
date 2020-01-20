@@ -28,3 +28,10 @@ export {
   logout,
   welcomeBack
 } from "./loginActions";
+
+export {
+  CREATE_PROFILE_START,
+  CREATE_PROFILE_SUCCESS,
+  CREATE_PROFILE_FAILURE,
+  createProfile
+} from "./profileActions";
