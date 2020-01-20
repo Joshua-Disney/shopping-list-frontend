@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Private from "./components/Helpers/privateRoute";
-import Home from "./components/Home";
+import Home from "./components/Home/Home";
 import LoginForm from "./components/Login/LoginForm";
+import ProfileForm from "./components/Profiles/profileForm";
 
 import "./App.css";
 
@@ -25,6 +26,7 @@ class App extends React.Component {
           <Switch>
             <Private exact path="/" component={Home} />
             <Route path="/login" component={LoginForm} />
+            <Private path="/add-profile" component={ProfileForm} />
           </Switch>
         </div>
       </Router>
