@@ -7,8 +7,11 @@ const LoginForm = props => {
   const [state, setState] = useState({
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
+    loggingIn: true
   });
+
+  console.log("logging in: ", state.loggingIn);
 
   const [token] = useState(() => {
     return localStorage.getItem("token");
@@ -50,80 +53,104 @@ const LoginForm = props => {
 
   return (
     <div>
-      <form
-        onSubmit={
-          // handleSubmit
-          event => {
-            event.preventDefault();
-            props.register({
-              email: state.email,
-              password: state.password
-            });
-          }
-        }
-      >
+      {state.loggingIn ? (
         <div>
-          <input
-            type="text"
-            name="email"
-            placeholder="Email..."
-            value={state.email}
-            onChange={handleChange}
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password..."
-            value={state.password}
-            onChange={handleChange}
-          />
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm password..."
-            value={state.confirmPassword}
-            onChange={handleChange}
-          />
-          <button type="submit">Register</button>
+          <form
+            onSubmit={
+              // handleSubmit
+              event => {
+                event.preventDefault();
+                props.login({
+                  email: state.email,
+                  password: state.password
+                });
+              }
+            }
+          >
+            <div>
+              <input
+                type="text"
+                name="email"
+                placeholder="Email..."
+                value={state.email}
+                onChange={handleChange}
+              />
+              <input
+                type="password"
+                name="password"
+                placeholder="Password..."
+                value={state.password}
+                onChange={handleChange}
+              />
+              <input
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirm password..."
+                value={state.confirmPassword}
+                onChange={handleChange}
+              />
+              <button type="submit">Login</button>
+            </div>
+          </form>
+          <button
+            onClick={event => {
+              event.preventDefault();
+              setState({ ...state, loggingIn: false });
+            }}
+          >
+            Don't have an account? Register here.
+          </button>
         </div>
-      </form>
-      <form
-        onSubmit={
-          // handleSubmit
-          event => {
-            event.preventDefault();
-            props.login({
-              email: state.email,
-              password: state.password
-            });
-          }
-        }
-      >
+      ) : (
         <div>
-          <input
-            type="text"
-            name="email"
-            placeholder="Email..."
-            value={state.email}
-            onChange={handleChange}
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password..."
-            value={state.password}
-            onChange={handleChange}
-          />
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm password..."
-            value={state.confirmPassword}
-            onChange={handleChange}
-          />
-          <button type="submit">Login</button>
+          <form
+            onSubmit={
+              // handleSubmit
+              event => {
+                event.preventDefault();
+                props.register({
+                  email: state.email,
+                  password: state.password
+                });
+                setState({ ...state, loggingIn: true });
+              }
+            }
+          >
+            <div>
+              <input
+                type="text"
+                name="email"
+                placeholder="Email..."
+                value={state.email}
+                onChange={handleChange}
+              />
+              <input
+                type="password"
+                name="password"
+                placeholder="Password..."
+                value={state.password}
+                onChange={handleChange}
+              />
+              <input
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirm password..."
+                value={state.confirmPassword}
+                onChange={handleChange}
+              />
+              <button type="submit">Register</button>
+            </div>
+          </form>
+          <button
+            onClick={event => {
+              event.preventDefault();
+              setState({ ...state, loggingIn: true });
+            }}
+          >
+            Already have an account? Log in here.
+          </button>
         </div>
-      </form>
+      )}
     </div>
   );
 };
