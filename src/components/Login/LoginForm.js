@@ -8,10 +8,9 @@ const LoginForm = props => {
     email: "",
     password: "",
     confirmPassword: "",
-    loggingIn: true
+    loggingIn: true,
+    loading: false
   });
-
-  console.log("logging in: ", state.loggingIn);
 
   const [token] = useState(() => {
     return localStorage.getItem("token");
@@ -53,7 +52,11 @@ const LoginForm = props => {
 
   return (
     <div>
-      {state.loggingIn ? (
+      {state.loading ? (
+        <div>
+          <h3>.......Loading.......</h3>
+        </div>
+      ) : state.loggingIn ? (
         <div>
           <form
             onSubmit={
@@ -64,6 +67,7 @@ const LoginForm = props => {
                   email: state.email,
                   password: state.password
                 });
+                setState({ ...state, loading: true });
               }
             }
           >
@@ -82,13 +86,13 @@ const LoginForm = props => {
                 value={state.password}
                 onChange={handleChange}
               />
-              <input
+              {/* <input
                 type="password"
                 name="confirmPassword"
                 placeholder="Confirm password..."
                 value={state.confirmPassword}
                 onChange={handleChange}
-              />
+              /> */}
               <button type="submit">Login</button>
             </div>
           </form>
@@ -112,7 +116,11 @@ const LoginForm = props => {
                   email: state.email,
                   password: state.password
                 });
-                setState({ ...state, loggingIn: true });
+                setState({ ...state, loading: true });
+                props.login({
+                  email: state.email,
+                  password: state.password
+                });
               }
             }
           >
@@ -131,13 +139,13 @@ const LoginForm = props => {
                 value={state.password}
                 onChange={handleChange}
               />
-              <input
+              {/* <input
                 type="password"
                 name="confirmPassword"
                 placeholder="Confirm password..."
                 value={state.confirmPassword}
                 onChange={handleChange}
-              />
+              /> */}
               <button type="submit">Register</button>
             </div>
           </form>
