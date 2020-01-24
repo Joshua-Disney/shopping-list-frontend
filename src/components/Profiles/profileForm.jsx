@@ -10,13 +10,6 @@ const ProfileForm = props => {
     account_id: props.account_id
   });
 
-  function doAThing(event) {
-    event.preventDefault();
-    console.log("profile: ", state);
-  }
-
-  console.log("profile form props: ", props);
-
   return (
     <div>
       <h1>This will be a form</h1>

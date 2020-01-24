@@ -35,3 +35,14 @@ export {
   CREATE_PROFILE_FAILURE,
   createProfile
 } from "./profileActions";
+
+export {
+  ADD_NEED_START,
+  ADD_NEED_SUCCESS,
+  ADD_NEED_FAILURE,
+  ADD_WANT_START,
+  ADD_WANT_SUCCESS,
+  ADD_WANT_FAILURE,
+  addNeed,
+  addWant
+} from "./listActions";
