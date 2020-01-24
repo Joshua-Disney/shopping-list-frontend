@@ -6,6 +6,8 @@ import Private from "./components/Helpers/privateRoute";
 import Home from "./components/Home/Home";
 import LoginForm from "./components/Login/LoginForm";
 import ProfileForm from "./components/Profiles/profileForm";
+import NeedForm from "./components/Needs/needForm";
+import WantForm from "./components/Wants/wantForm";
 
 import "./App.css";
 
@@ -27,6 +29,8 @@ class App extends React.Component {
             <Private exact path="/" component={Home} />
             <Route path="/login" component={LoginForm} />
             <Private path="/add-profile" component={ProfileForm} />
+            <Private path="/add-need" component={NeedForm} />
+            <Private path="/add-want" component={WantForm} />
           </Switch>
         </div>
       </Router>
