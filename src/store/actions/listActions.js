@@ -50,7 +50,7 @@ export const deleteNeed = id => async dispatch => {
   dispatch({ type: DELETE_NEED_START });
   try {
     console.log(
-      `https://disneys-shopping-list-backend.herokuapp.com/api/needs${id}`
+      `https://disneys-shopping-list-backend.herokuapp.com/api/needs/${id}`
     );
     const result = await axiosWithAuth().delete(
       `https://disneys-shopping-list-backend.herokuapp.com/api/needs/${id}`

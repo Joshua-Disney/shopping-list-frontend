@@ -5,19 +5,15 @@ import { Link } from "react-router-dom";
 import { deleteNeed, deleteWant } from "../../store/actions";
 
 import Want from "../Wants/wants";
-import Need from "../Needs/needs";
+// import Need from "../Needs/needs";
 
 const Profile = props => {
-  const [remove, setRemove] = React.useState(true);
+  const [remove, setRemove] = useState(true);
 
-  useEffect(() => {}, [remove]);
+  useEffect(() => {
+    console.log("remove: ", remove);
+  }, [remove]);
 
-  // ...put this line where you want to force a rerender
-
-  // ...make sure that {forceRerender} is "visible" in your js code
-  // ({forceRerender} will not actually be visible since booleans are
-  // not printed, but updating its value will nonetheless force a
-  // rerender)
   console.log("profile props: ", props);
   return (
     <div>
@@ -45,9 +41,14 @@ const Profile = props => {
             <div key={need.id}>
               <p>{need.name}</p>
               <button
-                onClick={() => {
+                onClick={event => {
+                  event.preventDefault();
+                  // console.log("Need shouldn't exist: ", need);
                   props.deleteNeed(need.id);
-                  setRemove(!remove);
+                  setTimeout(() => {
+                    setRemove(!remove);
+                  }, 3000);
+                  console.log("List of needs: ", props.profile.needs);
                 }}
               >
                 Delete Need
