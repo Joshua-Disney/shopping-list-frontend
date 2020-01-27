@@ -43,6 +43,14 @@ export {
   ADD_WANT_START,
   ADD_WANT_SUCCESS,
   ADD_WANT_FAILURE,
+  DELETE_NEED_START,
+  DELETE_NEED_SUCCESS,
+  DELETE_NEED_FAILURE,
+  DELETE_WANT_START,
+  DELETE_WANT_SUCCESS,
+  DELETE_WANT_FAILURE,
   addNeed,
-  addWant
+  addWant,
+  deleteNeed,
+  deleteWant
 } from "./listActions";

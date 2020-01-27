@@ -49,8 +49,11 @@ export const addWant = want => async dispatch => {
 export const deleteNeed = id => async dispatch => {
   dispatch({ type: DELETE_NEED_START });
   try {
-    const result = await axiosWithAuth().delete(
+    console.log(
       `https://disneys-shopping-list-backend.herokuapp.com/api/needs${id}`
+    );
+    const result = await axiosWithAuth().delete(
+      `https://disneys-shopping-list-backend.herokuapp.com/api/needs/${id}`
     );
     console.log("delete need result: ", result);
     dispatch({ type: DELETE_NEED_SUCCESS, payload: result.data });
@@ -64,7 +67,7 @@ export const deleteWant = id => async dispatch => {
   dispatch({ type: DELETE_WANT_START });
   try {
     const result = await axiosWithAuth().delete(
-      `https://disneys-shopping-list-backend.herokuapp.com/api/wants${id}`
+      `https://disneys-shopping-list-backend.herokuapp.com/api/wants/${id}`
     );
     console.log("delete want result: ", result);
     dispatch({ type: DELETE_WANT_SUCCESS, payload: result.data });

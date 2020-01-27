@@ -3,8 +3,8 @@ import React from "react";
 const Need = props => {
   return (
     <div>
-      {/* <p>Need id: {props.need.id}</p> */}
-      <h3>Need name: {props.need.name}</h3>
+      <p>Need id: {props.need.id}</p>
+      <p>{props.need.name}</p>
     </div>
   );
 };
