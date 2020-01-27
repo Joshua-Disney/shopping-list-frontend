@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { getAccount } from "../../store/actions";
 import Profile from "../Profiles/profile";
 
 const Account = props => {
@@ -22,13 +21,10 @@ const Account = props => {
   );
 };
 
-const mapStateToProps = ({ accountReducer, loginReducer }) => {
+const mapStateToProps = ({ loginReducer }) => {
   return {
-    account: accountReducer.account,
     account_id: loginReducer.account_id
   };
 };
 
-const mapDispatchToProps = { getAccount };
-
-export default connect(mapStateToProps, mapDispatchToProps)(Account);
+export default connect(mapStateToProps, {})(Account);
