@@ -7,6 +7,8 @@ export const GET_ACCOUNT_FAILURE = "GET_ACCOUNT_FAILURE";
 export const getAccount = id => async dispatch => {
   dispatch({ type: GET_ACCOUNT_START });
   try {
+    console.log("LOOOOG");
+
     const result = await axiosWithAuth().get(
       `https://disneys-shopping-list-backend.herokuapp.com/api/accounts/${id}`
     );

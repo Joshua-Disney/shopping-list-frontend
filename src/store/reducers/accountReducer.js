@@ -1,7 +1,8 @@
 import {
   GET_ACCOUNT_START,
   GET_ACCOUNT_SUCCESS,
-  GET_ACCOUNT_FAILURE
+  GET_ACCOUNT_FAILURE,
+  DELETE_NEED_SUCCESS
 } from "../actions";
 
 const initialState = {
@@ -34,6 +35,22 @@ const accountReducer = (state = initialState, action) => {
         message: action.payload.message,
         error: action.payload.error
       };
+    // case DELETE_NEED_SUCCESS:
+    //   const foundProfile = state.account.profiles.find(
+    //     profile => profile.id == action.profile_id
+    //   );
+    //   // const foundNeedIndex = foundProfile.needs.findIndex(
+    //   //   need => need.id == action.need_id
+    //   // );
+    //   // delete foundProfile.needs[foundNeedIndex]
+    //   const newAccount = {
+    //     ...state.account,
+    //     profiles: [...state.account.profiles]
+    //   };
+    //   return {
+    //     ...state,
+    //     error: null
+    //   };
     default:
       return state;
   }

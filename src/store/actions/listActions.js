@@ -1,4 +1,5 @@
 import axiosWithAuth from "../../components/Helpers/axiosWithAuth";
+import { getAccount } from "./accountActions";
 
 export const ADD_NEED_START = "ADD_NEED_START";
 export const ADD_NEED_SUCCESS = "ADD_NEED_SUCCESS";
@@ -47,16 +48,21 @@ export const addWant = want => async dispatch => {
 };
 
 export const deleteNeed = id => async dispatch => {
+  // export const deleteNeed = (profile_id, need_id) => async dispatch => {
   dispatch({ type: DELETE_NEED_START });
   try {
-    console.log(
-      `https://disneys-shopping-list-backend.herokuapp.com/api/needs/${id}`
-    );
     const result = await axiosWithAuth().delete(
       `https://disneys-shopping-list-backend.herokuapp.com/api/needs/${id}`
     );
     console.log("delete need result: ", result);
-    dispatch({ type: DELETE_NEED_SUCCESS, payload: result.data });
+    dispatch({
+      type: DELETE_NEED_SUCCESS,
+      payload: result.data
+      // profile_id,
+      // need_id
+    });
+    console.log("Getting account in theory???");
+    getAccount(localStorage.getItem("account_id"))(dispatch);
   } catch (error) {
     dispatch({ type: DELETE_NEED_FAILURE, payload: error });
     console.log("delete need error: ", error);
@@ -71,6 +77,7 @@ export const deleteWant = id => async dispatch => {
     );
     console.log("delete want result: ", result);
     dispatch({ type: DELETE_WANT_SUCCESS, payload: result.data });
+    getAccount(localStorage.getItem("account_id"))(dispatch);
   } catch (error) {
     dispatch({ type: DELETE_WANT_FAILURE, payload: error });
     console.log("delete want error: ", error);
