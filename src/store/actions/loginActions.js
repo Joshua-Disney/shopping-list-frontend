@@ -38,6 +38,7 @@ export const login = user => async dispatch => {
     );
     console.log("login result: ", result);
     localStorage.setItem("token", result.data.token);
+    localStorage.setItem("account_id", result.data.account_id);
     dispatch({ type: LOGIN_SUCCESS, payload: result.data });
   } catch (error) {
     console.log("login error: ", error);
@@ -50,6 +51,7 @@ export const logout = props => dispatch => {
   try {
     console.log("logging out");
     localStorage.removeItem("token");
+    localStorage.removeItem("account_id");
     dispatch({ type: LOG_OUT_SUCCESS, payload: "Successfully logged out." });
   } catch (error) {
     console.log(error);

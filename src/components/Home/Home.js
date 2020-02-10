@@ -9,8 +9,12 @@ import Account from "../Accounts/account";
 const Home = props => {
   useEffect(() => {
     console.log("grabbing account info");
-    if (props.account_id > 0) {
-      props.getAccount(props.account_id);
+    let account_id = props.account_id;
+    if (!account_id) {
+      account_id = localStorage.getItem("account_id");
+    }
+    if (account_id > 0) {
+      props.getAccount(account_id);
     }
   }, [props.account_id]);
 
@@ -24,7 +28,7 @@ const Home = props => {
         </header>
       ) : (
         <div>
-          <h3>.......Loading</h3>
+          <p>Something went wrong. Please log out and log back in.</p>
         </div>
       )}
       <button

@@ -43,12 +43,7 @@ const Profile = props => {
               <button
                 onClick={event => {
                   event.preventDefault();
-                  // console.log("Need shouldn't exist: ", need);
                   props.deleteNeed(need.id);
-                  setTimeout(() => {
-                    setRemove(!remove);
-                  }, 3000);
-                  console.log("List of needs: ", props.profile.needs);
                 }}
               >
                 Delete Need
@@ -60,12 +55,26 @@ const Profile = props => {
       <div>
         <h4>Wants</h4>
         {props.profile.wants.map(want => {
-          return <Want key={want.id} want={want} />;
+          return (
+            <div key={want.id}>
+              <p>{want.name}</p>
+              <button
+                onClick={event => {
+                  event.preventDefault();
+                  props.deleteWant(want.id);
+                }}
+              >
+                Delete Want
+              </button>
+            </div>
+          );
         })}
       </div>
     </div>
   );
 };
+
+// const mapStateToProps = ()
 
 const mapDispatchToProps = { deleteNeed, deleteWant };
 
