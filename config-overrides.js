@@ -1,9 +1,8 @@
-const rewireLess = require("react-app-rewire-less");
-
-module.exports = function override(config, env) {
-  config = rewireLess.withLoaderOptions({
-    javascriptEnabled: true
-  })(config, env);
-
-  return config;
-};
+const { override, addLessLoader } = require("customize-cra");
+module.exports = override(
+  addLessLoader({
+    javascriptEnabled: true,
+    importLoaders: true,
+    modifyVars: {}
+  })
+);
