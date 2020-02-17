@@ -9,7 +9,9 @@ import ProfileForm from "./components/Profiles/profileForm";
 import NeedForm from "./components/Needs/needForm";
 import WantForm from "./components/Wants/wantForm";
 
-import "./App.css";
+// import "./App.css";
+// import "./App.less";
+import "./less/index.less";
 
 class App extends React.Component {
   constructor(props) {
