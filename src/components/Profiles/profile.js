@@ -4,9 +4,6 @@ import { Link } from "react-router-dom";
 
 import { deleteNeed, deleteWant } from "../../store/actions";
 
-import Want from "../Wants/wants";
-// import Need from "../Needs/needs";
-
 const Profile = props => {
   const [remove, setRemove] = useState(true);
 
