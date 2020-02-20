@@ -51,13 +51,13 @@ const LoginForm = props => {
   };
 
   return (
-    <div>
+    <div className="login-container">
       {state.loading ? (
         <div>
           <h3>.......Loading.......</h3>
         </div>
       ) : state.loggingIn ? (
-        <div>
+        <div className="login-form">
           <form
             onSubmit={
               // handleSubmit
@@ -71,8 +71,9 @@ const LoginForm = props => {
               }
             }
           >
-            <div>
+            <div className="input-fields">
               <input
+                className="input-field"
                 type="text"
                 name="email"
                 placeholder="Email..."
@@ -80,6 +81,7 @@ const LoginForm = props => {
                 onChange={handleChange}
               />
               <input
+                className="input-field"
                 type="password"
                 name="password"
                 placeholder="Password..."
