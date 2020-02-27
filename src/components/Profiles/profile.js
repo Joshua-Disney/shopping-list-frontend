@@ -17,6 +17,7 @@ const Profile = props => {
     <div className="profile-container">
       <h3>{props.profile.name}</h3>
       <Link
+        className="add-list-button"
         to={{
           pathname: "/add-need",
           needProps: { profile_id: props.profile.id }
