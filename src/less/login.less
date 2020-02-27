@@ -1,5 +1,5 @@
 .login-container {
-  background-color: lightgreen;
+  background-color: #c7ebc7;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,11 +8,12 @@
 
   .login-form {
     background-color: @wild-sand;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
     margin-top: 5%;
-    padding-top: 1rem;
+    padding: 2rem;
     max-width: 50%;
-    height: 20rem;
-    border-radius: 1rem;
 
     .input-fields {
       display: flex;
@@ -20,8 +21,28 @@
       align-items: center;
 
       .input-field {
+        height: 3.5rem;
         max-width: 80%;
+        min-width: 25rem;
+        margin-bottom: 1rem;
       }
     }
+
+    p {
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .input-button {
+    color: darkgreen;
+    width: 100%;
+    font-size: 1.8rem;
+    // margin: trbl;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 2px solid darkgreen;
+    background-color: lightgreen;
+    border-radius: 1rem;
   }
 }

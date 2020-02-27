@@ -95,20 +95,24 @@ const LoginForm = props => {
                 value={state.confirmPassword}
                 onChange={handleChange}
               /> */}
-              <button type="submit">Login</button>
+              <button className="input-button" type="submit">
+                Login
+              </button>
             </div>
           </form>
+          <p>Don't have an account?</p>
           <button
+            className="input-button"
             onClick={event => {
               event.preventDefault();
               setState({ ...state, loggingIn: false });
             }}
           >
-            Don't have an account? Register here.
+            Register here.
           </button>
         </div>
       ) : (
-        <div>
+        <div className="login-form">
           <form
             onSubmit={
               // handleSubmit
@@ -126,8 +130,9 @@ const LoginForm = props => {
               }
             }
           >
-            <div>
+            <div className="input-fields">
               <input
+                className="input-field"
                 type="text"
                 name="email"
                 placeholder="Email..."
@@ -135,6 +140,7 @@ const LoginForm = props => {
                 onChange={handleChange}
               />
               <input
+                className="input-field"
                 type="password"
                 name="password"
                 placeholder="Password..."
@@ -148,16 +154,20 @@ const LoginForm = props => {
                 value={state.confirmPassword}
                 onChange={handleChange}
               /> */}
-              <button type="submit">Register</button>
+              <button className="input-button" type="submit">
+                Register
+              </button>
             </div>
           </form>
+          <p>Already have an account?</p>
           <button
+            className="input-button"
             onClick={event => {
               event.preventDefault();
               setState({ ...state, loggingIn: true });
             }}
           >
-            Already have an account? Log in here.
+            Log in here.
           </button>
         </div>
       )}
