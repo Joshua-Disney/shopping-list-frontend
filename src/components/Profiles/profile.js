@@ -12,6 +12,12 @@ const Profile = props => {
     console.log("remove: ", remove);
   }, [remove]);
 
+  // Set new background color
+  // Set a standard design for buttons
+  // Make each profile colapsable
+  // Lists as two columns or one?
+  // Grid format?
+
   console.log("profile props: ", props);
   return (
     <div className="profile-container">
