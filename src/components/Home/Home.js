@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { getThing, logout, getAccount } from "../../store/actions";
 
 import Account from "../Accounts/account";
+import Profile from "../Profiles/profile";
 
 const Home = props => {
   useEffect(() => {
@@ -20,18 +21,24 @@ const Home = props => {
 
   console.log("account props: ", props.account);
   return (
-    <div className="App-header">
+    <section className="app-main">
       {props.account.id > 0 ? (
-        <header>
-          <Account account={props.account} />
-          <Link to="/add-profile">Create New profile</Link>
-        </header>
+        <div>
+          {/* <Account account={props.account} /> */}
+          {props.account.profiles.map(profile => {
+            return <Profile key={profile.id} profile={profile} />;
+          })}
+          <Link className="add-list-button" to="/add-profile">
+            Create New profile
+          </Link>
+        </div>
       ) : (
         <div>
           <p>Something went wrong. Please log out and log back in.</p>
         </div>
       )}
       <button
+        className="logout-button"
         onClick={event => {
           event.preventDefault();
           props.logout(props);
@@ -39,7 +46,7 @@ const Home = props => {
       >
         Log out
       </button>
-    </div>
+    </section>
   );
 };
 

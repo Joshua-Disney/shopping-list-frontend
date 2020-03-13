@@ -20,26 +20,31 @@ const Profile = props => {
 
   console.log("profile props: ", props);
   return (
-    <div className="profile-container">
-      <h3>{props.profile.name}</h3>
-      <Link
-        className="add-list-button"
-        to={{
-          pathname: "/add-need",
-          needProps: { profile_id: props.profile.id }
-        }}
-      >
-        Create New need
-      </Link>
-      <Link
-        className="link"
-        to={{
-          pathname: "/add-want",
-          wantProps: { profile_id: props.profile.id }
-        }}
-      >
-        Create New want
-      </Link>
+    <section className="profile-container">
+      <div className="profile-name">
+        <p>Profile: </p>
+        <h3>{props.profile.name}</h3>
+      </div>
+      <div className="add-buttons">
+        <Link
+          className="add-list-button"
+          to={{
+            pathname: "/add-need",
+            needProps: { profile_id: props.profile.id }
+          }}
+        >
+          Create New need
+        </Link>
+        <Link
+          className="add=list-button"
+          to={{
+            pathname: "/add-want",
+            wantProps: { profile_id: props.profile.id }
+          }}
+        >
+          Create New want
+        </Link>
+      </div>
       <hr />
       <div className="list-container">
         <h4 className="headers">Needs</h4>
@@ -79,7 +84,7 @@ const Profile = props => {
           );
         })}
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -28,3 +28,5 @@ const mapStateToProps = ({ loginReducer }) => {
 };
 
 export default connect(mapStateToProps, {})(Account);
+
+// Dead component.  Archiving just in case.
