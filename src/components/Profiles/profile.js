@@ -12,29 +12,38 @@ const Profile = props => {
     console.log("remove: ", remove);
   }, [remove]);
 
+  // Set new background color
+  // Set a standard design for buttons
+  // Make each profile colapsable
+  // Lists as two columns or one?
+  // Grid format?
+
   console.log("profile props: ", props);
   return (
-    <div className="profile-container">
-      <h3>{props.profile.name}</h3>
-      <Link
-        className="add-list-button"
-        to={{
-          pathname: "/add-need",
-          needProps: { profile_id: props.profile.id }
-        }}
-      >
-        Create New need
-      </Link>
-      <Link
-        className="link"
-        to={{
-          pathname: "/add-want",
-          wantProps: { profile_id: props.profile.id }
-        }}
-      >
-        Create New want
-      </Link>
-      <hr />
+    <section className="profile-container">
+      <div>
+        <h3 className="profile-name">{props.profile.name}</h3>
+      </div>
+      <div className="add-buttons">
+        <Link
+          className="add-list-button"
+          to={{
+            pathname: "/add-need",
+            needProps: { profile_id: props.profile.id }
+          }}
+        >
+          Create Need
+        </Link>
+        <Link
+          className="add-list-button"
+          to={{
+            pathname: "/add-want",
+            wantProps: { profile_id: props.profile.id }
+          }}
+        >
+          Create Want
+        </Link>
+      </div>
       <div className="list-container">
         <h4 className="headers">Needs</h4>
         {props.profile.needs.map(need => {
@@ -48,7 +57,7 @@ const Profile = props => {
                   props.deleteNeed(need.id);
                 }}
               >
-                Delete Need
+                X
               </button>
             </div>
           );
@@ -67,13 +76,13 @@ const Profile = props => {
                   props.deleteWant(want.id);
                 }}
               >
-                Delete Want
+                X
               </button>
             </div>
           );
         })}
       </div>
-    </div>
+    </section>
   );
 };
 
