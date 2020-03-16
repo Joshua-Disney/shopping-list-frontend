@@ -21,9 +21,8 @@ const Profile = props => {
   console.log("profile props: ", props);
   return (
     <section className="profile-container">
-      <div className="profile-name">
-        <p>Profile: </p>
-        <h3>{props.profile.name}</h3>
+      <div>
+        <h3 className="profile-name">{props.profile.name}</h3>
       </div>
       <div className="add-buttons">
         <Link
@@ -33,19 +32,18 @@ const Profile = props => {
             needProps: { profile_id: props.profile.id }
           }}
         >
-          Create New need
+          Create Need
         </Link>
         <Link
-          className="add=list-button"
+          className="add-list-button"
           to={{
             pathname: "/add-want",
             wantProps: { profile_id: props.profile.id }
           }}
         >
-          Create New want
+          Create Want
         </Link>
       </div>
-      <hr />
       <div className="list-container">
         <h4 className="headers">Needs</h4>
         {props.profile.needs.map(need => {
@@ -59,7 +57,7 @@ const Profile = props => {
                   props.deleteNeed(need.id);
                 }}
               >
-                Delete Need
+                X
               </button>
             </div>
           );
@@ -78,7 +76,7 @@ const Profile = props => {
                   props.deleteWant(want.id);
                 }}
               >
-                Delete Want
+                X
               </button>
             </div>
           );
