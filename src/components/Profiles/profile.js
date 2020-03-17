@@ -91,3 +91,9 @@ const Profile = props => {
 const mapDispatchToProps = { deleteNeed, deleteWant };
 
 export default connect(null, mapDispatchToProps)(Profile);
+
+// Make this entire page reactive
+// Build a hanburger dropdown nav bar that contains add profile and logout
+// Style all add forms
+// Make sure add form styling is responsive
+// Tweek colors.
