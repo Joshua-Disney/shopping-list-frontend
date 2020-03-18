@@ -24,6 +24,26 @@ const Home = props => {
     <section className="app-main">
       {props.account.id > 0 ? (
         <div>
+          <nav className="nav-bar">
+            <div className="toggle-menu">
+              <a href="/add-profile">Add Profile</a>
+              <a
+                onClick={event => {
+                  event.preventDefault();
+                  props.logout(props);
+                }}
+              >
+                Log Out
+              </a>
+            </div>
+            <label className="hamburger">
+              <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+            </label>
+          </nav>
           {/* <Account account={props.account} /> */}
           {props.account.profiles.map(profile => {
             return <Profile key={profile.id} profile={profile} />;
