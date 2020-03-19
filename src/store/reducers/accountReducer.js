@@ -1,8 +1,8 @@
 import {
   GET_ACCOUNT_START,
   GET_ACCOUNT_SUCCESS,
-  GET_ACCOUNT_FAILURE,
-  DELETE_NEED_SUCCESS
+  GET_ACCOUNT_FAILURE
+  // DELETE_NEED_SUCCESS
 } from "../actions";
 
 const initialState = {

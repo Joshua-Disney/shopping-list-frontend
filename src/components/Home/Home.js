@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 import { getThing, logout, getAccount } from "../../store/actions";
 
-import Account from "../Accounts/account";
 import Profile from "../Profiles/profile";
 
 const Home = props => {
+  const [displayMenu, setDisplayMenu] = useState(false);
   useEffect(() => {
     console.log("grabbing account info");
     let account_id = props.account_id;
@@ -23,49 +23,54 @@ const Home = props => {
   return (
     <section className="app-main">
       {props.account.id > 0 ? (
-        <div>
-          <nav className="nav-bar">
-            <div className="toggle-menu">
-              <a href="/add-profile">Add Profile</a>
-              <a
-                onClick={event => {
-                  event.preventDefault();
-                  props.logout(props);
-                }}
-              >
-                Log Out
-              </a>
-            </div>
-            <label className="hamburger">
-              <ul>
-                <li></li>
-                <li></li>
-                <li></li>
-              </ul>
-            </label>
-          </nav>
-          {/* <Account account={props.account} /> */}
-          {props.account.profiles.map(profile => {
-            return <Profile key={profile.id} profile={profile} />;
-          })}
-          <Link className="add-list-button" to="/add-profile">
-            Create New profile
-          </Link>
-        </div>
+        <>
+          <div className="red-green-refactor specific">
+            <nav className="nav-bar">
+              <div className={`toggle-menu ${displayMenu ? "none" : ""}`}>
+                <NavLink to="/add-profile">Add Profile</NavLink>
+                <button
+                  onClick={event => {
+                    event.preventDefault();
+                    props.logout(props);
+                  }}
+                >
+                  Log Out
+                </button>
+              </div>
+              <label className="hamburger">
+                <ul
+                  onClick={() => {
+                    setDisplayMenu(!displayMenu);
+                  }}
+                >
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </label>
+            </nav>
+          </div>
+          <div className="red-green-refactor">
+            {/* <Account account={props.account} /> */}
+            {props.account.profiles.map(profile => {
+              return <Profile key={profile.id} profile={profile} />;
+            })}
+          </div>
+        </>
       ) : (
         <div>
           <p>Something went wrong. Please log out and log back in.</p>
+          <button
+            className="logout-button"
+            onClick={event => {
+              event.preventDefault();
+              props.logout(props);
+            }}
+          >
+            Log out
+          </button>
         </div>
       )}
-      <button
-        className="logout-button"
-        onClick={event => {
-          event.preventDefault();
-          props.logout(props);
-        }}
-      >
-        Log out
-      </button>
     </section>
   );
 };

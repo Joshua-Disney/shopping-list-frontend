@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -6,11 +6,11 @@ import { deleteNeed, deleteWant } from "../../store/actions";
 import "../../less/index.less";
 
 const Profile = props => {
-  const [remove, setRemove] = useState(true);
+  // const [remove, setRemove] = useState(true);
 
-  useEffect(() => {
-    console.log("remove: ", remove);
-  }, [remove]);
+  // useEffect(() => {
+  //   console.log("remove: ", remove);
+  // }, [remove]);
 
   // Set new background color
   // Set a standard design for buttons
@@ -21,7 +21,7 @@ const Profile = props => {
   console.log("profile props: ", props);
   return (
     <section className="profile-container">
-      <div>
+      <div className="profile-div">
         <h3 className="profile-name">{props.profile.name}</h3>
       </div>
       <div className="add-buttons">
