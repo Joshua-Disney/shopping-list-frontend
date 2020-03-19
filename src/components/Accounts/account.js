@@ -4,8 +4,6 @@ import { connect } from "react-redux";
 import Profile from "../Profiles/profile";
 
 const Account = props => {
-  console.log("account: ", props.account);
-
   return (
     <div>
       {/* <div>

@@ -11,8 +11,6 @@ const WantForm = props => {
     is_added: false
   });
 
-  console.log("wants props: ", props);
-
   return (
     <div>
       <form

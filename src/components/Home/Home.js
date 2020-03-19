@@ -9,7 +9,6 @@ import Profile from "../Profiles/profile";
 const Home = props => {
   const [displayMenu, setDisplayMenu] = useState(false);
   useEffect(() => {
-    console.log("grabbing account info");
     let account_id = props.account_id;
     if (!account_id) {
       account_id = localStorage.getItem("account_id");
@@ -19,7 +18,6 @@ const Home = props => {
     }
   }, [props.account_id]);
 
-  console.log("account props: ", props.account);
   return (
     <section className="app-main">
       {props.account.id > 0 ? (

@@ -22,10 +22,8 @@ export const register = newUser => async dispatch => {
       newUser
     );
     dispatch({ type: REGISTER_SUCCESS, payload: result });
-    console.log("register result: ", result);
   } catch (error) {
     dispatch({ type: REGISTER_FAILURE, payload: error });
-    console.log("error: ", error);
   }
 };
 
@@ -36,12 +34,10 @@ export const login = user => async dispatch => {
       "https://disneys-shopping-list-backend.herokuapp.com/api/auth/login",
       user
     );
-    console.log("login result: ", result);
     localStorage.setItem("token", result.data.token);
     localStorage.setItem("account_id", result.data.account_id);
     dispatch({ type: LOGIN_SUCCESS, payload: result.data });
   } catch (error) {
-    console.log("login error: ", error);
     dispatch({ type: LOGIN_FAILURE, payload: error });
   }
 };
@@ -49,12 +45,10 @@ export const login = user => async dispatch => {
 export const logout = props => dispatch => {
   dispatch({ type: LOG_OUT_START });
   try {
-    console.log("logging out");
     localStorage.removeItem("token");
     localStorage.removeItem("account_id");
     dispatch({ type: LOG_OUT_SUCCESS, payload: "Successfully logged out." });
   } catch (error) {
-    console.log(error);
     dispatch({ type: LOG_OUT_FAILURE, payload: "Failed to log out." });
   }
 };

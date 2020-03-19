@@ -7,9 +7,7 @@ const Need = props => {
     message: null
   });
 
-  useEffect(() => {
-    console.log("Message: ", state.message);
-  }, [state.message]);
+  useEffect(() => {}, [state.message]);
   return (
     <div>
       <p>Need id: {props.need.id}</p>
@@ -17,7 +15,6 @@ const Need = props => {
       <button
         onClick={event => {
           event.preventDefault();
-          console.log(`deleteNeed(${props.need.id})`);
           props.deleteNeed(props.need.id);
           setState({ ...state, message: props.message });
         }}

@@ -11,10 +11,8 @@ export const createProfile = newProfile => async dispatch => {
       `https://disneys-shopping-list-backend.herokuapp.com/api/profiles`,
       newProfile
     );
-    console.log("create profile result: ", result);
     dispatch({ type: CREATE_PROFILE_SUCCESS, payload: result.data });
   } catch (error) {
     dispatch({ type: CREATE_PROFILE_FAILURE, payload: error });
-    console.log("create profile error: ", error);
   }
 };
