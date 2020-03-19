@@ -184,3 +184,5 @@ const mapStateToProps = ({ loginReducer }) => {
 const mapDispatchToProps = { register, login, welcomeBack };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+
+// Make email and password text boxes responsive

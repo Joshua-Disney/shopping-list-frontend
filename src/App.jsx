@@ -21,6 +21,10 @@ class App extends React.Component {
     console.log("isLoggedIn: ", this.props.isLoggedIn);
   }
 
+  componentDidUpdate() {
+    console.log("Updated isLoggedIn: ", this.props.isLoggedIn);
+  }
+
   render() {
     return (
       <Router>
