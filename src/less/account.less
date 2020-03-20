@@ -70,20 +70,20 @@
 }
 .add-list-button:visited {
   text-decoration: none;
-  color: red;
+  color: white;
 }
 .add-list-button:hover {
   text-decoration: none;
-  color: blue;
+  color: white;
 }
 .add-list-button:focus {
   text-decoration: none;
-  color: yellow;
+  color: white;
 }
 .add-list-button:hover,
 .add-list-button:active {
   text-decoration: none;
-  color: black;
+  color: white;
 }
 
 .list-container {
@@ -106,6 +106,7 @@
     }
 
     .list-item-button {
+      cursor: pointer;
       font-size: 1.8rem;
       font-weight: bold;
       background-color: white;
@@ -140,13 +141,18 @@
 
   .toggle-menu {
     display: flex;
+    align-items: baseline;
     // display: none;
 
-    a {
+    .nav-item {
+      cursor: pointer;
       font-size: 3rem;
+      font-weight: bold;
       text-decoration: none;
       margin: 0 10px;
       color: rgb(80, 80, 80);
+      background-color: rgb(75, 199, 240);
+      border: none;
     }
   }
 
@@ -154,6 +160,7 @@
     margin: 0 10px 0 40px;
 
     ul {
+      cursor: pointer;
       display: flex;
       flex-direction: column;
       width: 25px;
@@ -174,4 +181,81 @@
 
 .none {
   display: none !important;
+}
+
+// =========================tablet view
+
+@media screen and (max-width: 800px) {
+  .nav-bar {
+    padding-top: 15px;
+
+    .toggle-menu {
+      .nav-item {
+        font-size: 2.5rem;
+      }
+    }
+  }
+
+  .app-main {
+    .red-green-refactor {
+      width: 100%;
+      min-width: 200px;
+    }
+  }
+
+  .profile-container {
+    .profile-div {
+      .profile-name {
+        font-size: 4rem;
+      }
+    }
+  }
+
+  .add-list-button {
+    font-size: 1.5rem;
+  }
+
+  .list-container {
+    .headers {
+      font-size: 3rem;
+    }
+  }
+}
+
+// =============================mobile view
+
+@media screen and (max-width: 500px) {
+  .nav-bar {
+    padding-top: 15px;
+
+    .toggle-menu {
+      .nav-item {
+        margin: 0 5px;
+        font-size: 2rem;
+      }
+    }
+
+    .hamburger {
+      margin-left: 20px;
+    }
+  }
+  .profile-container {
+    .profile-div {
+      .profile-name {
+        font-size: 3rem;
+      }
+    }
+  }
+
+  .list-container {
+    .list-item {
+      .list-item-text {
+        font-size: 1.5rem;
+      }
+    }
+
+    .headers {
+      font-size: 2.5rem;
+    }
+  }
 }

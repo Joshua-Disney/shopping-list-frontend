@@ -7,7 +7,7 @@ import { getThing, logout, getAccount } from "../../store/actions";
 import Profile from "../Profiles/profile";
 
 const Home = props => {
-  const [displayMenu, setDisplayMenu] = useState(false);
+  const [displayMenu, setDisplayMenu] = useState(true);
   useEffect(() => {
     let account_id = props.account_id;
     if (!account_id) {
@@ -25,8 +25,11 @@ const Home = props => {
           <div className="red-green-refactor specific">
             <nav className="nav-bar">
               <div className={`toggle-menu ${displayMenu ? "none" : ""}`}>
-                <NavLink to="/add-profile">Add Profile</NavLink>
+                <NavLink className="nav-item" to="/add-profile">
+                  Add Profile
+                </NavLink>
                 <button
+                  className="nav-item"
                   onClick={event => {
                     event.preventDefault();
                     props.logout(props);
