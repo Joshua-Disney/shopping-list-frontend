@@ -24,11 +24,9 @@ export const addNeed = need => async dispatch => {
       `https://disneys-shopping-list-backend.herokuapp.com/api/needs`,
       need
     );
-    console.log("add need result: ", result);
     dispatch({ type: ADD_NEED_SUCCESS, payload: result.data });
   } catch (error) {
     dispatch({ type: ADD_NEED_FAILURE, payload: error });
-    console.log("add need error: ", error);
   }
 };
 
@@ -39,11 +37,9 @@ export const addWant = want => async dispatch => {
       `https://disneys-shopping-list-backend.herokuapp.com/api/wants`,
       want
     );
-    console.log("add want result: ", result);
     dispatch({ type: ADD_WANT_SUCCESS, payload: result.data });
   } catch (error) {
     dispatch({ type: ADD_WANT_FAILURE, payload: error });
-    console.log("add want error: ", error);
   }
 };
 
@@ -54,18 +50,15 @@ export const deleteNeed = id => async dispatch => {
     const result = await axiosWithAuth().delete(
       `https://disneys-shopping-list-backend.herokuapp.com/api/needs/${id}`
     );
-    console.log("delete need result: ", result);
     dispatch({
       type: DELETE_NEED_SUCCESS,
       payload: result.data
       // profile_id,
       // need_id
     });
-    console.log("Getting account in theory???");
     getAccount(localStorage.getItem("account_id"))(dispatch);
   } catch (error) {
     dispatch({ type: DELETE_NEED_FAILURE, payload: error });
-    console.log("delete need error: ", error);
   }
 };
 
@@ -75,11 +68,9 @@ export const deleteWant = id => async dispatch => {
     const result = await axiosWithAuth().delete(
       `https://disneys-shopping-list-backend.herokuapp.com/api/wants/${id}`
     );
-    console.log("delete want result: ", result);
     dispatch({ type: DELETE_WANT_SUCCESS, payload: result.data });
     getAccount(localStorage.getItem("account_id"))(dispatch);
   } catch (error) {
     dispatch({ type: DELETE_WANT_FAILURE, payload: error });
-    console.log("delete want error: ", error);
   }
 };

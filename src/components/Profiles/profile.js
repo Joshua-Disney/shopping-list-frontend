@@ -9,7 +9,6 @@ const Profile = props => {
   // const [remove, setRemove] = useState(true);
 
   // useEffect(() => {
-  //   console.log("remove: ", remove);
   // }, [remove]);
 
   // Set new background color
@@ -18,7 +17,6 @@ const Profile = props => {
   // Lists as two columns or one?
   // Grid format?
 
-  console.log("profile props: ", props);
   return (
     <section className="profile-container">
       <div className="profile-div">

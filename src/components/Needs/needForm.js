@@ -11,9 +11,6 @@ const NeedForm = props => {
     is_added: false
   });
 
-  console.log("needs props: ", props);
-  console.log("need state: ", state);
-
   return (
     <div>
       <form
