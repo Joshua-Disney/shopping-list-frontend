@@ -4,32 +4,40 @@ import { connect } from "react-redux";
 
 import { addWant } from "../../store/actions";
 
-const WantForm = props => {
+const WantForm = (props) => {
   const [state, setState] = useState({
     name: "",
     profile_id: props.location.wantProps.profile_id,
-    is_added: false
+    is_added: false,
   });
 
   return (
-    <div>
-      <form
-        onSubmit={event => {
-          event.preventDefault();
-          props.addWant(state);
-          props.history.push("/");
-        }}
-      >
-        <input
-          type="text"
-          value={state.name}
-          placeholder="Enter new want"
-          onChange={event => setState({ ...state, name: event.target.value })}
-        />
-        <button>Submit</button>
-      </form>
-      <Link to="/">Return Home</Link>
-    </div>
+    <container className="form-container">
+      <section className="form-section">
+        <form
+          className="actual-form"
+          onSubmit={(event) => {
+            event.preventDefault();
+            props.addWant(state);
+            props.history.push("/");
+          }}
+        >
+          <input
+            className="form-input"
+            type="text"
+            value={state.name}
+            placeholder="Enter new want"
+            onChange={(event) =>
+              setState({ ...state, name: event.target.value })
+            }
+          />
+          <button className="form-button">Submit</button>
+        </form>
+        <Link className="form-button form-link" to="/">
+          Cancel
+        </Link>
+      </section>
+    </container>
   );
 };
 
