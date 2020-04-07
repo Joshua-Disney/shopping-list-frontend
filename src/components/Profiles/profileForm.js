@@ -4,39 +4,41 @@ import { connect } from "react-redux";
 
 import { createProfile } from "../../store/actions";
 
-const ProfileForm = props => {
+const ProfileForm = (props) => {
   const [state, setState] = useState({
     name: "",
-    account_id: props.account_id
+    account_id: props.account_id,
   });
 
   return (
-    <div>
-      <h1>This will be a form</h1>
+    <div className="form-container">
       <form
-        onSubmit={event => {
+        className="form-section"
+        onSubmit={(event) => {
           event.preventDefault();
           props.createProfile(state);
           props.history.push("/");
         }}
       >
         <input
+          className="form-input"
           type="text"
           value={state.name}
           placeholder="Enter new profile Name"
-          onChange={event => setState({ ...state, name: event.target.value })}
+          onChange={(event) => setState({ ...state, name: event.target.value })}
         />
-        <button>Submit</button>
+        <button className="form-button">Submit</button>
       </form>
-      <h3>Account id: {props.account_id}</h3>
-      <Link to="/">Return Home</Link>
+      <Link className="form-link" to="/">
+        Return Home
+      </Link>
     </div>
   );
 };
 
 const mapStateToProps = ({ loginReducer }) => {
   return {
-    account_id: loginReducer.account_id
+    account_id: loginReducer.account_id,
   };
 };
 
