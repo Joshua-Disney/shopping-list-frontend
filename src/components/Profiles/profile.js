@@ -3,9 +3,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { deleteNeed, deleteWant } from "../../store/actions";
-import "../../less/index.less";
 
-const Profile = props => {
+const Profile = (props) => {
   // const [remove, setRemove] = useState(true);
 
   // useEffect(() => {
@@ -27,7 +26,7 @@ const Profile = props => {
           className="add-list-button"
           to={{
             pathname: "/add-need",
-            needProps: { profile_id: props.profile.id }
+            needProps: { profile_id: props.profile.id },
           }}
         >
           Create Need
@@ -36,7 +35,7 @@ const Profile = props => {
           className="add-list-button"
           to={{
             pathname: "/add-want",
-            wantProps: { profile_id: props.profile.id }
+            wantProps: { profile_id: props.profile.id },
           }}
         >
           Create Want
@@ -44,13 +43,13 @@ const Profile = props => {
       </div>
       <div className="list-container">
         <h4 className="headers">Needs</h4>
-        {props.profile.needs.map(need => {
+        {props.profile.needs.map((need) => {
           return (
             <div className="list-item" key={need.id}>
               <p className="list-item-text">{need.name}</p>
               <button
                 className="list-item-button"
-                onClick={event => {
+                onClick={(event) => {
                   event.preventDefault();
                   props.deleteNeed(need.id);
                 }}
@@ -63,13 +62,13 @@ const Profile = props => {
       </div>
       <div className="list-container">
         <h4 className="headers">Wants</h4>
-        {props.profile.wants.map(want => {
+        {props.profile.wants.map((want) => {
           return (
             <div className="list-item" key={want.id}>
               <p className="list-item-text">{want.name}</p>
               <button
                 className="list-item-button"
-                onClick={event => {
+                onClick={(event) => {
                   event.preventDefault();
                   props.deleteWant(want.id);
                 }}
