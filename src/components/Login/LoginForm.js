@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 
 import { register, login, welcomeBack } from "../../store/actions";
 
-const LoginForm = props => {
+const LoginForm = (props) => {
   const [state, setState] = useState({
     email: "",
     password: "",
     confirmPassword: "",
     loggingIn: true,
-    loading: false
+    loading: false,
   });
 
   const [token] = useState(() => {
@@ -28,22 +28,22 @@ const LoginForm = props => {
     }
   }, [props.isLoggedIn, props.history]);
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     event.preventDefault();
     setState({ ...state, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    alert(
-      "A name was submitted: " +
-        state.email +
-        " " +
-        state.password +
-        " " +
-        state.confirmPassword
-    );
-  };
+  // const handleSubmit = (event) => {  <============================  For testing purposes
+  //   event.preventDefault();
+  //   alert(
+  //     "A name was submitted: " +
+  //       state.email +
+  //       " " +
+  //       state.password +
+  //       " " +
+  //       state.confirmPassword
+  //   );
+  // };
 
   return (
     <div className="login-container">
@@ -54,17 +54,14 @@ const LoginForm = props => {
       ) : state.loggingIn ? (
         <div className="login-form">
           <form
-            onSubmit={
-              // handleSubmit
-              event => {
-                event.preventDefault();
-                props.login({
-                  email: state.email,
-                  password: state.password
-                });
-                setState({ ...state, loading: true });
-              }
-            }
+            onSubmit={(event) => {
+              event.preventDefault();
+              props.login({
+                email: state.email,
+                password: state.password,
+              });
+              setState({ ...state, loading: true });
+            }}
           >
             <div className="input-fields">
               <input
@@ -72,7 +69,7 @@ const LoginForm = props => {
                 type="text"
                 name="email"
                 placeholder="Email..."
-                value={state.email}
+                value={state.email.toLowerCase().trim()}
                 onChange={handleChange}
               />
               <input
@@ -98,7 +95,7 @@ const LoginForm = props => {
           <p>Don't have an account?</p>
           <button
             className="input-button"
-            onClick={event => {
+            onClick={(event) => {
               event.preventDefault();
               setState({ ...state, loggingIn: false });
             }}
@@ -111,16 +108,16 @@ const LoginForm = props => {
           <form
             onSubmit={
               // handleSubmit
-              event => {
+              (event) => {
                 event.preventDefault();
                 props.register({
                   email: state.email,
-                  password: state.password
+                  password: state.password,
                 });
                 setState({ ...state, loading: true });
                 props.login({
                   email: state.email,
-                  password: state.password
+                  password: state.password,
                 });
               }
             }
@@ -157,7 +154,7 @@ const LoginForm = props => {
           <p>Already have an account?</p>
           <button
             className="input-button"
-            onClick={event => {
+            onClick={(event) => {
               event.preventDefault();
               setState({ ...state, loggingIn: true });
             }}
@@ -172,7 +169,7 @@ const LoginForm = props => {
 
 const mapStateToProps = ({ loginReducer }) => {
   return {
-    isLoggedIn: loginReducer.isLoggedIn
+    isLoggedIn: loginReducer.isLoggedIn,
   };
 };
 
