@@ -11,28 +11,32 @@ const ProfileForm = (props) => {
   });
 
   return (
-    <div className="form-container">
-      <form
-        className="form-section"
-        onSubmit={(event) => {
-          event.preventDefault();
-          props.createProfile(state);
-          props.history.push("/");
-        }}
-      >
-        <input
-          className="form-input"
-          type="text"
-          value={state.name}
-          placeholder="Enter new profile Name"
-          onChange={(event) => setState({ ...state, name: event.target.value })}
-        />
-        <button className="form-button">Submit</button>
-      </form>
-      <Link className="form-link" to="/">
-        Return Home
-      </Link>
-    </div>
+    <container className="form-container">
+      <section className="form-section">
+        <form
+          className="actual-form"
+          onSubmit={(event) => {
+            event.preventDefault();
+            props.createProfile(state);
+            props.history.push("/");
+          }}
+        >
+          <input
+            className="form-input"
+            type="text"
+            value={state.name}
+            placeholder="Enter new profile Name"
+            onChange={(event) =>
+              setState({ ...state, name: event.target.value })
+            }
+          />
+          <button className="form-button">Submit</button>
+        </form>
+        <Link className=" form-button form-link" to="/">
+          Cancel
+        </Link>
+      </section>
+    </container>
   );
 };
 

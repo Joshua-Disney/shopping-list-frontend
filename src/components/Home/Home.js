@@ -6,7 +6,7 @@ import { getThing, logout, getAccount } from "../../store/actions";
 
 import Profile from "../Profiles/profile";
 
-const Home = props => {
+const Home = (props) => {
   const [displayMenu, setDisplayMenu] = useState(true);
   useEffect(() => {
     let account_id = props.account_id;
@@ -30,7 +30,7 @@ const Home = props => {
                 </NavLink>
                 <button
                   className="nav-item"
-                  onClick={event => {
+                  onClick={(event) => {
                     event.preventDefault();
                     props.logout(props);
                   }}
@@ -53,7 +53,7 @@ const Home = props => {
           </div>
           <div className="red-green-refactor">
             {/* <Account account={props.account} /> */}
-            {props.account.profiles.map(profile => {
+            {props.account.profiles.map((profile) => {
               return <Profile key={profile.id} profile={profile} />;
             })}
           </div>
@@ -63,7 +63,7 @@ const Home = props => {
           <p>Something went wrong. Please log out and log back in.</p>
           <button
             className="logout-button"
-            onClick={event => {
+            onClick={(event) => {
               event.preventDefault();
               props.logout(props);
             }}
@@ -81,7 +81,7 @@ const mapStateToProps = ({ accountReducer, loginReducer, thingReducer }) => {
     account: accountReducer.account,
     account_id: loginReducer.account_id,
     isLoggedIn: loginReducer.isLoggedIn,
-    thing: thingReducer.thing
+    thing: thingReducer.thing,
   };
 };
 

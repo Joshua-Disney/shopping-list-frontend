@@ -9,8 +9,6 @@ import ProfileForm from "./components/Profiles/profileForm";
 import NeedForm from "./components/Needs/needForm";
 import WantForm from "./components/Wants/wantForm";
 
-import "./less/index.less";
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -36,7 +34,7 @@ class App extends React.Component {
 
 const mapStateToProps = ({ loginReducer }) => {
   return {
-    isLoggedIn: loginReducer.isLoggedIn
+    isLoggedIn: loginReducer.isLoggedIn,
   };
 };
 
