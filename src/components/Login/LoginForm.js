@@ -52,116 +52,122 @@ const LoginForm = (props) => {
           <h3>.......Loading.......</h3>
         </div>
       ) : state.loggingIn ? (
-        <div className="login-form">
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              props.login({
-                email: state.email,
-                password: state.password,
-              });
-              setState({ ...state, loading: true });
-            }}
-          >
-            <div className="input-fields">
-              <input
-                className="input-field"
-                type="text"
-                name="email"
-                placeholder="Email..."
-                value={state.email.toLowerCase().trim()}
-                onChange={handleChange}
-              />
-              <input
-                className="input-field"
-                type="password"
-                name="password"
-                placeholder="Password..."
-                value={state.password}
-                onChange={handleChange}
-              />
-              {/* <input
-                type="password"
-                name="confirmPassword"
-                placeholder="Confirm password..."
-                value={state.confirmPassword}
-                onChange={handleChange}
-              /> */}
-              <button className="input-button" type="submit">
-                Login
-              </button>
-            </div>
-          </form>
-          <p>Don't have an account?</p>
-          <button
-            className="input-button"
-            onClick={(event) => {
-              event.preventDefault();
-              setState({ ...state, loggingIn: false });
-            }}
-          >
-            Register here.
-          </button>
-        </div>
-      ) : (
-        <div className="login-form">
-          <form
-            onSubmit={
-              // handleSubmit
-              (event) => {
+        <container className="login-width-container">
+          <h1 className="title">Shopping / Wish List</h1>
+          <div className="login-form">
+            <form
+              onSubmit={(event) => {
                 event.preventDefault();
-                props.register({
-                  email: state.email,
-                  password: state.password,
-                });
-                setState({ ...state, loading: true });
                 props.login({
                   email: state.email,
                   password: state.password,
                 });
-              }
-            }
-          >
-            <div className="input-fields">
-              <input
-                className="input-field"
-                type="text"
-                name="email"
-                placeholder="Email..."
-                value={state.email}
-                onChange={handleChange}
-              />
-              <input
-                className="input-field"
-                type="password"
-                name="password"
-                placeholder="Password..."
-                value={state.password}
-                onChange={handleChange}
-              />
-              {/* <input
+                setState({ ...state, loading: true });
+              }}
+            >
+              <div className="input-fields">
+                <input
+                  className="input-field"
+                  type="text"
+                  name="email"
+                  placeholder="Email..."
+                  value={state.email.toLowerCase().trim()}
+                  onChange={handleChange}
+                />
+                <input
+                  className="input-field"
+                  type="password"
+                  name="password"
+                  placeholder="Password..."
+                  value={state.password}
+                  onChange={handleChange}
+                />
+                {/* <input
                 type="password"
                 name="confirmPassword"
                 placeholder="Confirm password..."
                 value={state.confirmPassword}
                 onChange={handleChange}
               /> */}
-              <button className="input-button" type="submit">
-                Register
-              </button>
-            </div>
-          </form>
-          <p>Already have an account?</p>
-          <button
-            className="input-button"
-            onClick={(event) => {
-              event.preventDefault();
-              setState({ ...state, loggingIn: true });
-            }}
-          >
-            Log in here.
-          </button>
-        </div>
+                <button className="input-button" type="submit">
+                  Login
+                </button>
+              </div>
+            </form>
+            <p>Don't have an account?</p>
+            <button
+              className="input-button"
+              onClick={(event) => {
+                event.preventDefault();
+                setState({ ...state, loggingIn: false });
+              }}
+            >
+              Register here
+            </button>
+          </div>
+        </container>
+      ) : (
+        <container className="login-width-container">
+          <h1 className="title">Shopping / Wish List</h1>
+          <div className="login-form">
+            <form
+              onSubmit={
+                // handleSubmit
+                (event) => {
+                  event.preventDefault();
+                  props.register({
+                    email: state.email,
+                    password: state.password,
+                  });
+                  setState({ ...state, loading: true });
+                  props.login({
+                    email: state.email,
+                    password: state.password,
+                  });
+                }
+              }
+            >
+              <div className="input-fields">
+                <input
+                  className="input-field"
+                  type="text"
+                  name="email"
+                  placeholder="Email..."
+                  value={state.email}
+                  onChange={handleChange}
+                />
+                <input
+                  className="input-field"
+                  type="password"
+                  name="password"
+                  placeholder="Password..."
+                  value={state.password}
+                  onChange={handleChange}
+                />
+                {/* <input
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirm password..."
+                value={state.confirmPassword}
+                onChange={handleChange}
+              /> */}
+                <button className="input-button" type="submit">
+                  Register
+                </button>
+              </div>
+            </form>
+            <p>Already have an account?</p>
+            <button
+              className="input-button"
+              onClick={(event) => {
+                event.preventDefault();
+                setState({ ...state, loggingIn: true });
+              }}
+            >
+              Login here
+            </button>
+          </div>
+        </container>
       )}
     </div>
   );
