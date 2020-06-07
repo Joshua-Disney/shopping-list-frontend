@@ -13,6 +13,7 @@
 
     .title {
       margin: 10% 0 5% 0;
+      text-align: center;
       font-size: 5rem;
       font-weight: bold;
       color: whitesmoke;
@@ -58,5 +59,32 @@
     border: 2px solid darkgreen;
     background-color: lightgreen;
     border-radius: 1rem;
+  }
+}
+
+// =========================tablet view
+
+@media screen and (max-width: 800px) {
+  .login-container {
+    width: 100vw;
+
+    .login-width-container {
+      width: 100%;
+      min-width: 300px;
+    }
+  }
+}
+
+// =========================mobile view
+
+@media screen and (max-width: 500px) {
+  .login-container
+    .login-width-container
+    .login-form
+    .input-fields
+    .input-field {
+    width: 100%;
+    max-width: 250px;
+    min-width: 175px;
   }
 }

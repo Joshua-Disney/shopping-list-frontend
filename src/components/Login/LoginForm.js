@@ -56,6 +56,7 @@ const LoginForm = (props) => {
           <h1 className="title">Shopping / Wish List</h1>
           <div className="login-form">
             <form
+              className="input-fields"
               onSubmit={(event) => {
                 event.preventDefault();
                 props.login({
@@ -65,34 +66,34 @@ const LoginForm = (props) => {
                 setState({ ...state, loading: true });
               }}
             >
-              <div className="input-fields">
-                <input
-                  className="input-field"
-                  type="text"
-                  name="email"
-                  placeholder="Email..."
-                  value={state.email.toLowerCase().trim()}
-                  onChange={handleChange}
-                />
-                <input
-                  className="input-field"
-                  type="password"
-                  name="password"
-                  placeholder="Password..."
-                  value={state.password}
-                  onChange={handleChange}
-                />
-                {/* <input
+              {/* <div className="input-fields"> */}
+              <input
+                className="input-field"
+                type="text"
+                name="email"
+                placeholder="Email..."
+                value={state.email.toLowerCase().trim()}
+                onChange={handleChange}
+              />
+              <input
+                className="input-field"
+                type="password"
+                name="password"
+                placeholder="Password..."
+                value={state.password}
+                onChange={handleChange}
+              />
+              {/* <input
                 type="password"
                 name="confirmPassword"
                 placeholder="Confirm password..."
                 value={state.confirmPassword}
                 onChange={handleChange}
               /> */}
-                <button className="input-button" type="submit">
-                  Login
-                </button>
-              </div>
+              <button className="input-button" type="submit">
+                Login
+              </button>
+              {/* </div> */}
             </form>
             <p>Don't have an account?</p>
             <button
@@ -111,6 +112,7 @@ const LoginForm = (props) => {
           <h1 className="title">Shopping / Wish List</h1>
           <div className="login-form">
             <form
+              className="input-fields"
               onSubmit={
                 // handleSubmit
                 (event) => {
@@ -127,34 +129,34 @@ const LoginForm = (props) => {
                 }
               }
             >
-              <div className="input-fields">
-                <input
-                  className="input-field"
-                  type="text"
-                  name="email"
-                  placeholder="Email..."
-                  value={state.email}
-                  onChange={handleChange}
-                />
-                <input
-                  className="input-field"
-                  type="password"
-                  name="password"
-                  placeholder="Password..."
-                  value={state.password}
-                  onChange={handleChange}
-                />
-                {/* <input
+              {/* <div className="input-fields"> */}
+              <input
+                className="input-field"
+                type="text"
+                name="email"
+                placeholder="Email..."
+                value={state.email}
+                onChange={handleChange}
+              />
+              <input
+                className="input-field"
+                type="password"
+                name="password"
+                placeholder="Password..."
+                value={state.password}
+                onChange={handleChange}
+              />
+              {/* <input
                 type="password"
                 name="confirmPassword"
                 placeholder="Confirm password..."
                 value={state.confirmPassword}
                 onChange={handleChange}
               /> */}
-                <button className="input-button" type="submit">
-                  Register
-                </button>
-              </div>
+              <button className="input-button" type="submit">
+                Register
+              </button>
+              {/* </div> */}
             </form>
             <p>Already have an account?</p>
             <button
