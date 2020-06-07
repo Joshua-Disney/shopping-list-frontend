@@ -52,18 +52,21 @@ const LoginForm = (props) => {
           <h3>.......Loading.......</h3>
         </div>
       ) : state.loggingIn ? (
-        <div className="login-form">
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              props.login({
-                email: state.email,
-                password: state.password,
-              });
-              setState({ ...state, loading: true });
-            }}
-          >
-            <div className="input-fields">
+        <container className="login-width-container">
+          <h1 className="title">Shopping / Wish List</h1>
+          <div className="login-form">
+            <form
+              className="input-fields"
+              onSubmit={(event) => {
+                event.preventDefault();
+                props.login({
+                  email: state.email,
+                  password: state.password,
+                });
+                setState({ ...state, loading: true });
+              }}
+            >
+              {/* <div className="input-fields"> */}
               <input
                 className="input-field"
                 type="text"
@@ -90,39 +93,43 @@ const LoginForm = (props) => {
               <button className="input-button" type="submit">
                 Login
               </button>
-            </div>
-          </form>
-          <p>Don't have an account?</p>
-          <button
-            className="input-button"
-            onClick={(event) => {
-              event.preventDefault();
-              setState({ ...state, loggingIn: false });
-            }}
-          >
-            Register here.
-          </button>
-        </div>
-      ) : (
-        <div className="login-form">
-          <form
-            onSubmit={
-              // handleSubmit
-              (event) => {
+              {/* </div> */}
+            </form>
+            <p>Don't have an account?</p>
+            <button
+              className="input-button"
+              onClick={(event) => {
                 event.preventDefault();
-                props.register({
-                  email: state.email,
-                  password: state.password,
-                });
-                setState({ ...state, loading: true });
-                props.login({
-                  email: state.email,
-                  password: state.password,
-                });
+                setState({ ...state, loggingIn: false });
+              }}
+            >
+              Register here
+            </button>
+          </div>
+        </container>
+      ) : (
+        <container className="login-width-container">
+          <h1 className="title">Shopping / Wish List</h1>
+          <div className="login-form">
+            <form
+              className="input-fields"
+              onSubmit={
+                // handleSubmit
+                (event) => {
+                  event.preventDefault();
+                  props.register({
+                    email: state.email,
+                    password: state.password,
+                  });
+                  setState({ ...state, loading: true });
+                  props.login({
+                    email: state.email,
+                    password: state.password,
+                  });
+                }
               }
-            }
-          >
-            <div className="input-fields">
+            >
+              {/* <div className="input-fields"> */}
               <input
                 className="input-field"
                 type="text"
@@ -149,19 +156,20 @@ const LoginForm = (props) => {
               <button className="input-button" type="submit">
                 Register
               </button>
-            </div>
-          </form>
-          <p>Already have an account?</p>
-          <button
-            className="input-button"
-            onClick={(event) => {
-              event.preventDefault();
-              setState({ ...state, loggingIn: true });
-            }}
-          >
-            Log in here.
-          </button>
-        </div>
+              {/* </div> */}
+            </form>
+            <p>Already have an account?</p>
+            <button
+              className="input-button"
+              onClick={(event) => {
+                event.preventDefault();
+                setState({ ...state, loggingIn: true });
+              }}
+            >
+              Login here
+            </button>
+          </div>
+        </container>
       )}
     </div>
   );
