@@ -1,6 +1,7 @@
 .app-main {
   display: flex;
   justify-content: center;
+  background-color: #fafafa;
 
   .red-green-refactor {
     width: 60%;
@@ -15,10 +16,12 @@
 
 .profile-container {
   padding-bottom: 5rem;
-  background-color: rgb(83, 173, 9);
+  // background-color: rgb(83, 173, 9);
+  background-color: rgb(125, 205, 60);
 
   .profile-div {
-    background-color: rgb(75, 199, 240);
+    // background-color: rgb(75, 199, 240);
+    background-color: rgb(123, 190, 226);
     display: flex;
 
     .profile-name {
@@ -49,18 +52,7 @@
   text-decoration: none;
   font-size: 2rem;
 }
-// .add-list-button:visited {
-//   text-decoration: none;
-//   color: white;
-// }
-// .add-list-button:hover {
-//   text-decoration: none;
-//   color: white;
-// }
-// .add-list-button:focus {
-//   text-decoration: none;
-//   color: white;
-// }
+
 .add-list-button:hover,
 .add-list-button:active,
 .add-list-button:visited,
@@ -109,7 +101,7 @@
     font-size: 3.5rem;
     font-weight: bold;
     margin-bottom: 0.75rem;
-    color: rgb(167, 236, 28);
+    color: rgb(50, 127, 178);
     -webkit-text-stroke: 1px rgba(0, 0, 0, 1);
   }
 }
@@ -119,7 +111,8 @@
   align-items: center;
   justify-content: flex-end;
   padding: 25px 1% 10px;
-  background-color: rgb(75, 199, 240);
+  // background-color: rgb(75, 199, 240);
+  background-color: rgb(123, 190, 226);
 
   .toggle-menu {
     display: flex;
@@ -132,7 +125,8 @@
       text-decoration: none;
       margin: 0 10px;
       color: rgb(80, 80, 80);
-      background-color: rgb(75, 199, 240);
+      // background-color: rgb(75, 199, 240);
+      background-color: rgb(123, 190, 226);
       border: none;
     }
   }
@@ -171,7 +165,8 @@
     height: 100vh;
     width: 60%;
     min-width: 800px;
-    background-color: rgb(83, 173, 9);
+    // background-color: rgb(83, 173, 9);
+    background-color: rgb(125, 205, 60);
 
     .form-button {
       cursor: pointer;
@@ -218,36 +213,26 @@
   .nav-bar {
     padding-top: 15px;
 
-    .toggle-menu {
-      .nav-item {
-        font-size: 2.5rem;
-      }
+    .toggle-menu .nav-item {
+      font-size: 2.5rem;
     }
   }
 
-  .app-main {
-    .red-green-refactor {
-      width: 100%;
-      min-width: 200px;
-    }
+  .app-main .red-green-refactor {
+    width: 100%;
+    min-width: 200px;
   }
 
-  .profile-container {
-    .profile-div {
-      .profile-name {
-        font-size: 4rem;
-      }
-    }
+  .profile-container .profile-div .profile-name {
+    font-size: 4rem;
   }
 
   .add-list-button {
     font-size: 1.5rem;
   }
 
-  .list-container {
-    .headers {
-      font-size: 3rem;
-    }
+  .list-container .headers {
+    font-size: 3rem;
   }
 
   .form-section {
@@ -262,30 +247,22 @@
   .nav-bar {
     padding-top: 15px;
 
-    .toggle-menu {
-      .nav-item {
-        margin: 0 5px;
-        font-size: 2rem;
-      }
+    .toggle-menu .nav-item {
+      margin: 0 5px;
+      font-size: 2rem;
     }
 
     .hamburger {
       margin-left: 20px;
     }
   }
-  .profile-container {
-    .profile-div {
-      .profile-name {
-        font-size: 3rem;
-      }
-    }
+  .profile-container .profile-div .profile-name {
+    font-size: 3rem;
   }
 
   .list-container {
-    .list-item {
-      .list-item-text {
-        font-size: 1.5rem;
-      }
+    .list-item .list-item-text {
+      font-size: 1.5rem;
     }
 
     .headers {
@@ -293,17 +270,13 @@
     }
   }
 
-  .form-container {
-    .form-section {
-      .actual-form {
-        flex-direction: column;
-        align-items: center;
+  .form-container .form-section .actual-form {
+    flex-direction: column;
+    align-items: center;
 
-        .form-input {
-          margin: 0 auto;
-          margin-bottom: 3%;
-        }
-      }
+    .form-input {
+      margin: 0 auto;
+      margin-bottom: 3%;
     }
   }
 }
