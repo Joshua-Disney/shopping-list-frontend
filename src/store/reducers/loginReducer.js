@@ -8,7 +8,7 @@ import {
   LOG_OUT_START,
   LOG_OUT_SUCCESS,
   LOG_OUT_FAILURE,
-  WELCOME_BACK
+  WELCOME_BACK,
 } from "../actions";
 
 const initialState = {
@@ -16,9 +16,10 @@ const initialState = {
   isLoggingOut: false,
   isLoggingIn: false,
   isLoggedIn: false,
+  isRegistered: false,
   account_id: "",
   message: "",
-  error: null
+  error: null,
 };
 
 const loginReducer = (state = initialState, action) => {
@@ -28,28 +29,29 @@ const loginReducer = (state = initialState, action) => {
         ...state,
         isRegistering: true,
         message: "",
-        error: null
+        error: null,
       };
     case REGISTER_SUCCESS:
       return {
         ...state,
         isRegistering: false,
+        isRegistered: true,
         message: action.payload.message,
-        error: null
+        error: null,
       };
     case REGISTER_FAILURE:
       return {
         ...state,
         isRegistering: false,
         message: action.payload.message,
-        error: action.payload.error
+        error: action.payload.error,
       };
     case LOGIN_START:
       return {
         ...state,
         isLoggingIn: true,
         message: "",
-        error: null
+        error: null,
       };
     case LOGIN_SUCCESS:
       return {
@@ -58,20 +60,20 @@ const loginReducer = (state = initialState, action) => {
         isLoggedIn: true,
         account_id: action.payload.account_id,
         message: action.payload.message,
-        error: null
+        error: null,
       };
     case LOGIN_FAILURE:
       return {
         ...state,
         isLoggingIn: false,
         message: action.payload.message,
-        error: action.payload
+        error: action.payload,
       };
     case LOG_OUT_START:
       return {
         ...state,
         isLoggingOut: true,
-        error: null
+        error: null,
       };
     case LOG_OUT_SUCCESS:
       return {
@@ -80,20 +82,20 @@ const loginReducer = (state = initialState, action) => {
         isLoggedIn: false,
         account_id: "",
         message: action.payload,
-        error: null
+        error: null,
       };
     case LOG_OUT_FAILURE:
       return {
         ...state,
         isLoggingOut: false,
         message: action.payload,
-        error: null
+        error: null,
       };
     case WELCOME_BACK:
       return {
         ...state,
         isLoggedIn: true,
-        error: null
+        error: null,
       };
     default:
       return state;

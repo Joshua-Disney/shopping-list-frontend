@@ -23,6 +23,15 @@ const LoginForm = (props) => {
   }, []);
 
   useEffect(() => {
+    if (props.isRegistered) {
+      props.login({
+        email: state.email,
+        password: state.password,
+      });
+    }
+  }, [props.isRegistered]);
+
+  useEffect(() => {
     if (props.isLoggedIn) {
       props.history.push("/");
     }
@@ -122,10 +131,6 @@ const LoginForm = (props) => {
                     password: state.password,
                   });
                   setState({ ...state, loading: true });
-                  props.login({
-                    email: state.email,
-                    password: state.password,
-                  });
                 }
               }
             >
@@ -178,6 +183,7 @@ const LoginForm = (props) => {
 const mapStateToProps = ({ loginReducer }) => {
   return {
     isLoggedIn: loginReducer.isLoggedIn,
+    isRegistered: loginReducer.isRegistered,
   };
 };
 
