@@ -10,6 +10,8 @@ const LoginForm = (props) => {
     confirmPassword: "",
     loggingIn: true,
     loading: false,
+    isEmail: true,
+    isConfirmed: true,
   });
 
   const [token] = useState(() => {
@@ -36,6 +38,24 @@ const LoginForm = (props) => {
       props.history.push("/");
     }
   }, [props.isLoggedIn, props.history]);
+
+  const checkValidEmail = (event) => {
+    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    setState({ ...state, isEmail: event.target.value.match(emailRegex) });
+  };
+
+  const checkConfirmedPassword = (event) => {
+    setState({ ...state, isConfirmed: state.password === event.target.value });
+  };
+
+  useEffect(() => {
+    if (state.confirmPassword.length >= 1) {
+      setState({
+        ...state,
+        isConfirmed: state.password === state.confirmPassword,
+      });
+    }
+  }, [state.password]);
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -136,12 +156,15 @@ const LoginForm = (props) => {
             >
               {/* <div className="input-fields"> */}
               <input
-                className="input-field"
+                className={`input-field ${
+                  state.isEmail ? "" : "invalid-input"
+                }`}
                 type="text"
                 name="email"
-                placeholder="Email..."
+                placeholder="Please enter a valid email address"
                 value={state.email}
                 onChange={handleChange}
+                onBlur={checkValidEmail}
               />
               <input
                 className="input-field"
@@ -151,13 +174,17 @@ const LoginForm = (props) => {
                 value={state.password}
                 onChange={handleChange}
               />
-              {/* <input
+              <input
+                className={`input-field ${
+                  state.isConfirmed ? "" : "invalid-input"
+                }`}
                 type="password"
                 name="confirmPassword"
                 placeholder="Confirm password..."
                 value={state.confirmPassword}
                 onChange={handleChange}
-              /> */}
+                onBlur={checkConfirmedPassword}
+              />
               <button className="input-button" type="submit">
                 Register
               </button>
