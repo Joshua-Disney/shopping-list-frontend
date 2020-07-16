@@ -25,6 +25,10 @@ const LoginForm = (props) => {
   }, []);
 
   useEffect(() => {
+    setState({ ...state, loading: props.isLoading });
+  }, [props.isLoading]);
+
+  useEffect(() => {
     if (props.isRegistered) {
       props.login({
         email: state.email,
@@ -76,10 +80,9 @@ const LoginForm = (props) => {
                   email: state.email,
                   password: state.password,
                 });
-                setState({ ...state, loading: true });
+                // setState({ ...state, loading: true });
               }}
             >
-              {/* <div className="input-fields"> */}
               <input
                 className="input-field"
                 type="text"
@@ -128,7 +131,7 @@ const LoginForm = (props) => {
                   email: state.email,
                   password: state.password,
                 });
-                setState({ ...state, loading: true });
+                // setState({ ...state, loading: true });
               }}
             >
               <input
@@ -196,6 +199,7 @@ const mapStateToProps = ({ loginReducer }) => {
   return {
     isLoggedIn: loginReducer.isLoggedIn,
     isRegistered: loginReducer.isRegistered,
+    isLoading: loginReducer.isLoading,
   };
 };
 

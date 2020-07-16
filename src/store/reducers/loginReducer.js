@@ -16,6 +16,7 @@ const initialState = {
   isLoggingOut: false,
   isLoggingIn: false,
   isLoggedIn: false,
+  isLoading: false,
   isRegistered: false,
   account_id: "",
   message: "",
@@ -28,6 +29,7 @@ const loginReducer = (state = initialState, action) => {
       return {
         ...state,
         isRegistering: true,
+        isLoading: true,
         message: "",
         error: null,
       };
@@ -36,6 +38,7 @@ const loginReducer = (state = initialState, action) => {
         ...state,
         isRegistering: false,
         isRegistered: true,
+        isLoading: false,
         message: action.payload.message,
         error: null,
       };
@@ -43,6 +46,7 @@ const loginReducer = (state = initialState, action) => {
       return {
         ...state,
         isRegistering: false,
+        isLoading: false,
         message: action.payload.message,
         error: action.payload.error,
       };
@@ -50,6 +54,7 @@ const loginReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggingIn: true,
+        isLoading: true,
         message: "",
         error: null,
       };
@@ -58,6 +63,7 @@ const loginReducer = (state = initialState, action) => {
         ...state,
         isLoggingIn: false,
         isLoggedIn: true,
+        isLoading: false,
         account_id: action.payload.account_id,
         message: action.payload.message,
         error: null,
@@ -66,6 +72,7 @@ const loginReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggingIn: false,
+        isLoading: false,
         message: action.payload.message,
         error: action.payload,
       };
