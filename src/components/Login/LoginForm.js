@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 
 import { register, login, welcomeBack } from "../../store/actions";
@@ -14,9 +14,9 @@ const LoginForm = (props) => {
     isConfirmed: true,
   });
 
-  const [token] = useState(() => {
+  const token = useMemo(() => {
     return localStorage.getItem("token");
-  });
+  }, []);
 
   useEffect(() => {
     if (token) {
@@ -44,10 +44,6 @@ const LoginForm = (props) => {
     setState({ ...state, isEmail: event.target.value.match(emailRegex) });
   };
 
-  const checkConfirmedPassword = (event) => {
-    setState({ ...state, isConfirmed: state.password === event.target.value });
-  };
-
   useEffect(() => {
     if (state.confirmPassword.length >= 1) {
       setState({
@@ -55,24 +51,12 @@ const LoginForm = (props) => {
         isConfirmed: state.password === state.confirmPassword,
       });
     }
-  }, [state.password]);
+  }, [state.password, state.confirmPassword]);
 
   const handleChange = (event) => {
     event.preventDefault();
     setState({ ...state, [event.target.name]: event.target.value });
   };
-
-  // const handleSubmit = (event) => {  <============================  For testing purposes
-  //   event.preventDefault();
-  //   alert(
-  //     "A name was submitted: " +
-  //       state.email +
-  //       " " +
-  //       state.password +
-  //       " " +
-  //       state.confirmPassword
-  //   );
-  // };
 
   return (
     <div className="login-container">
@@ -81,7 +65,7 @@ const LoginForm = (props) => {
           <h3>.......Loading.......</h3>
         </div>
       ) : state.loggingIn ? (
-        <container className="login-width-container">
+        <section className="login-width-container">
           <h1 className="title">Shopping / Wish List</h1>
           <div className="login-form">
             <form
@@ -112,17 +96,13 @@ const LoginForm = (props) => {
                 value={state.password}
                 onChange={handleChange}
               />
-              {/* <input
-                type="password"
-                name="confirmPassword"
-                placeholder="Confirm password..."
-                value={state.confirmPassword}
-                onChange={handleChange}
-              /> */}
-              <button className="input-button" type="submit">
+              <button
+                className="input-button"
+                disabled={!(!!state.email && !!state.password)}
+                type="submit"
+              >
                 Login
               </button>
-              {/* </div> */}
             </form>
             <p>Don't have an account?</p>
             <button
@@ -135,26 +115,22 @@ const LoginForm = (props) => {
               Register here
             </button>
           </div>
-        </container>
+        </section>
       ) : (
-        <container className="login-width-container">
+        <section className="login-width-container">
           <h1 className="title">Shopping / Wish List</h1>
           <div className="login-form">
             <form
               className="input-fields"
-              onSubmit={
-                // handleSubmit
-                (event) => {
-                  event.preventDefault();
-                  props.register({
-                    email: state.email,
-                    password: state.password,
-                  });
-                  setState({ ...state, loading: true });
-                }
-              }
+              onSubmit={(event) => {
+                event.preventDefault();
+                props.register({
+                  email: state.email,
+                  password: state.password,
+                });
+                setState({ ...state, loading: true });
+              }}
             >
-              {/* <div className="input-fields"> */}
               <input
                 className={`input-field ${
                   state.isEmail ? "" : "invalid-input"
@@ -183,12 +159,21 @@ const LoginForm = (props) => {
                 placeholder="Confirm password..."
                 value={state.confirmPassword}
                 onChange={handleChange}
-                onBlur={checkConfirmedPassword}
               />
-              <button className="input-button" type="submit">
+              <button
+                className="input-button"
+                disabled={
+                  !(
+                    !!state.email &&
+                    !!state.confirmPassword &&
+                    !!state.isEmail &&
+                    !!state.isConfirmed
+                  )
+                }
+                type="submit"
+              >
                 Register
               </button>
-              {/* </div> */}
             </form>
             <p>Already have an account?</p>
             <button
@@ -201,7 +186,7 @@ const LoginForm = (props) => {
               Login here
             </button>
           </div>
-        </container>
+        </section>
       )}
     </div>
   );
