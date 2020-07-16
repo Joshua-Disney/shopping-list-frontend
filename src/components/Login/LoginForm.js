@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 
 import { register, login, welcomeBack } from "../../store/actions";
@@ -10,11 +10,13 @@ const LoginForm = (props) => {
     confirmPassword: "",
     loggingIn: true,
     loading: false,
+    isEmail: true,
+    isConfirmed: true,
   });
 
-  const [token] = useState(() => {
+  const token = useMemo(() => {
     return localStorage.getItem("token");
-  });
+  }, []);
 
   useEffect(() => {
     if (token) {
@@ -23,27 +25,42 @@ const LoginForm = (props) => {
   }, []);
 
   useEffect(() => {
+    setState({ ...state, loading: props.isLoading });
+  }, [props.isLoading]);
+
+  useEffect(() => {
+    if (props.isRegistered) {
+      props.login({
+        email: state.email,
+        password: state.password,
+      });
+    }
+  }, [props.isRegistered]);
+
+  useEffect(() => {
     if (props.isLoggedIn) {
       props.history.push("/");
     }
   }, [props.isLoggedIn, props.history]);
 
+  const checkValidEmail = (event) => {
+    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    setState({ ...state, isEmail: event.target.value.match(emailRegex) });
+  };
+
+  useEffect(() => {
+    if (state.confirmPassword.length >= 1) {
+      setState({
+        ...state,
+        isConfirmed: state.password === state.confirmPassword,
+      });
+    }
+  }, [state.password, state.confirmPassword]);
+
   const handleChange = (event) => {
     event.preventDefault();
     setState({ ...state, [event.target.name]: event.target.value });
   };
-
-  // const handleSubmit = (event) => {  <============================  For testing purposes
-  //   event.preventDefault();
-  //   alert(
-  //     "A name was submitted: " +
-  //       state.email +
-  //       " " +
-  //       state.password +
-  //       " " +
-  //       state.confirmPassword
-  //   );
-  // };
 
   return (
     <div className="login-container">
@@ -52,7 +69,7 @@ const LoginForm = (props) => {
           <h3>.......Loading.......</h3>
         </div>
       ) : state.loggingIn ? (
-        <container className="login-width-container">
+        <section className="login-width-container">
           <h1 className="title">Shopping / Wish List</h1>
           <div className="login-form">
             <form
@@ -63,10 +80,9 @@ const LoginForm = (props) => {
                   email: state.email,
                   password: state.password,
                 });
-                setState({ ...state, loading: true });
+                // setState({ ...state, loading: true });
               }}
             >
-              {/* <div className="input-fields"> */}
               <input
                 className="input-field"
                 type="text"
@@ -83,17 +99,13 @@ const LoginForm = (props) => {
                 value={state.password}
                 onChange={handleChange}
               />
-              {/* <input
-                type="password"
-                name="confirmPassword"
-                placeholder="Confirm password..."
-                value={state.confirmPassword}
-                onChange={handleChange}
-              /> */}
-              <button className="input-button" type="submit">
+              <button
+                className="input-button"
+                disabled={!(!!state.email && !!state.password)}
+                type="submit"
+              >
                 Login
               </button>
-              {/* </div> */}
             </form>
             <p>Don't have an account?</p>
             <button
@@ -106,37 +118,32 @@ const LoginForm = (props) => {
               Register here
             </button>
           </div>
-        </container>
+        </section>
       ) : (
-        <container className="login-width-container">
+        <section className="login-width-container">
           <h1 className="title">Shopping / Wish List</h1>
           <div className="login-form">
             <form
               className="input-fields"
-              onSubmit={
-                // handleSubmit
-                (event) => {
-                  event.preventDefault();
-                  props.register({
-                    email: state.email,
-                    password: state.password,
-                  });
-                  setState({ ...state, loading: true });
-                  props.login({
-                    email: state.email,
-                    password: state.password,
-                  });
-                }
-              }
+              onSubmit={(event) => {
+                event.preventDefault();
+                props.register({
+                  email: state.email,
+                  password: state.password,
+                });
+                // setState({ ...state, loading: true });
+              }}
             >
-              {/* <div className="input-fields"> */}
               <input
-                className="input-field"
+                className={`input-field ${
+                  state.isEmail ? "" : "invalid-input"
+                }`}
                 type="text"
                 name="email"
-                placeholder="Email..."
+                placeholder="Please enter a valid email address"
                 value={state.email}
                 onChange={handleChange}
+                onBlur={checkValidEmail}
               />
               <input
                 className="input-field"
@@ -146,17 +153,30 @@ const LoginForm = (props) => {
                 value={state.password}
                 onChange={handleChange}
               />
-              {/* <input
+              <input
+                className={`input-field ${
+                  state.isConfirmed ? "" : "invalid-input"
+                }`}
                 type="password"
                 name="confirmPassword"
                 placeholder="Confirm password..."
                 value={state.confirmPassword}
                 onChange={handleChange}
-              /> */}
-              <button className="input-button" type="submit">
+              />
+              <button
+                className="input-button"
+                disabled={
+                  !(
+                    !!state.email &&
+                    !!state.confirmPassword &&
+                    !!state.isEmail &&
+                    !!state.isConfirmed
+                  )
+                }
+                type="submit"
+              >
                 Register
               </button>
-              {/* </div> */}
             </form>
             <p>Already have an account?</p>
             <button
@@ -169,7 +189,7 @@ const LoginForm = (props) => {
               Login here
             </button>
           </div>
-        </container>
+        </section>
       )}
     </div>
   );
@@ -178,6 +198,8 @@ const LoginForm = (props) => {
 const mapStateToProps = ({ loginReducer }) => {
   return {
     isLoggedIn: loginReducer.isLoggedIn,
+    isRegistered: loginReducer.isRegistered,
+    isLoading: loginReducer.isLoading,
   };
 };
 
