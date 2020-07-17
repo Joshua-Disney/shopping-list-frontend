@@ -70,7 +70,7 @@ const LoginForm = (props) => {
         </div>
       ) : state.loggingIn ? (
         <section className="login-width-container">
-          <h1 className="title">Shopping / Wish List</h1>
+          <h1 className="title">Diz - List</h1>
           <div className="login-form">
             <form
               className="input-fields"
@@ -121,7 +121,7 @@ const LoginForm = (props) => {
         </section>
       ) : (
         <section className="login-width-container">
-          <h1 className="title">Shopping / Wish List</h1>
+          <h1 className="title">Diz - List</h1>
           <div className="login-form">
             <form
               className="input-fields"
