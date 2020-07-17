@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import socketIOClient from "socket.io-client";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
 
 import { getThing, logout, getAccount } from "../../store/actions";
 
 import Profile from "../Profiles/profile";
+
+const ENDPOINT = process.env.REACT_APP_SERVER;
+
+console.log("endpoint: ", ENDPOINT);
 
 const Home = (props) => {
   const [displayMenu, setDisplayMenu] = useState(true);
@@ -17,6 +22,14 @@ const Home = (props) => {
       props.getAccount(account_id);
     }
   }, [props.account_id]);
+
+  useEffect(() => {
+    const socket = socketIOClient(ENDPOINT);
+    socket.on("FromAPI", (data) => {
+      // setResponse(data);
+      console.log(data);
+    });
+  }, []);
 
   return (
     <section className="app-main">
