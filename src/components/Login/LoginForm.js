@@ -74,6 +74,7 @@ const LoginForm = (props) => {
           <div className="login-form">
             <form
               className="input-fields"
+              autoComplete="off"
               onSubmit={(event) => {
                 event.preventDefault();
                 props.login({
@@ -125,6 +126,7 @@ const LoginForm = (props) => {
           <div className="login-form">
             <form
               className="input-fields"
+              autoComplete="off"
               onSubmit={(event) => {
                 event.preventDefault();
                 props.register({
