@@ -8,6 +8,7 @@ import LoginForm from "./components/Login/LoginForm";
 import ProfileForm from "./components/Profiles/profileForm";
 import NeedForm from "./components/Needs/needForm";
 import WantForm from "./components/Wants/wantForm";
+import SettingsPage from "./components/Settings/settings";
 
 class App extends React.Component {
   constructor(props) {
@@ -25,6 +26,7 @@ class App extends React.Component {
             <Private path="/add-profile" component={ProfileForm} />
             <Private path="/add-need" component={NeedForm} />
             <Private path="/add-want" component={WantForm} />
+            <Private path="/settings" component={SettingsPage} />
           </Switch>
         </div>
       </Router>

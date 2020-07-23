@@ -57,6 +57,11 @@ const Home = (props) => {
               return <Profile key={profile.id} profile={profile} />;
             })}
           </div>
+          <div>
+            <NavLink className="nav-item" to="/settings">
+              To settings page
+            </NavLink>
+          </div>
         </>
       ) : (
         <div>
