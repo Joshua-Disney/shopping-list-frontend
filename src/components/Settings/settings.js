@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 const initialState = {
   currentValue: "",
   updatedValue: "",
+  addingProfile: false,
   updatingEmail: false,
   updatingPassword: false,
   deletingAccount: false,
@@ -25,6 +26,34 @@ const Settings = (props) => {
       <NavLink className="give this a classname later that's important" to="/">
         Return Home
       </NavLink>
+      <p onClick={(event) => updateState(event, "addingProfile")}>
+        Add new profile
+      </p>
+      {state.addingProfile && (
+        <form
+          className="settings-form"
+          onSubmit={(event) => {
+            event.preventDefault();
+            console.log(
+              "current value: ",
+              state.currentValue,
+              "updated value: ",
+              state.updatedValue
+            );
+          }}
+        >
+          <input
+            className="settings-input"
+            type="text"
+            value={state.currentValue}
+            placeholder="New profile name"
+            onChange={(event) =>
+              setState({ ...state, currentValue: event.target.value })
+            }
+          />
+          <button className="settings-button">Submit</button>
+        </form>
+      )}
       <p onClick={(event) => updateState(event, "updatingEmail")}>
         Update email address
       </p>

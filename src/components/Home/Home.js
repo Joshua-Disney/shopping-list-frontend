@@ -25,8 +25,11 @@ const Home = (props) => {
           <div className="red-green-refactor specific">
             <nav className="nav-bar">
               <div className={`toggle-menu ${displayMenu ? "none" : ""}`}>
-                <NavLink className="nav-item" to="/add-profile">
+                {/* <NavLink className="nav-item" to="/add-profile">
                   Add Profile
+                </NavLink> */}
+                <NavLink className="nav-item" to="/settings">
+                  Settings
                 </NavLink>
                 <button
                   className="nav-item"
@@ -57,11 +60,11 @@ const Home = (props) => {
               return <Profile key={profile.id} profile={profile} />;
             })}
           </div>
-          <div>
+          {/* <div>
             <NavLink className="nav-item" to="/settings">
               To settings page
             </NavLink>
-          </div>
+          </div> */}
         </>
       ) : (
         <div>
