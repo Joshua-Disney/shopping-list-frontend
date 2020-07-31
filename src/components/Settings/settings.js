@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+
+import { createProfile } from "../../store/actions";
 
 const initialState = {
   currentValue: "",
@@ -8,12 +11,26 @@ const initialState = {
   updatingEmail: false,
   updatingPassword: false,
   deletingAccount: false,
+  account_id: localStorage.getItem("account_id"),
 };
 
 const Settings = (props) => {
   const [state, setState] = useState({
     ...initialState,
+    // account_id: props.account_id,
   });
+
+  useEffect(() => {
+    console.log("props: ", props);
+  }, [props]);
+
+  // useEffect(() => {
+  //   setState({ ...state, account_id: props.account_id });
+  //   console.log("state", state);
+  //   if (!state.account_id) {
+  //     setState({ ...state, account_id: localStorage.getItem("account_id") });
+  //   }
+  // }, []);
 
   const updateState = (event, action) => {
     event.preventDefault();
@@ -34,12 +51,15 @@ const Settings = (props) => {
           className="settings-form"
           onSubmit={(event) => {
             event.preventDefault();
-            console.log(
-              "current value: ",
-              state.currentValue,
-              "updated value: ",
-              state.updatedValue
-            );
+            // console.log({
+            //   name: state.currentValue,
+            //   account_id: state.account_id,
+            // });
+            props.createProfile({
+              name: state.currentValue,
+              account_id: state.account_id,
+            });
+            props.history.push("/");
           }}
         >
           <input
@@ -54,7 +74,7 @@ const Settings = (props) => {
           <button className="settings-button">Submit</button>
         </form>
       )}
-      <p onClick={(event) => updateState(event, "updatingEmail")}>
+      {/* <p onClick={(event) => updateState(event, "updatingEmail")}>
         Update email address
       </p>
       {state.updatingEmail && (
@@ -131,9 +151,17 @@ const Settings = (props) => {
         <form>
           <h3>this will be a model to confirm deletion</h3>
         </form>
-      )}
+      )} */}
     </div>
   );
 };
 
-export default Settings;
+const mapStateToProps = ({ loginReducer }) => {
+  return {
+    account_id: loginReducer.account_id,
+  };
+};
+
+const mapDispatchToProps = { createProfile };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);
