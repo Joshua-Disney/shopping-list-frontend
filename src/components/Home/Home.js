@@ -28,6 +28,9 @@ const Home = (props) => {
                 <NavLink className="nav-item" to="/add-profile">
                   Add Profile
                 </NavLink>
+                {/* <NavLink className="nav-item" to="/settings">
+                  Settings
+                </NavLink> */}
                 <button
                   className="nav-item"
                   onClick={(event) => {
@@ -57,6 +60,11 @@ const Home = (props) => {
               return <Profile key={profile.id} profile={profile} />;
             })}
           </div>
+          {/* <div>
+            <NavLink className="nav-item" to="/settings">
+              To settings page
+            </NavLink>
+          </div> */}
         </>
       ) : (
         <div>
