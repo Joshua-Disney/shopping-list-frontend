@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 
 import { register, login, welcomeBack } from "../../store/actions";
+import LoginInput from "../../ui/LoginInput";
 
 const LoginForm = (props) => {
   const [state, setState] = useState({
@@ -58,20 +59,19 @@ const LoginForm = (props) => {
   }, [state.password, state.confirmPassword]);
 
   const handleChange = (event) => {
-    event.preventDefault();
     setState({ ...state, [event.target.name]: event.target.value });
   };
 
   return (
-    <div className="login-container">
+    <div className="bg-green-50 min-h-screen">
       {state.loading ? (
         <div>
           <h3>.......Loading.......</h3>
         </div>
       ) : state.loggingIn ? (
-        <section className="login-width-container">
+        <section className="sm:mx-auto sm:w-full sm:max-w-md">
           <h1 className="title">Shopping / Wish List</h1>
-          <div className="login-form">
+          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <form
               className="input-fields"
               onSubmit={(event) => {
@@ -83,40 +83,54 @@ const LoginForm = (props) => {
                 // setState({ ...state, loading: true });
               }}
             >
-              <input
-                className="input-field"
-                type="text"
-                name="email"
-                placeholder="Email..."
-                value={state.email.toLowerCase().trim()}
-                onChange={handleChange}
-              />
-              <input
-                className="input-field"
-                type="password"
-                name="password"
-                placeholder="Password..."
-                value={state.password}
-                onChange={handleChange}
-              />
-              <button
-                className="input-button"
-                disabled={!(!!state.email && !!state.password)}
-                type="submit"
-              >
-                Login
-              </button>
+              <div>
+                <LoginInput
+                  id="email"
+                  type="text"
+                  name="email"
+                  value={state.email.toLowerCase().trim()}
+                  onChange={handleChange}
+                />
+              </div>
+              <div class="mt-6">
+                <LoginInput
+                  className="password"
+                  type="password"
+                  name="password"
+                  value={state.password}
+                  onChange={handleChange}
+                />
+              </div>
+              <div class="mt-6">
+                <span class="block w-full rounded-md shadow-sm">
+                  <button
+                    type="submit"
+                    disabled={!(!!state.email && !!state.password)}
+                    className={`w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white disabled:opacity-50 bg-green-600 focus:outline-none transition duration-150 ease-in-out ${
+                      state.email && state.password
+                        ? "hover:bg-green-500 focus:border-green-700 focus:shadow-outline-green active:bg-green-700"
+                        : "cursor-not-allowed"
+                    }`}
+                  >
+                    Login
+                  </button>
+                </span>
+              </div>
             </form>
-            <p>Don't have an account?</p>
-            <button
-              className="input-button"
-              onClick={(event) => {
-                event.preventDefault();
-                setState({ ...state, loggingIn: false });
-              }}
-            >
-              Register here
-            </button>
+            <div className="text-sm mt-5">
+              <span className="block leading-5 text-gray-900">
+                Don't have an account?
+              </span>
+              <button
+                className="font-medium text-green-600 hover:text-green-400 focus:outline-none focus:underline transition ease-in-out duration-150"
+                onClick={(event) => {
+                  event.preventDefault();
+                  setState({ ...state, loggingIn: false });
+                }}
+              >
+                Register here
+              </button>
+            </div>
           </div>
         </section>
       ) : (
@@ -134,37 +148,40 @@ const LoginForm = (props) => {
                 // setState({ ...state, loading: true });
               }}
             >
-              <input
-                className={`input-field ${
-                  state.isEmail ? "" : "invalid-input"
-                }`}
-                type="text"
-                name="email"
-                placeholder="Please enter a valid email address"
-                value={state.email}
-                onChange={handleChange}
-                onBlur={checkValidEmail}
-              />
-              <input
-                className="input-field"
-                type="password"
-                name="password"
-                placeholder="Password..."
-                value={state.password}
-                onChange={handleChange}
-              />
-              <input
-                className={`input-field ${
-                  state.isConfirmed ? "" : "invalid-input"
-                }`}
-                type="password"
-                name="confirmPassword"
-                placeholder="Confirm password..."
-                value={state.confirmPassword}
-                onChange={handleChange}
-              />
+              <div>
+                <LoginInput
+                  type="text"
+                  name="email"
+                  placeholder="Please enter a valid email address"
+                  value={state.email}
+                  onChange={handleChange}
+                  onBlur={checkValidEmail}
+                />
+              </div>
+              <div class="mt-6">
+                <LoginInput
+                  type="password"
+                  name="password"
+                  placeholder="Password..."
+                  value={state.password}
+                  onChange={handleChange}
+                />
+              </div>
+              <div class="mt-6">
+                <LoginInput
+                  type="password"
+                  name="confirmPassword"
+                  placeholder="Confirm password..."
+                  value={state.confirmPassword}
+                  onChange={handleChange}
+                />
+              </div>
               <button
-                className="input-button"
+                className={`w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white disabled:opacity-50 bg-green-600 focus:outline-none transition duration-150 ease-in-out ${
+                  state.email && state.password
+                    ? "hover:bg-green-500 focus:border-green-700 focus:shadow-outline-green active:bg-green-700"
+                    : "cursor-not-allowed"
+                }`}
                 disabled={
                   !(
                     !!state.email &&
@@ -178,16 +195,20 @@ const LoginForm = (props) => {
                 Register
               </button>
             </form>
-            <p>Already have an account?</p>
-            <button
-              className="input-button"
-              onClick={(event) => {
-                event.preventDefault();
-                setState({ ...state, loggingIn: true });
-              }}
-            >
-              Login here
-            </button>
+            <div className="text-sm mt-5">
+              <span className="block leading-5 text-gray-900">
+                Already have an account?
+              </span>
+              <button
+                className="font-medium text-green-600 hover:text-green-400 focus:outline-none focus:underline transition ease-in-out duration-150"
+                onClick={(event) => {
+                  event.preventDefault();
+                  setState({ ...state, loggingIn: true });
+                }}
+              >
+                Login here
+              </button>
+            </div>
           </div>
         </section>
       )}

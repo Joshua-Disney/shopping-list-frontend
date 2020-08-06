@@ -43,5 +43,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@tailwindcss/ui": "^0.5.0",
+    "autoprefixer": "^9.8.6",
+    "tailwindcss": "^1.6.2"
   }
 }

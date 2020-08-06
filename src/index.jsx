@@ -4,11 +4,10 @@ import ReactDOM from "react-dom";
 import logger from "redux-logger";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
+import './main.css';
 
 import App from "./App";
 import rootReducer from "./store/reducers";
-
-import "./less/index.less";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
