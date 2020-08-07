@@ -43,14 +43,14 @@ const accountReducer = (state = initialState, action) => {
       return {
         ...state,
         isUpdating: true,
-        message: action.payload.message,
+        message: "",
         error: null,
       };
     case UPDATE_ACCOUNT_SUCCESS:
       return {
         ...state,
         isUpdating: false,
-        account: action.payload,
+        message: action.payload,
         error: null,
       };
     case UPDATE_ACCOUNT_FAILURE:

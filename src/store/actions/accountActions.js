@@ -19,11 +19,12 @@ export const getAccount = (id) => async (dispatch) => {
   }
 };
 
-export const updateAccount = (id) => async (dispatch) => {
+export const updateAccount = (id, account) => async (dispatch) => {
   dispatch({ type: UPDATE_ACCOUNT_START });
   try {
     const result = await axiosWithAuth().put(
-      `https://disneys-shopping-list-backend.herokuapp.com/api/accounts/${id}`
+      `https://disneys-shopping-list-backend.herokuapp.com/api/accounts/${id}`,
+      account
     );
     dispatch({ type: UPDATE_ACCOUNT_SUCCESS, payload: result.data });
   } catch (error) {
