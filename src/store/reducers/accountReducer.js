@@ -1,15 +1,19 @@
 import {
   GET_ACCOUNT_START,
   GET_ACCOUNT_SUCCESS,
-  GET_ACCOUNT_FAILURE
+  GET_ACCOUNT_FAILURE,
+  UPDATE_ACCOUNT_START,
+  UPDATE_ACCOUNT_SUCCESS,
+  UPDATE_ACCOUNT_FAILURE,
   // DELETE_NEED_SUCCESS
 } from "../actions";
 
 const initialState = {
   isGetting: false,
+  isUpdating: false,
   account: {},
   message: "",
-  error: null
+  error: null,
 };
 
 const accountReducer = (state = initialState, action) => {
@@ -19,21 +23,42 @@ const accountReducer = (state = initialState, action) => {
         ...state,
         isGetting: true,
         message: "",
-        error: null
+        error: null,
       };
     case GET_ACCOUNT_SUCCESS:
       return {
         ...state,
         isGetting: false,
         account: action.payload,
-        error: null
+        error: null,
       };
     case GET_ACCOUNT_FAILURE:
       return {
         ...state,
         isGetting: false,
         message: action.payload.message,
-        error: action.payload.error
+        error: action.payload.error,
+      };
+    case UPDATE_ACCOUNT_START:
+      return {
+        ...state,
+        isUpdating: true,
+        message: action.payload.message,
+        error: null,
+      };
+    case UPDATE_ACCOUNT_SUCCESS:
+      return {
+        ...state,
+        isUpdating: false,
+        account: action.payload,
+        error: null,
+      };
+    case UPDATE_ACCOUNT_FAILURE:
+      return {
+        ...state,
+        isUpdating: false,
+        message: action.payload.message,
+        error: action.payload.error,
       };
     // case DELETE_NEED_SUCCESS:
     //   const foundProfile = state.account.profiles.find(

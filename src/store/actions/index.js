@@ -2,14 +2,18 @@ export {
   GET_ACCOUNT_START,
   GET_ACCOUNT_SUCCESS,
   GET_ACCOUNT_FAILURE,
-  getAccount
+  UPDATE_ACCOUNT_START,
+  UPDATE_ACCOUNT_SUCCESS,
+  UPDATE_ACCOUNT_FAILURE,
+  getAccount,
+  updateAccount,
 } from "./accountActions";
 
 export {
   GET_THING_START,
   GET_THING_SUCCESS,
   GET_THING_FAILURE,
-  getThing
+  getThing,
 } from "./thingActions";
 
 export {
@@ -26,14 +30,14 @@ export {
   register,
   login,
   logout,
-  welcomeBack
+  welcomeBack,
 } from "./loginActions";
 
 export {
   CREATE_PROFILE_START,
   CREATE_PROFILE_SUCCESS,
   CREATE_PROFILE_FAILURE,
-  createProfile
+  createProfile,
 } from "./profileActions";
 
 export {
@@ -52,5 +56,5 @@ export {
   addNeed,
   addWant,
   deleteNeed,
-  deleteWant
+  deleteWant,
 } from "./listActions";
