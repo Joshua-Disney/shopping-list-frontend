@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import { getThing, logout, getAccount } from "../../store/actions";
+import Hamburger from "../../ui/Hamburger";
 
 import Profile from "../Profiles/profile";
 
@@ -23,35 +24,29 @@ const Home = (props) => {
       {props.account.id > 0 ? (
         <>
           <div className="red-green-refactor specific">
-            <nav className="nav-bar">
-              <div className={`toggle-menu ${displayMenu ? "none" : ""}`}>
-                <NavLink className="nav-item" to="/add-profile">
-                  Add Profile
-                </NavLink>
-                {/* <NavLink className="nav-item" to="/settings">
-                  Settings
-                </NavLink> */}
-                <button
-                  className="nav-item"
-                  onClick={(event) => {
-                    event.preventDefault();
-                    props.logout(props);
-                  }}
+            <nav className="bg-green-800">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <Hamburger display={displayMenu} onClick={() => setDisplayMenu(!displayMenu)} />
+                <div
+                  className={`toggle-menu ${displayMenu ? "hidden" : "block"}`}
                 >
-                  Log Out
-                </button>
+                  <NavLink className="nav-item" to="/add-profile">
+                    Add Profile
+                  </NavLink>
+                  <NavLink className="nav-item" to="/settings">
+                    Settings
+                  </NavLink>
+                  {/* this should be a link */}
+                  <button
+                    className="nav-item"
+                    onClick={(event) => {
+                      props.logout(props);
+                    }}
+                  >
+                    Log Out
+                  </button>
+                </div>
               </div>
-              <label className="hamburger">
-                <ul
-                  onClick={() => {
-                    setDisplayMenu(!displayMenu);
-                  }}
-                >
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                </ul>
-              </label>
             </nav>
           </div>
           <div className="red-green-refactor">
