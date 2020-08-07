@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { createProfile } from "../../store/actions";
+import { createProfile, updateAccount } from "../../store/actions";
 
 const initialState = {
   currentValue: "",
@@ -11,6 +11,7 @@ const initialState = {
   updatingEmail: false,
   updatingPassword: false,
   deletingAccount: false,
+  isEmail: false,
   account_id: localStorage.getItem("account_id"),
 };
 
@@ -32,10 +33,31 @@ const Settings = (props) => {
   //   }
   // }, []);
 
+  const checkValidEmail = (event) => {
+    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    setState({ ...state, isEmail: event.target.value.match(emailRegex) });
+  };
+
   const updateState = (event, action) => {
     event.preventDefault();
     setState({ ...initialState, [action]: !state[action] });
   };
+
+  useEffect(() => {
+    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (state.updatedValue > 1) {
+      setState({ ...state, isEmail: !!state.updatedValue.match(emailRegex) });
+    }
+    console.log(
+      "state: ",
+      !!state.updatedValue.match(emailRegex),
+      state.updatedValue,
+      state,
+      !(!!state.currentValue && !!state.updatedValue && !!state.isEmail)
+    );
+  }, [state.updatedValue]);
+
+  console.log(!!state.currentValue, !!state.updatedValue, !!state.isEmail);
 
   return (
     <div>
@@ -74,7 +96,7 @@ const Settings = (props) => {
           <button className="settings-button">Submit</button>
         </form>
       )}
-      {/* <p onClick={(event) => updateState(event, "updatingEmail")}>
+      <p onClick={(event) => updateState(event, "updatingEmail")}>
         Update email address
       </p>
       {state.updatingEmail && (
@@ -83,11 +105,14 @@ const Settings = (props) => {
           onSubmit={(event) => {
             event.preventDefault();
             console.log(
-              "current value: ",
-              state.currentValue,
+              "account_id: ",
+              state.account_id,
               "updated value: ",
               state.updatedValue
             );
+            props.updateAccount(state.account_id, {
+              email: state.updatedValue,
+            });
           }}
         >
           <input
@@ -100,18 +125,26 @@ const Settings = (props) => {
             }
           />
           <input
-            className="settings-input"
+            className={`input-field ${state.isEmail ? "" : "invalid-input"}`}
             type="text"
             value={state.updatedValue}
             placeholder="New email address"
-            onChange={(event) =>
-              setState({ ...state, updatedValue: event.target.value })
-            }
+            onChange={(event) => {
+              setState({ ...state, updatedValue: event.target.value });
+            }}
+            // onBlur={checkValidEmail}
           />
-          <button className="settings-button">Submit</button>
+          <button
+            className="settings-button"
+            disabled={
+              !(!!state.currentValue && !!state.updatedValue && !!state.isEmail)
+            }
+          >
+            Submit
+          </button>
         </form>
       )}
-      <p onClick={(e) => updateState(e, "updatingPassword")}>Reset password</p>
+      {/* <p onClick={(e) => updateState(e, "updatingPassword")}>Reset password</p>
       {state.updatingPassword && (
         <form
           className="settings-form"
@@ -162,6 +195,6 @@ const mapStateToProps = ({ loginReducer }) => {
   };
 };
 
-const mapDispatchToProps = { createProfile };
+const mapDispatchToProps = { createProfile, updateAccount };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

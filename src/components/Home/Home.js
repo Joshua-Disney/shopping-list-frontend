@@ -28,9 +28,9 @@ const Home = (props) => {
                 <NavLink className="nav-item" to="/add-profile">
                   Add Profile
                 </NavLink>
-                {/* <NavLink className="nav-item" to="/settings">
+                <NavLink className="nav-item" to="/settings">
                   Settings
-                </NavLink> */}
+                </NavLink>
                 <button
                   className="nav-item"
                   onClick={(event) => {
