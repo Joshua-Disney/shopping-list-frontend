@@ -70,10 +70,9 @@ const LoginForm = (props) => {
         </div>
       ) : state.loggingIn ? (
         <section className="sm:mx-auto sm:w-full sm:max-w-md">
-          <h1 className="title">Shopping / Wish List</h1>
+            <h1 className="font-semibold text-5xl text-center tracking-tight mb-4 text-green-700">Shopping / Wish List</h1>
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <form
-              className="input-fields"
               onSubmit={(event) => {
                 event.preventDefault();
                 props.login({
@@ -83,7 +82,7 @@ const LoginForm = (props) => {
                 // setState({ ...state, loading: true });
               }}
             >
-              <div>
+                <div>
                 <LoginInput
                   id="email"
                   type="text"
@@ -92,7 +91,7 @@ const LoginForm = (props) => {
                   onChange={handleChange}
                 />
               </div>
-              <div class="mt-6">
+              <div className="mt-6">
                 <LoginInput
                   className="password"
                   type="password"
@@ -101,8 +100,8 @@ const LoginForm = (props) => {
                   onChange={handleChange}
                 />
               </div>
-              <div class="mt-6">
-                <span class="block w-full rounded-md shadow-sm">
+              <div className="mt-6">
+                <span className="block w-full rounded-md shadow-sm">
                   <button
                     type="submit"
                     disabled={!(!!state.email && !!state.password)}
@@ -134,9 +133,9 @@ const LoginForm = (props) => {
           </div>
         </section>
       ) : (
-        <section className="login-width-container">
-          <h1 className="title">Shopping / Wish List</h1>
-          <div className="login-form">
+        <section className="sm:mx-auto sm:w-full sm:max-w-md">
+          <h1 className="font-semibold text-5xl text-center tracking-tight mb-4 text-green-700">Shopping / Wish List</h1>
+          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <form
               className="input-fields"
               onSubmit={(event) => {
@@ -148,52 +147,54 @@ const LoginForm = (props) => {
                 // setState({ ...state, loading: true });
               }}
             >
-              <div>
+                <div>
                 <LoginInput
                   type="text"
                   name="email"
-                  placeholder="Please enter a valid email address"
                   value={state.email}
                   onChange={handleChange}
                   onBlur={checkValidEmail}
                 />
               </div>
-              <div class="mt-6">
+              <div className="mt-6">
                 <LoginInput
                   type="password"
                   name="password"
-                  placeholder="Password..."
                   value={state.password}
                   onChange={handleChange}
                 />
               </div>
-              <div class="mt-6">
+              <div className="mt-6">
                 <LoginInput
                   type="password"
                   name="confirmPassword"
-                  placeholder="Confirm password..."
                   value={state.confirmPassword}
                   onChange={handleChange}
                 />
               </div>
-              <button
-                className={`w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white disabled:opacity-50 bg-green-600 focus:outline-none transition duration-150 ease-in-out ${
-                  state.email && state.password
-                    ? "hover:bg-green-500 focus:border-green-700 focus:shadow-outline-green active:bg-green-700"
-                    : "cursor-not-allowed"
-                }`}
-                disabled={
-                  !(
-                    !!state.email &&
-                    !!state.confirmPassword &&
-                    !!state.isEmail &&
-                    !!state.isConfirmed
-                  )
-                }
-                type="submit"
-              >
-                Register
-              </button>
+              <div className="mt-6">
+                  <button
+                    className={`w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white disabled:opacity-50 bg-green-600 focus:outline-none transition duration-150 ease-in-out ${
+                        state.email &&
+                        state.confirmPassword &&
+                        state.isEmail &&
+                        state.isConfirmed
+                        ? "hover:bg-green-500 focus:border-green-700 focus:shadow-outline-green active:bg-green-700"
+                        : "cursor-not-allowed"
+                    }`}
+                    disabled={
+                      !(
+                        !!state.email &&
+                        !!state.confirmPassword &&
+                        !!state.isEmail &&
+                        !!state.isConfirmed
+                      )
+                    }
+                    type="submit"
+                  >
+                    Register
+                  </button>
+              </div>
             </form>
             <div className="text-sm mt-5">
               <span className="block leading-5 text-gray-900">
