@@ -33,10 +33,10 @@ const Settings = (props) => {
   //   }
   // }, []);
 
-  const checkValidEmail = (event) => {
-    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    setState({ ...state, isEmail: event.target.value.match(emailRegex) });
-  };
+  // const checkValidEmail = (event) => {
+  //   const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  //   setState({ ...state, isEmail: event.target.value.match(emailRegex) });
+  // };
 
   const updateState = (event, action) => {
     event.preventDefault();
@@ -132,7 +132,6 @@ const Settings = (props) => {
             onChange={(event) => {
               setState({ ...state, updatedValue: event.target.value });
             }}
-            // onBlur={checkValidEmail}
           />
           <button
             className="settings-button"
@@ -144,7 +143,7 @@ const Settings = (props) => {
           </button>
         </form>
       )}
-      {/* <p onClick={(e) => updateState(e, "updatingPassword")}>Reset password</p>
+      <p onClick={(e) => updateState(e, "updatingPassword")}>Reset password</p>
       {state.updatingPassword && (
         <form
           className="settings-form"
@@ -184,7 +183,7 @@ const Settings = (props) => {
         <form>
           <h3>this will be a model to confirm deletion</h3>
         </form>
-      )} */}
+      )}
     </div>
   );
 };
