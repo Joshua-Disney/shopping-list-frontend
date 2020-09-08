@@ -70,7 +70,7 @@ const LoginForm = (props) => {
   ) : state.loggingIn ? (
     <section className="sm:mx-auto sm:w-full sm:max-w-md">
       <Title>
-        Shopping / Wish List
+        DizList
       </Title>
       <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
         <form
@@ -136,7 +136,7 @@ const LoginForm = (props) => {
   ) : (
     <section className="sm:mx-auto sm:w-full sm:max-w-md">
       <h1 className="font-semibold text-5xl text-center tracking-tight mb-4 text-green-700">
-        Shopping / Wish List
+        DizList
       </h1>
       <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
         <form
