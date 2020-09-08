@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import { register, login, welcomeBack } from "../../store/actions";
 import LoginInput from "../../ui/LoginInput";
+import { Title } from "../../ui/Titles";
 
 const LoginForm = (props) => {
   const [state, setState] = useState({
@@ -68,9 +69,9 @@ const LoginForm = (props) => {
     </div>
   ) : state.loggingIn ? (
     <section className="sm:mx-auto sm:w-full sm:max-w-md">
-      <h1 className="font-semibold text-5xl text-center tracking-tight mb-4 text-green-700">
+      <Title>
         Shopping / Wish List
-      </h1>
+      </Title>
       <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
         <form
           onSubmit={(event) => {

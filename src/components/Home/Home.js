@@ -28,17 +28,17 @@ const Home = (props) => {
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <Hamburger display={displayMenu} onClick={() => setDisplayMenu(!displayMenu)} />
                 <div
-                  className={`toggle-menu ${displayMenu ? "hidden" : "block"}`}
+                  className={`toggle-menu ${displayMenu ? "hidden" : "block"} absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl`}
                 >
-                  <NavLink className="nav-item" to="/add-profile">
+                  <NavLink className="block px-4 py-2 text-gray-800 hover:bg-blue-200" to="/add-profile">
                     Add Profile
                   </NavLink>
-                  <NavLink className="nav-item" to="/settings">
+                  <NavLink className="block px-4 py-2 text-gray-800 hover:bg-blue-200" to="/settings">
                     Settings
                   </NavLink>
                   {/* this should be a link */}
                   <button
-                    className="nav-item"
+                    className="w-block px-4 py-2 text-gray-800 hover:bg-blue-200 text-left w-full"
                     onClick={(event) => {
                       props.logout(props);
                     }}

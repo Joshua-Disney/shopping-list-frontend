@@ -2,7 +2,7 @@ import React from "react";
 
 const Hamburger = ({ display, ...props }) => {
   return (
-    <div className="-mr-2 flex">
+    <div className="-mr-2 flex justify-end">
       <button
         className="inline-flex items-center justify-center p-2 rounded-md text-green-400 hover:text-white hover:bg-green-700 focus:outline-none focus:bg-green-700 focus:text-white transition duration-150 ease-in-out"
         aria-label="Main menu"
