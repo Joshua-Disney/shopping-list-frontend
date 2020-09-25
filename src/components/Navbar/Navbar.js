@@ -1,9 +1,17 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
+
+import { logout } from "../../store/actions";
 import Hamburger from '../../ui/Hamburger';
 
 const Navbar = (props) => {
 	const [displayMenu, setDisplayMenu] = useState(true);
+
+	if (!props.isLoggedIn) {
+		return null;
+	}
+
   return (
     <nav className="bg-green-800">
       <div className="px-6 sm:px-8 lg:px-10 container mx-auto relative">
@@ -43,4 +51,12 @@ const Navbar = (props) => {
   );
 };
 
-export default Navbar;
+const mapStateToProps = ({ accountReducer, loginReducer, thingReducer }) => {
+  return {
+    isLoggedIn: loginReducer.isLoggedIn,
+  };
+};
+
+const mapDispatchToProps = { logout };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
