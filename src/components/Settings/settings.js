@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { createProfile, updateAccount } from "../../store/actions";
+import {
+  createProfile,
+  updateAccount,
+  deleteAccount,
+} from "../../store/actions";
 
 const initialState = {
   currentValue: "",
@@ -194,6 +198,6 @@ const mapStateToProps = ({ loginReducer }) => {
   };
 };
 
-const mapDispatchToProps = { createProfile, updateAccount };
+const mapDispatchToProps = { createProfile, updateAccount, deleteAccount };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

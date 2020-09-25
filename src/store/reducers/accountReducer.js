@@ -5,12 +5,15 @@ import {
   UPDATE_ACCOUNT_START,
   UPDATE_ACCOUNT_SUCCESS,
   UPDATE_ACCOUNT_FAILURE,
-  // DELETE_NEED_SUCCESS
+  DELETE_ACCOUNT_START,
+  DELETE_ACCOUNT_SUCCESS,
+  DELETE_ACCOUNT_FAILURE,
 } from "../actions";
 
 const initialState = {
   isGetting: false,
   isUpdating: false,
+  isDeleting: false,
   account: {},
   message: "",
   error: null,
@@ -60,22 +63,27 @@ const accountReducer = (state = initialState, action) => {
         message: action.payload.message,
         error: action.payload.error,
       };
-    // case DELETE_NEED_SUCCESS:
-    //   const foundProfile = state.account.profiles.find(
-    //     profile => profile.id == action.profile_id
-    //   );
-    //   // const foundNeedIndex = foundProfile.needs.findIndex(
-    //   //   need => need.id == action.need_id
-    //   // );
-    //   // delete foundProfile.needs[foundNeedIndex]
-    //   const newAccount = {
-    //     ...state.account,
-    //     profiles: [...state.account.profiles]
-    //   };
-    //   return {
-    //     ...state,
-    //     error: null
-    //   };
+    case DELETE_ACCOUNT_START:
+      return {
+        ...state,
+        isDeleting: true,
+        message: "",
+        error: null,
+      };
+    case DELETE_ACCOUNT_SUCCESS:
+      return {
+        ...state,
+        isDeleting: false,
+        message: action.payload,
+        error: null,
+      };
+    case DELETE_ACCOUNT_FAILURE:
+      return {
+        ...state,
+        isDeleting: false,
+        message: "",
+        error: action.payload.error,
+      };
     default:
       return state;
   }

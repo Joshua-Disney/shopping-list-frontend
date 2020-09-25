@@ -35,12 +35,11 @@ export const updateAccount = (id, account) => async (dispatch) => {
   }
 };
 
-export const deleteAccount = (id, password) => async (dispatch) => {
+export const deleteAccount = (id) => async (dispatch) => {
   dispatch({ type: DELETE_ACCOUNT_START });
   try {
     const result = await axiosWithAuth().delete(
-      `https://disneys-shopping-list-backend.herokuapp.com/api/accounts/${id}`,
-      password
+      `https://disneys-shopping-list-backend.herokuapp.com/api/accounts/${id}`
     );
     dispatch({ type: DELETE_ACCOUNT_SUCCESS, payload: result.data });
   } catch (error) {
