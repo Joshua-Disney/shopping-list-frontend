@@ -5,8 +5,11 @@ import { deleteNeed, deleteWant } from "../../store/actions";
 import ButtonLink from "../../ui/ButtonLink";
 import Close from "../../ui/Close";
 import { H3, H4 } from "../../ui/Titles";
+import useWindowSize from "../Helpers/useWindowSize";
 
 const Profile = (props) => {
+  const windowSize = useWindowSize();
+  const isScreenSmall = windowSize <= 640;
   // const [remove, setRemove] = useState(true);
 
   // useEffect(() => {
@@ -59,7 +62,7 @@ const Profile = (props) => {
                         event.preventDefault();
                         props.deleteNeed(need.id);
                       }}
-                      className="cursor-pointer rounded-full p-4 hover:bg-green-100  hover:text-red-500 transition duration-200"
+                      className={`cursor-pointer rounded-full ${isScreenSmall ? 'p-2' : 'p-4'} hover:bg-green-100 hover:text-red-500 transition duration-200`}
                     >
                       <Close className="w-3.5 h-3.5 fill-current" />
                     </div>
@@ -83,7 +86,7 @@ const Profile = (props) => {
                         event.preventDefault();
                         props.deleteWant(want.id);
                       }}
-                      className="cursor-pointer rounded-full p-4 hover:bg-green-100  hover:text-red-500 transition duration-200"
+                      className={`cursor-pointer rounded-full ${isScreenSmall ? 'p-2' : 'p-4'} hover:bg-green-100 hover:text-red-500 transition duration-200`}
                     >
                       <Close className="w-3.5 h-3.5 fill-current" />
                     </div>

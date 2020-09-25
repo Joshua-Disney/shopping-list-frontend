@@ -8,9 +8,9 @@ export const Title = ({ children }) => {
   );
 };
 // Todo dymanically generate probably
-export const H3 = ({ children }) => {
+export const H3 = ({ children, className }) => {
   return (
-    <h3 className="text-2xl leading-6 font-medium text-green-900">{children}</h3>
+    <h3 className={`text-2xl leading-6 font-medium text-green-900 ${className}`}>{children}</h3>
   );
 };
 

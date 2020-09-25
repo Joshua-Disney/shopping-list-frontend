@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import { createProfile, updateAccount } from "../../store/actions";
 import { H3 } from "../../ui/Titles";
+import useWindowSize from "../Helpers/useWindowSize";
 
 const initialState = {
   currentValue: "",
@@ -25,6 +26,9 @@ const Settings = (props) => {
   useEffect(() => {
     console.log("props: ", props);
   }, [props]);
+
+  const windowSize = useWindowSize();
+  const isScreenSmall = windowSize <= 680;
 
   // useEffect(() => {
   //   setState({ ...state, account_id: props.account_id });
@@ -62,9 +66,9 @@ const Settings = (props) => {
 
   return (
     <div className="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
-      <H3 className="">User settings</H3>
+      <H3 className="pb-2">User settings</H3>
       <div className="flex">
-        <nav className="cursor-pointer w-1/5 m-4">
+        <nav className={`cursor-pointer w-1/5 ${isScreenSmall ? '' : 'm-4'}`}>
           <NavLink
             className="group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition ease-in-out duration-150"
             to="/"
@@ -129,7 +133,7 @@ const Settings = (props) => {
         </nav>
         {state.addingProfile && (
           <form
-            className="w-4/5"
+            className={`w-4/5 ${isScreenSmall ? 'p-4' : '' }`}
             onSubmit={(event) => {
               event.preventDefault();
               // console.log({
@@ -178,7 +182,7 @@ const Settings = (props) => {
         )}
         {state.updatingEmail && (
           <form
-            className="w-4/5"
+            className={`w-4/5 ${isScreenSmall ? 'p-4' : '' }`}
             onSubmit={(event) => {
               event.preventDefault();
               console.log(
