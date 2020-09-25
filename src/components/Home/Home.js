@@ -25,9 +25,6 @@ const Home = (props) => {
           <div className="red-green-refactor specific">
             <nav className="nav-bar">
               <div className={`toggle-menu ${displayMenu ? "none" : ""}`}>
-                <NavLink className="nav-item" to="/add-profile">
-                  Add Profile
-                </NavLink>
                 <NavLink className="nav-item" to="/settings">
                   Settings
                 </NavLink>

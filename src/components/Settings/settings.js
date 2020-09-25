@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
+import Modal from "../modal";
+
 import {
   createProfile,
   updateAccount,
@@ -60,6 +62,10 @@ const Settings = (props) => {
       !(!!state.currentValue && !!state.updatedValue && !!state.isEmail)
     );
   }, [state.updatedValue]);
+
+  const hideModal = () => {
+    setState({ ...state, deletingAccount: false });
+  };
 
   console.log(!!state.currentValue, !!state.updatedValue, !!state.isEmail);
 
@@ -183,11 +189,12 @@ const Settings = (props) => {
         </form>
       )}
       <p onClick={(e) => updateState(e, "deletingAccount")}>Delete account</p>
-      {state.deletingAccount && (
+      {/* {state.deletingAccount && (
         <form>
           <h3>this will be a model to confirm deletion</h3>
         </form>
-      )}
+      )} */}
+      <Modal showModal={state.deletingAccount} handleClose={hideModal}></Modal>
     </div>
   );
 };
