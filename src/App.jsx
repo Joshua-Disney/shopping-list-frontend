@@ -9,6 +9,7 @@ import ProfileForm from "./components/Profiles/profileForm";
 import NeedForm from "./components/Needs/needForm";
 import WantForm from "./components/Wants/wantForm";
 import SettingsPage from "./components/Settings/settings";
+import Layout from "./ui/Layout";
 
 class App extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <div className="App">
+        <Layout>
           <Switch>
             <Private exact path="/" component={Home} />
             <Route path="/login" component={LoginForm} />
@@ -28,7 +29,7 @@ class App extends React.Component {
             <Private path="/add-want" component={WantForm} />
             <Private path="/settings" component={SettingsPage} />
           </Switch>
-        </div>
+        </Layout>
       </Router>
     );
   }

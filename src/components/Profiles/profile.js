@@ -1,10 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 
 import { deleteNeed, deleteWant } from "../../store/actions";
+import ButtonLink from "../../ui/ButtonLink";
+import Close from "../../ui/Close";
+import { H3, H4 } from "../../ui/Titles";
+import useWindowSize from "../Helpers/useWindowSize";
 
 const Profile = (props) => {
+  const windowSize = useWindowSize();
+  const isScreenSmall = windowSize <= 640;
   // const [remove, setRemove] = useState(true);
 
   // useEffect(() => {
@@ -16,68 +21,80 @@ const Profile = (props) => {
   // Lists as two columns or one?
   // Grid format?
 
+  const { needs, wants, name } = props.profile || {};
+
   return (
-    <section className="profile-container">
-      <div className="profile-div">
-        <h3 className="profile-name">{props.profile.name}</h3>
+    <section>
+      <div className="border-b border-gray-200 space-y-3 sm:flex sm:items-center sm:justify-between sm:space-x-4 sm:space-y-0">
+        <H3>{name}</H3>
+        <div className="flex justify-end">
+          <ButtonLink
+            to={{
+              pathname: "/add-need",
+              needProps: { profile_id: props.profile.id },
+            }}
+          >
+            Create Need
+          </ButtonLink>
+          <ButtonLink
+            to={{
+              pathname: "/add-want",
+              wantProps: { profile_id: props.profile.id },
+            }}
+          >
+            Create Want
+          </ButtonLink>
+        </div>
       </div>
-      <div className="add-buttons">
-        <Link
-          className="add-list-button"
-          to={{
-            pathname: "/add-need",
-            needProps: { profile_id: props.profile.id },
-          }}
-        >
-          Create Need
-        </Link>
-        <Link
-          className="add-list-button"
-          to={{
-            pathname: "/add-want",
-            wantProps: { profile_id: props.profile.id },
-          }}
-        >
-          Create Want
-        </Link>
-      </div>
-      <div className="list-container">
-        <h4 className="headers">Needs</h4>
-        {props.profile.needs.map((need) => {
-          return (
-            <div className="list-item" key={need.id}>
-              <p className="list-item-text">{need.name}</p>
-              <button
-                className="list-item-button"
-                onClick={(event) => {
-                  event.preventDefault();
-                  props.deleteNeed(need.id);
-                }}
-              >
-                X
-              </button>
-            </div>
-          );
-        })}
-      </div>
-      <div className="list-container">
-        <h4 className="headers">Wants</h4>
-        {props.profile.wants.map((want) => {
-          return (
-            <div className="list-item" key={want.id}>
-              <p className="list-item-text">{want.name}</p>
-              <button
-                className="list-item-button"
-                onClick={(event) => {
-                  event.preventDefault();
-                  props.deleteWant(want.id);
-                }}
-              >
-                X
-              </button>
-            </div>
-          );
-        })}
+      <div className="flex flex-col sm:flex-row pt-2 mb-5">
+        <div className="sm:w-1/2">
+          <H4>Needs</H4>
+          {needs && needs.length
+            ? needs.map((need) => {
+                return (
+                  <div
+                    key={need.id}
+                    className="pr-4 py-2 px-1 flex justify-between items-center"
+                  >
+                    <p>{need.name}</p>
+                    <div
+                      onClick={(event) => {
+                        event.preventDefault();
+                        props.deleteNeed(need.id);
+                      }}
+                      className={`cursor-pointer rounded-full ${isScreenSmall ? 'p-2' : 'p-4'} hover:bg-green-100 hover:text-red-500 transition duration-200`}
+                    >
+                      <Close className="w-3.5 h-3.5 fill-current" />
+                    </div>
+                  </div>
+                );
+              })
+            : null}
+        </div>
+        <div className="sm:w-1/2">
+          <H4>Wants</H4>
+          {wants && wants.length
+            ? wants.map((want) => {
+                return (
+                  <div
+                    key={want.id}
+                    className="pr-4 py-2 px-1 flex justify-between items-center"
+                  >
+                    <p>{want.name}</p>
+                    <div
+                      onClick={(event) => {
+                        event.preventDefault();
+                        props.deleteWant(want.id);
+                      }}
+                      className={`cursor-pointer rounded-full ${isScreenSmall ? 'p-2' : 'p-4'} hover:bg-green-100 hover:text-red-500 transition duration-200`}
+                    >
+                      <Close className="w-3.5 h-3.5 fill-current" />
+                    </div>
+                  </div>
+                );
+              })
+            : null}
+        </div>
       </div>
     </section>
   );
