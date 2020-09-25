@@ -25,7 +25,7 @@ const Home = (props) => {
         <>
           <div className="red-green-refactor specific">
             <nav className="bg-green-800">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
                 <Hamburger display={displayMenu} onClick={() => setDisplayMenu(!displayMenu)} />
                 <div
                   className={`toggle-menu ${displayMenu ? "hidden" : "block"} absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl`}
@@ -54,11 +54,6 @@ const Home = (props) => {
             {props.account.profiles.map((profile) => {
               return <Profile key={profile.id} profile={profile} />;
             })}
-          </div>
-          <div>
-            <NavLink className="nav-item" to="/settings">
-              To settings page
-            </NavLink>
           </div>
         </>
       ) : (
