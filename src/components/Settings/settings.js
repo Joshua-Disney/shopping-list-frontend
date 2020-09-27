@@ -223,19 +223,6 @@ const Settings = (props) => {
               <p>Update your current email address</p>
             </div>
             <div className="mt-5 flex flex-col md:flex-row flex-wrap sm:items-center">
-              <div className="max-w-xs w-full mr-2">
-                <label for="email">Email address</label>
-                <div className="relative rounded-md shadow-sm">
-                  <input
-                    className="form-input block w-full sm:text-sm sm:leading-5"
-                    placeholder="example@example.com"
-                    value={state.currentValue}
-                    onChange={(event) =>
-                      setState({ ...state, currentValue: event.target.value })
-                    }
-                  />
-                </div>
-              </div>
               <div className="max-w-xs mt-2 lg:mt-0 w-full">
                 <label for="email">Updated Email address</label>
                 <div className="relative rounded-md shadow-sm">
@@ -254,13 +241,7 @@ const Settings = (props) => {
               <span className="inline-flex rounded-md shadow-sm">
                 <button
                   type="submit"
-                  disabled={
-                    !(
-                      !!state.currentValue &&
-                      !!state.updatedValue &&
-                      !!state.isEmail
-                    )
-                  }
+                  disabled={!(!!state.updatedValue && !!state.isEmail)}
                   className="px-4 py-2 border border-transparent font-medium rounded-md text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-700 transition ease-in-out duration-150 w-auto text-sm leading-5"
                 >
                   Submit
