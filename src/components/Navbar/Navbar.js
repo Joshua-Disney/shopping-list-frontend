@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 
 import { logout } from "../../store/actions";
 import Hamburger from "../../ui/Hamburger";
+import OutsideClick from "../Helpers/outsideClickWrapper";
 
 // const thing = () = {""}
 
@@ -21,29 +22,31 @@ const Navbar = (props) => {
           display={displayMenu}
           onClick={() => setDisplayMenu(!displayMenu)}
         />
-        <div
-          className={`toggle-menu ${
-            displayMenu ? "block" : "hidden"
-          } absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl`}
-        >
-          <NavLink
-            className="block px-4 py-2 text-gray-800 hover:bg-blue-200"
-            to="/settings"
-            onClick={() => setDisplayMenu(false)}
+        <OutsideClick onOutsideClick={() => setDisplayMenu(false)}>
+          <div
+            className={`toggle-menu ${
+              displayMenu ? "block" : "hidden"
+            } absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl`}
           >
-            Settings
-          </NavLink>
-          {/* this should be a link */}
-          <button
-            className="w-block px-4 py-2 text-gray-800 hover:bg-blue-200 text-left w-full"
-            onClick={(event) => {
-              setDisplayMenu(false);
-              props.logout(props);
-            }}
-          >
-            Log Out
-          </button>
-        </div>
+            <NavLink
+              className="block px-4 py-2 text-gray-800 hover:bg-blue-200"
+              to="/settings"
+              onClick={() => setDisplayMenu(false)}
+            >
+              Settings
+            </NavLink>
+            {/* this should be a link */}
+            <button
+              className="w-block px-4 py-2 text-gray-800 hover:bg-blue-200 text-left w-full"
+              onClick={(event) => {
+                setDisplayMenu(false);
+                props.logout(props);
+              }}
+            >
+              Log Out
+            </button>
+          </div>
+        </OutsideClick>
       </div>
     </nav>
   );

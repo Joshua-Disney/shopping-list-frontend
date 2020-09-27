@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react";
 const useHandleOutsideClick = (ref, cb) => {
   useEffect(() => {
     const handleOutsideClick = (event) => {
+      // The div is the current of the ref
       const outsideClickDiv = ref.current;
       if (outsideClickDiv && !outsideClickDiv.contains(event.target)) {
         cb();
