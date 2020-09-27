@@ -5,8 +5,12 @@ export {
   UPDATE_ACCOUNT_START,
   UPDATE_ACCOUNT_SUCCESS,
   UPDATE_ACCOUNT_FAILURE,
+  DELETE_ACCOUNT_START,
+  DELETE_ACCOUNT_SUCCESS,
+  DELETE_ACCOUNT_FAILURE,
   getAccount,
   updateAccount,
+  deleteAccount,
 } from "./accountActions";
 
 export {

@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { createProfile, updateAccount } from "../../store/actions";
+import {
+  createProfile,
+  updateAccount,
+  deleteAccount,
+} from "../../store/actions";
+import Modal from "../modal";
 import { H3 } from "../../ui/Titles";
 import useWindowSize from "../Helpers/useWindowSize";
 
@@ -38,10 +43,10 @@ const Settings = (props) => {
   //   }
   // }, []);
 
-  const checkValidEmail = (event) => {
-    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    setState({ ...state, isEmail: event.target.value.match(emailRegex) });
-  };
+  // const checkValidEmail = (event) => {
+  //   const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  //   setState({ ...state, isEmail: event.target.value.match(emailRegex) });
+  // };
 
   const updateState = (event, action) => {
     event.preventDefault();
@@ -50,7 +55,7 @@ const Settings = (props) => {
 
   useEffect(() => {
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (state.updatedValue > 1) {
+    if (state.updatedValue.length > 1) {
       setState({ ...state, isEmail: !!state.updatedValue.match(emailRegex) });
     }
     console.log(
@@ -62,13 +67,17 @@ const Settings = (props) => {
     );
   }, [state.updatedValue]);
 
+  const hideModal = () => {
+    setState({ ...state, deletingAccount: false });
+  };
+
   console.log(!!state.currentValue, !!state.updatedValue, !!state.isEmail);
 
   return (
     <div className="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
       <H3 className="pb-2">User settings</H3>
       <div className="flex">
-        <nav className={`cursor-pointer w-1/5 ${isScreenSmall ? '' : 'm-4'}`}>
+        <nav className={`cursor-pointer w-1/5 ${isScreenSmall ? "" : "m-4"}`}>
           <NavLink
             className="group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition ease-in-out duration-150"
             to="/"
@@ -87,6 +96,13 @@ const Settings = (props) => {
             onClick={(event) => updateState(event, "updatingEmail")}
           >
             Update email address
+          </p>
+
+          <p
+            className="mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition ease-in-out duration-150"
+            onClick={(event) => updateState(event, "updatingPassword")}
+          >
+            Update password
           </p>
 
           {/* <p onClick={(e) => updateState(e, "updatingPassword")}>Reset password</p>
@@ -125,15 +141,19 @@ const Settings = (props) => {
         </form>
       )}
       <p onClick={(e) => updateState(e, "deletingAccount")}>Delete account</p>
-      {state.deletingAccount && (
+      {/* {state.deletingAccount && (
         <form>
           <h3>this will be a model to confirm deletion</h3>
         </form>
       )} */}
+          <Modal
+            showModal={state.deletingAccount}
+            handleClose={hideModal}
+          ></Modal>
         </nav>
         {state.addingProfile && (
           <form
-            className={`w-4/5 ${isScreenSmall ? 'p-4' : '' }`}
+            className={`w-4/5 ${isScreenSmall ? "p-4" : ""}`}
             onSubmit={(event) => {
               event.preventDefault();
               // console.log({
@@ -182,7 +202,7 @@ const Settings = (props) => {
         )}
         {state.updatingEmail && (
           <form
-            className={`w-4/5 ${isScreenSmall ? 'p-4' : '' }`}
+            className={`w-4/5 ${isScreenSmall ? "p-4" : ""}`}
             onSubmit={(event) => {
               event.preventDefault();
               console.log(
@@ -203,26 +223,13 @@ const Settings = (props) => {
               <p>Update your current email address</p>
             </div>
             <div className="mt-5 flex flex-col md:flex-row flex-wrap sm:items-center">
-              <div className="max-w-xs w-full mr-2">
-                <label for="email">Email address</label>
-                <div className="relative rounded-md shadow-sm">
-                  <input
-                    className="form-input block w-full sm:text-sm sm:leading-5"
-                    placeholder="example@example.com"
-                    value={state.currentValue}
-                    onChange={(event) =>
-                      setState({ ...state, currentValue: event.target.value })
-                    }
-                  />
-                </div>
-              </div>
               <div className="max-w-xs mt-2 lg:mt-0 w-full">
                 <label for="email">Updated Email address</label>
                 <div className="relative rounded-md shadow-sm">
                   <input
                     className="form-input block w-full sm:text-sm sm:leading-5"
                     placeholder="example@example.com"
-                    value={state.currentValue}
+                    value={state.updatedValue}
                     onChange={(event) =>
                       setState({ ...state, updatedValue: event.target.value })
                     }
@@ -231,14 +238,80 @@ const Settings = (props) => {
               </div>
             </div>
             <div className="display flex w-full justify-end mt-3">
-            <span className="inline-flex rounded-md shadow-sm">
+              <span className="inline-flex rounded-md shadow-sm">
+                <button
+                  type="submit"
+                  disabled={!(!!state.updatedValue && !!state.isEmail)}
+                  className="px-4 py-2 border border-transparent font-medium rounded-md text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-700 transition ease-in-out duration-150 w-auto text-sm leading-5"
+                >
+                  Submit
+                </button>
+              </span>
+            </div>
+          </form>
+        )}
+        {state.updatingPassword && (
+          <form
+            className={`w-4/5 ${isScreenSmall ? "p-4" : ""}`}
+            onSubmit={(event) => {
+              event.preventDefault();
+              console.log(
+                "account_id: ",
+                state.account_id,
+                "updated value: ",
+                state.updatedValue
+              );
+              props.updateAccount(state.account_id, {
+                password: state.updatedValue,
+              });
+            }}
+          >
+            <h3 className="text-lg leading-6 font-medium text-gray-900">
+              Update Password
+            </h3>
+            <div className="mt-2 max-w-xl text-sm leading-5 text-gray-500">
+              <p>Update your current password</p>
+            </div>
+            <div className="mt-5 flex flex-col md:flex-row flex-wrap sm:items-center">
+              <div className="max-w-xs w-full mr-2">
+                <label for="password">Current Password</label>
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="password"
+                    className="form-input block w-full sm:text-sm sm:leading-5"
+                    placeholder="password1234"
+                    value={state.currentValue}
+                    onChange={(event) =>
+                      setState({ ...state, currentValue: event.target.value })
+                    }
+                  />
+                </div>
+              </div>
+              <div className="max-w-xs mt-2 lg:mt-0 w-full">
+                <label for="email">Updated Password</label>
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="password"
+                    className="form-input block w-full sm:text-sm sm:leading-5"
+                    placeholder="password1234"
+                    value={state.updatedValue}
+                    onChange={(event) =>
+                      setState({ ...state, updatedValue: event.target.value })
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="display flex w-full justify-end mt-3">
+              <span className="inline-flex rounded-md shadow-sm">
                 <button
                   type="submit"
                   disabled={
                     !(
                       !!state.currentValue &&
                       !!state.updatedValue &&
-                      !!state.isEmail
+                      state.currentValue !== state.updatedValue
                     )
                   }
                   className="px-4 py-2 border border-transparent font-medium rounded-md text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-700 transition ease-in-out duration-150 w-auto text-sm leading-5"
@@ -246,7 +319,7 @@ const Settings = (props) => {
                   Submit
                 </button>
               </span>
-              </div>
+            </div>
           </form>
         )}
       </div>
@@ -260,6 +333,6 @@ const mapStateToProps = ({ loginReducer }) => {
   };
 };
 
-const mapDispatchToProps = { createProfile, updateAccount };
+const mapDispatchToProps = { createProfile, updateAccount, deleteAccount };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);

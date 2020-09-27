@@ -10,7 +10,7 @@ const Hamburger = ({ display, ...props }) => {
         {...props}
       >
         <svg
-          className={`${display ? "block" : "hidden"} h-6 w-6`}
+          className={`${display ? "hidden" : "block"} h-6 w-6`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -23,7 +23,7 @@ const Hamburger = ({ display, ...props }) => {
           />
         </svg>
         <svg
-          className={`${display ? "hidden" : "block"} h-6 w-6`}
+          className={`${display ? "block" : "hidden"} h-6 w-6`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
