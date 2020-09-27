@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
 
 import { getThing, logout, getAccount } from "../../store/actions";
 
 import Profile from "../Profiles/profile";
 
 const Home = (props) => {
-  const [displayMenu, setDisplayMenu] = useState(true);
   useEffect(() => {
     let account_id = props.account_id;
     if (!account_id) {
@@ -22,46 +20,12 @@ const Home = (props) => {
     <section className="app-main">
       {props.account.id > 0 ? (
         <>
-          <div className="red-green-refactor specific">
-            <nav className="nav-bar">
-              <div className={`toggle-menu ${displayMenu ? "none" : ""}`}>
-                <NavLink className="nav-item" to="/settings">
-                  Settings
-                </NavLink>
-                <button
-                  className="nav-item"
-                  onClick={(event) => {
-                    event.preventDefault();
-                    props.logout(props);
-                  }}
-                >
-                  Log Out
-                </button>
-              </div>
-              <label className="hamburger">
-                <ul
-                  onClick={() => {
-                    setDisplayMenu(!displayMenu);
-                  }}
-                >
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                </ul>
-              </label>
-            </nav>
-          </div>
           <div className="red-green-refactor">
             {/* <Account account={props.account} /> */}
             {props.account.profiles.map((profile) => {
               return <Profile key={profile.id} profile={profile} />;
             })}
           </div>
-          {/* <div>
-            <NavLink className="nav-item" to="/settings">
-              To settings page
-            </NavLink>
-          </div> */}
         </>
       ) : (
         <div>
