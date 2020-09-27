@@ -98,6 +98,13 @@ const Settings = (props) => {
             Update email address
           </p>
 
+          <p
+            className="mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition ease-in-out duration-150"
+            onClick={(event) => updateState(event, "updatingPassword")}
+          >
+            Update password
+          </p>
+
           {/* <p onClick={(e) => updateState(e, "updatingPassword")}>Reset password</p>
       {state.updatingPassword && (
         <form
@@ -235,7 +242,7 @@ const Settings = (props) => {
                   <input
                     className="form-input block w-full sm:text-sm sm:leading-5"
                     placeholder="example@example.com"
-                    value={state.currentValue}
+                    value={state.updatedValue}
                     onChange={(event) =>
                       setState({ ...state, updatedValue: event.target.value })
                     }
@@ -252,6 +259,78 @@ const Settings = (props) => {
                       !!state.currentValue &&
                       !!state.updatedValue &&
                       !!state.isEmail
+                    )
+                  }
+                  className="px-4 py-2 border border-transparent font-medium rounded-md text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-700 transition ease-in-out duration-150 w-auto text-sm leading-5"
+                >
+                  Submit
+                </button>
+              </span>
+            </div>
+          </form>
+        )}
+        {state.updatingPassword && (
+          <form
+            className={`w-4/5 ${isScreenSmall ? "p-4" : ""}`}
+            onSubmit={(event) => {
+              event.preventDefault();
+              console.log(
+                "account_id: ",
+                state.account_id,
+                "updated value: ",
+                state.updatedValue
+              );
+              props.updateAccount(state.account_id, {
+                password: state.updatedValue,
+              });
+            }}
+          >
+            <h3 className="text-lg leading-6 font-medium text-gray-900">
+              Update Password
+            </h3>
+            <div className="mt-2 max-w-xl text-sm leading-5 text-gray-500">
+              <p>Update your current password</p>
+            </div>
+            <div className="mt-5 flex flex-col md:flex-row flex-wrap sm:items-center">
+              <div className="max-w-xs w-full mr-2">
+                <label for="password">Current Password</label>
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="password"
+                    className="form-input block w-full sm:text-sm sm:leading-5"
+                    placeholder="password1234"
+                    value={state.currentValue}
+                    onChange={(event) =>
+                      setState({ ...state, currentValue: event.target.value })
+                    }
+                  />
+                </div>
+              </div>
+              <div className="max-w-xs mt-2 lg:mt-0 w-full">
+                <label for="email">Updated Password</label>
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="password"
+                    className="form-input block w-full sm:text-sm sm:leading-5"
+                    placeholder="password1234"
+                    value={state.updatedValue}
+                    onChange={(event) =>
+                      setState({ ...state, updatedValue: event.target.value })
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="display flex w-full justify-end mt-3">
+              <span className="inline-flex rounded-md shadow-sm">
+                <button
+                  type="submit"
+                  disabled={
+                    !(
+                      !!state.currentValue &&
+                      !!state.updatedValue &&
+                      state.currentValue !== state.updatedValue
                     )
                   }
                   className="px-4 py-2 border border-transparent font-medium rounded-md text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-700 transition ease-in-out duration-150 w-auto text-sm leading-5"
