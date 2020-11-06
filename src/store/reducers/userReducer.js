@@ -25,7 +25,8 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isGetting: true,
-        message: null,
+        message: "",
+        error: null,
       };
     case GET_USERS_SUCCESS:
       return {
@@ -43,7 +44,7 @@ const userReducer = (state = initialState, action) => {
         error: action.payload.error,
       };
     case CREATE_USER_START:
-      return { ...state, isCreating: true, error: null };
+      return { ...state, isCreating: true, message: "", error: null };
     case CREATE_USER_SUCCESS:
       return {
         ...state,
@@ -77,7 +78,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isDeleting: false,
-        message: "",
+        message: action.payload.message,
         error: action.payload.error,
       };
     default:
