@@ -14,28 +14,22 @@ export const LOG_OUT_FAILURE = "LOG_OUT_FAILURE";
 
 export const WELCOME_BACK = "WELCOME_BACK";
 
-const baseUrl = process.env.REACT_APP_SERVER
+const baseUrl = process.env.REACT_APP_SERVER;
 
-export const register = newUser => async dispatch => {
+export const register = (newUser) => async (dispatch) => {
   dispatch({ type: REGISTER_START });
   try {
-    const result = await axios.post(
-      "${baseUrl}/api/auth/register",
-      newUser
-    );
+    const result = await axios.post(`${baseUrl}/api/auth/register`, newUser);
     dispatch({ type: REGISTER_SUCCESS, payload: result });
   } catch (error) {
     dispatch({ type: REGISTER_FAILURE, payload: error });
   }
 };
 
-export const login = user => async dispatch => {
+export const login = (user) => async (dispatch) => {
   dispatch({ type: LOGIN_START });
   try {
-    const result = await axios.post(
-      "${baseUrl}/api/auth/login",
-      user
-    );
+    const result = await axios.post(`${baseUrl}/api/auth/login`, user);
     localStorage.setItem("token", result.data.token);
     localStorage.setItem("account_id", result.data.account_id);
     dispatch({ type: LOGIN_SUCCESS, payload: result.data });
@@ -44,7 +38,7 @@ export const login = user => async dispatch => {
   }
 };
 
-export const logout = props => dispatch => {
+export const logout = (props) => (dispatch) => {
   dispatch({ type: LOG_OUT_START });
   try {
     localStorage.removeItem("token");
@@ -55,6 +49,6 @@ export const logout = props => dispatch => {
   }
 };
 
-export const welcomeBack = () => dispatch => {
+export const welcomeBack = () => (dispatch) => {
   dispatch({ type: WELCOME_BACK });
 };

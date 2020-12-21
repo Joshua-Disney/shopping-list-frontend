@@ -1,7 +1,6 @@
 import axiosWithAuth from "../../components/Helpers/axiosWithAuth";
 
-const baseUrl =
-  "${process.env.REACT_APP_SERVER}/api/profiles";
+const baseUrl = `${process.env.REACT_APP_SERVER}/api/profiles`;
 
 export const CREATE_PROFILE_START = "CREATE_PROFILE_START";
 export const CREATE_PROFILE_SUCCESS = "CREATE_PROFILE_SUCCESS";
