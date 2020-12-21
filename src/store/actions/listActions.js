@@ -17,11 +17,13 @@ export const DELETE_WANT_START = "DELETE_WANT_START";
 export const DELETE_WANT_SUCCESS = "DELETE_WANT_SUCCESS";
 export const DELETE_WANT_FAILURE = "DELETE_WANT_FAILURE";
 
+const baseUrl = process.env.REACT_APP_SERVER
+
 export const addNeed = need => async dispatch => {
   dispatch({ type: ADD_NEED_START });
   try {
     const result = await axiosWithAuth().post(
-      `https://disneys-shopping-list-backend.herokuapp.com/api/needs`,
+      `${baseUrl}/api/needs`,
       need
     );
     dispatch({ type: ADD_NEED_SUCCESS, payload: result.data });
@@ -34,7 +36,7 @@ export const addWant = want => async dispatch => {
   dispatch({ type: ADD_WANT_START });
   try {
     const result = await axiosWithAuth().post(
-      `https://disneys-shopping-list-backend.herokuapp.com/api/wants`,
+      `${baseUrl}/api/wants`,
       want
     );
     dispatch({ type: ADD_WANT_SUCCESS, payload: result.data });
@@ -48,7 +50,7 @@ export const deleteNeed = id => async dispatch => {
   dispatch({ type: DELETE_NEED_START });
   try {
     const result = await axiosWithAuth().delete(
-      `https://disneys-shopping-list-backend.herokuapp.com/api/needs/${id}`
+      `${baseUrl}/api/needs/${id}`
     );
     dispatch({
       type: DELETE_NEED_SUCCESS,
@@ -66,7 +68,7 @@ export const deleteWant = id => async dispatch => {
   dispatch({ type: DELETE_WANT_START });
   try {
     const result = await axiosWithAuth().delete(
-      `https://disneys-shopping-list-backend.herokuapp.com/api/wants/${id}`
+      `${baseUrl}/api/wants/${id}`
     );
     dispatch({ type: DELETE_WANT_SUCCESS, payload: result.data });
     getAccount(localStorage.getItem("account_id"))(dispatch);
