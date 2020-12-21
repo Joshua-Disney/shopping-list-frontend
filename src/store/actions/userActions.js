@@ -12,11 +12,13 @@ export const DELETE_USER_START = "DELETE_USER_START";
 export const DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS";
 export const DELETE_USER_FAILURE = "DELETE_USER_FAILURE";
 
+const baseUrl = process.env.REACT_APP_SERVER 
+
 export const getUsers = (accountId) => async (dispatch) => {
   dispatch({ type: GET_USERS_START });
   try {
     const result = await axiosWithAuth().get(
-      `https://disneys-shopping-list-backend.herokuapp.com/api/users/${accountId}`
+      `${baseUrl}/api/users/${accountId}`
     );
     dispatch({ type: GET_USERS_SUCCESS, payload: result.data });
   } catch (error) {
@@ -28,7 +30,7 @@ export const createUser = (newUser) => async (dispatch) => {
   dispatch({ type: CREATE_USER_START });
   try {
     const result = await axiosWithAuth().post(
-      `https://disneys-shopping-list-backend.herokuapp.com/api/users`,
+      `${baseUrl}/api/users`,
       newUser
     );
     dispatch({ type: CREATE_USER_SUCCESS, payload: result.data });
@@ -42,7 +44,7 @@ export const deleteUser = (userId) => async (dispatch) => {
   try {
     // TODO: return updated user array
     const result = await axiosWithAuth().delete(
-      `https://disneys-shopping-list-backend.herokuapp.com/api/users/${userId}`
+      `${baseUrl}/api/users/${userId}`
     );
     dispatch({ type: DELETE_USER_SUCCESS, payload: result.data });
   } catch (error) {

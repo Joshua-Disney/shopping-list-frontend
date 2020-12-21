@@ -10,11 +10,13 @@ export const DELETE_ACCOUNT_START = "DELETE_ACCOUNT_START";
 export const DELETE_ACCOUNT_SUCCESS = "DELETE_ACCOUNT_SUCCESS";
 export const DELETE_ACCOUNT_FAILURE = "DELETE_ACCOUNT_FAILURE";
 
+const baseUrl = process.env.REACT_APP_SERVER;
+
 export const getAccount = (id) => async (dispatch) => {
   dispatch({ type: GET_ACCOUNT_START });
   try {
     const result = await axiosWithAuth().get(
-      `https://disneys-shopping-list-backend.herokuapp.com/api/accounts/${id}`
+      `${baseUrl}/api/accounts/${id}`
     );
     dispatch({ type: GET_ACCOUNT_SUCCESS, payload: result.data });
   } catch (error) {
@@ -26,7 +28,7 @@ export const updateAccount = (id, account) => async (dispatch) => {
   dispatch({ type: UPDATE_ACCOUNT_START });
   try {
     const result = await axiosWithAuth().put(
-      `https://disneys-shopping-list-backend.herokuapp.com/api/accounts/${id}`,
+      `${baseUrl}/api/accounts/${id}`,
       account
     );
     dispatch({ type: UPDATE_ACCOUNT_SUCCESS, payload: result.data });
@@ -39,7 +41,7 @@ export const deleteAccount = (id) => async (dispatch) => {
   dispatch({ type: DELETE_ACCOUNT_START });
   try {
     const result = await axiosWithAuth().delete(
-      `https://disneys-shopping-list-backend.herokuapp.com/api/accounts/${id}`
+      `${baseUrl}/api/accounts/${id}`
     );
     dispatch({ type: DELETE_ACCOUNT_SUCCESS, payload: result.data });
   } catch (error) {

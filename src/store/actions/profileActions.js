@@ -1,9 +1,7 @@
 import axiosWithAuth from "../../components/Helpers/axiosWithAuth";
 
 const baseUrl =
-  "https://disneys-shopping-list-backend.herokuapp.com/api/profiles";
-
-const localUrl = "http://localstorage:8000/api/profiles";
+  "${process.env.REACT_APP_SERVER}/api/profiles";
 
 export const CREATE_PROFILE_START = "CREATE_PROFILE_START";
 export const CREATE_PROFILE_SUCCESS = "CREATE_PROFILE_SUCCESS";

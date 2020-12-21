@@ -14,11 +14,13 @@ export const LOG_OUT_FAILURE = "LOG_OUT_FAILURE";
 
 export const WELCOME_BACK = "WELCOME_BACK";
 
+const baseUrl = process.env.REACT_APP_SERVER
+
 export const register = newUser => async dispatch => {
   dispatch({ type: REGISTER_START });
   try {
     const result = await axios.post(
-      "https://disneys-shopping-list-backend.herokuapp.com/api/auth/register",
+      "${baseUrl}/api/auth/register",
       newUser
     );
     dispatch({ type: REGISTER_SUCCESS, payload: result });
@@ -31,7 +33,7 @@ export const login = user => async dispatch => {
   dispatch({ type: LOGIN_START });
   try {
     const result = await axios.post(
-      "https://disneys-shopping-list-backend.herokuapp.com/api/auth/login",
+      "${baseUrl}/api/auth/login",
       user
     );
     localStorage.setItem("token", result.data.token);
