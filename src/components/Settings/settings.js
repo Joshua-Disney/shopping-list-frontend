@@ -19,11 +19,12 @@ const initialState = {
   newUserEmail: "",
   currentValue: "",
   updatedValue: "",
-  addingProfile: false,
+  addingList: false,
   updatingEmail: false,
   updatingPassword: false,
   managingUsers: false,
   deletingAccount: false,
+  generalAccountSettings: false,
   isEmail: false,
 };
 
@@ -89,9 +90,9 @@ const Settings = (props) => {
           </NavLink>
           <p
             className="mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition ease-in-out duration-150"
-            onClick={(event) => updateState(event, "addingProfile")}
+            onClick={(event) => updateState(event, "addingList")}
           >
-            Add new profile
+            Add new List
           </p>
 
           {/* <p
@@ -113,6 +114,13 @@ const Settings = (props) => {
             onClick={(event) => updateState(event, "managingUsers")}
           >
             Manage users
+          </p>
+
+          <p
+            className="mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition ease-in-out duration-150"
+            onClick={(event) => updateState(event, "generalAccountSettings")}
+          >
+            General Account Settings
           </p>
 
           {/* <p onClick={(e) => updateState(e, "updatingPassword")}>Reset password</p>
@@ -161,7 +169,7 @@ const Settings = (props) => {
             handleClose={hideModal}
           ></Modal>
         </nav>
-        {state.addingProfile && (
+        {state.addingList && (
           <form
             className={`w-4/5 ${isScreenSmall ? "p-4" : ""}`}
             onSubmit={(event) => {
@@ -426,6 +434,106 @@ const Settings = (props) => {
                     !!state.currentValue &&
                     !!state.updatedValue &&
                     state.currentValue === state.updatedValue
+                      ? "hover:bg-green-500"
+                      : "pointer-events-none"
+                  } focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-700 transition ease-in-out duration-150 w-auto text-sm leading-5 disabled:opacity-75`}
+                >
+                  Submit
+                </button>
+              </span>
+            </div>
+          </form>
+        )}
+        {state.generalAccountSettings && (
+          <form
+            className={`w-4/5 ${isScreenSmall ? "p-4" : ""}`}
+            onSubmit={(event) => {
+              event.preventDefault();
+              console.log("fill this in when I know what I want to look at");
+
+              // TODO: @DISNEY THIS NEEDS TO BE A THING
+              props.updateAccountSettings({
+                ...(state.newUserEmail && { email: state.newUserEmail }),
+                ...(state.updatedValue && { password: state.updatedValue }),
+                account_id: props.account_id,
+              });
+            }}
+          >
+            <h3 className="text-lg leading-6 font-medium text-gray-900">
+              Update Account Settings
+            </h3>
+            <div className="mt-2 max-w-xl text-sm leading-5 text-gray-500">
+              <p>
+                Update Account Settings. <br />
+                Update email address and password
+              </p>
+            </div>
+            <div className="mt-5 flex flex-col md:flex-row flex-wrap sm:items-center">
+              <div className="max-w-xs w-full mr-2">
+                <label>Update Email</label>
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    className="form-input block w-full sm:text-sm sm:leading-5"
+                    placeholder="youremail@website.com"
+                    value={state.newUserEmail}
+                    onChange={(event) =>
+                      setState({ ...state, newUserEmail: event.target.value })
+                    }
+                  />
+                </div>
+              </div>
+              <div className="max-w-xs mt-2 lg:mt-0 w-full">
+                <label>Update Password</label>
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="password"
+                    autoComplete="new-password"
+                    className="form-input block w-full sm:text-sm sm:leading-5"
+                    placeholder="password1234"
+                    value={state.currentValue}
+                    onChange={(event) =>
+                      setState({ ...state, currentValue: event.target.value })
+                    }
+                  />
+                </div>
+              </div>
+              <div className="max-w-xs mt-2 lg:mt-0 w-full">
+                <label>Confirm Password</label>
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="password"
+                    className="form-input block w-full sm:text-sm sm:leading-5"
+                    placeholder="password1234"
+                    value={state.updatedValue}
+                    onChange={(event) =>
+                      setState({ ...state, updatedValue: event.target.value })
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="display flex w-full justify-end mt-3">
+              <span className="inline-flex rounded-md shadow-sm">
+                <button
+                  type="submit"
+                  disabled={
+                    !(
+                      !!state.newUserEmail &&
+                      (state.currentValue
+                        ? !!state.currentValue &&
+                          !!state.updatedValue &&
+                          state.currentValue === state.updatedValue
+                        : true)
+                    )
+                  }
+                  className={`px-4 py-2 border border-transparent font-medium rounded-md text-white bg-green-600 ${
+                    !!state.newUserEmail ||
+                    (state.currentVlue
+                      ? !!state.currentValue &&
+                        !!state.updatedValue &&
+                        state.currentValue === state.updatedValue
+                      : true)
                       ? "hover:bg-green-500"
                       : "pointer-events-none"
                   } focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-700 transition ease-in-out duration-150 w-auto text-sm leading-5 disabled:opacity-75`}
