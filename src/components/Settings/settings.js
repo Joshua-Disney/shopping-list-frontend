@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
-// Something to push
-
 import {
   createUser,
   deleteUser,
@@ -14,6 +12,8 @@ import {
 import Modal from "../modal";
 import { H3 } from "../../ui/Titles";
 import useWindowSize from "../Helpers/useWindowSize";
+
+import Toast from "../toast";
 
 const initialState = {
   newUserEmail: "",
@@ -78,6 +78,9 @@ const Settings = (props) => {
 
   return (
     <div className="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+      <Toast isToastTime={props.status !== null}>
+        <p>{props.message}</p>
+      </Toast>
       <H3 className="pb-2">User settings</H3>
       <div className="flex">
         <nav className={`cursor-pointer w-1/5 ${isScreenSmall ? "" : "m-4"}`}>
@@ -353,6 +356,7 @@ const Settings = (props) => {
                 password: state.updatedValue,
                 account_id: props.account_id,
               });
+              setState({ ...initialState });
             }}
           >
             <h3 className="text-lg leading-6 font-medium text-gray-900">
@@ -446,6 +450,8 @@ const mapStateToProps = ({ loginReducer, userReducer }) => {
     account_id:
       loginReducer.account_id || localStorage.getItem("account_id") || "",
     users: userReducer.users,
+    status: userReducer.status,
+    message: userReducer.message,
   };
 };
 

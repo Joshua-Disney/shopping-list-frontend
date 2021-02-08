@@ -8,6 +8,7 @@ import {
   DELETE_USER_START,
   DELETE_USER_SUCCESS,
   DELETE_USER_FAILURE,
+  REMOVE_STATUS,
 } from "../actions";
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
   users: [],
   messge: "",
   error: null,
+  status: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -44,7 +46,13 @@ const userReducer = (state = initialState, action) => {
         error: action.payload.error,
       };
     case CREATE_USER_START:
-      return { ...state, isCreating: true, message: "", error: null };
+      return {
+        ...state,
+        isCreating: true,
+        message: "",
+        error: null,
+        status: null,
+      };
     case CREATE_USER_SUCCESS:
       return {
         ...state,
@@ -52,6 +60,7 @@ const userReducer = (state = initialState, action) => {
         users: action.payload.users,
         message: action.payload.message,
         error: null,
+        status: action.payload.status,
       };
     case CREATE_USER_FAILURE:
       return {
@@ -59,6 +68,7 @@ const userReducer = (state = initialState, action) => {
         isCreating: false,
         message: action.payload.message,
         error: action.payload.error,
+        status: action.payload.status,
       };
     case DELETE_USER_START:
       return {
@@ -80,6 +90,11 @@ const userReducer = (state = initialState, action) => {
         isDeleting: false,
         message: action.payload.message,
         error: action.payload.error,
+      };
+    case REMOVE_STATUS:
+      return {
+        ...state,
+        status: null,
       };
     default:
       return state;
