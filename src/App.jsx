@@ -11,6 +11,8 @@ import WantForm from "./components/Wants/wantForm";
 import SettingsPage from "./components/Settings/settings";
 import Layout from "./ui/Layout";
 
+import ContactFooter from "./components/contactFooter"
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -30,6 +32,7 @@ class App extends React.Component {
             <Private path="/settings" component={SettingsPage} />
           </Switch>
         </Layout>
+        <ContactFooter />
       </Router>
     );
   }
