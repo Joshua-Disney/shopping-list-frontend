@@ -5,7 +5,7 @@ const ContactFooter = () => {
     <div>
       <p>
         Thank you for using Dizlist! Have any questions, comments, or derogatory
-        remarks? Please email me as contact@joshuadisney.com
+        remarks? Please email me at contact@joshuadisney.com
       </p>
     </div>
   );
