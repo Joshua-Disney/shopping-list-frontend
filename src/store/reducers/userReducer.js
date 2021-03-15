@@ -5,6 +5,9 @@ import {
   CREATE_USER_START,
   CREATE_USER_SUCCESS,
   CREATE_USER_FAILURE,
+  UPDATE_USER_START,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAILURE,
   DELETE_USER_START,
   DELETE_USER_SUCCESS,
   DELETE_USER_FAILURE,
@@ -14,6 +17,7 @@ import {
 const initialState = {
   isGetting: false,
   isCreating: false,
+  isUpdating: false,
   isDeleting: false,
   users: [],
   messge: "",
@@ -66,6 +70,30 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isCreating: false,
+        message: action.payload.message,
+        error: action.payload.error,
+        status: action.payload.status,
+      };
+    case UPDATE_USER_START:
+      return {
+        ...state,
+        isUpdating: true,
+        message: "",
+        error: null,
+        status: null,
+      };
+    case UPDATE_USER_SUCCESS:
+      return {
+        ...state,
+        isUpdating: false,
+        message: action.payload.message,
+        error: null,
+        status: action.payload.status,
+      };
+    case UPDATE_USER_FAILURE:
+      return {
+        ...state,
+        isUpdating: false,
         message: action.payload.message,
         error: action.payload.error,
         status: action.payload.status,

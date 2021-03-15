@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import {
   createUser,
   deleteUser,
+  updateUser,
   createProfile,
   updateAccount,
   deleteAccount,
@@ -456,10 +457,10 @@ const Settings = (props) => {
               console.log("fill this in when I know what I want to look at");
 
               // TODO: @DISNEY THIS NEEDS TO BE A THING
-              props.updateAccountSettings({
+              props.updateUser({
                 ...(state.newUserEmail && { email: state.newUserEmail }),
                 ...(state.updatedValue && { password: state.updatedValue }),
-                account_id: props.account_id,
+                userId: props.user_id,
               });
             }}
           >
@@ -557,6 +558,7 @@ const mapStateToProps = ({ loginReducer, userReducer }) => {
   return {
     account_id:
       loginReducer.account_id || localStorage.getItem("account_id") || "",
+    user_id: loginReducer.user_id || localStorage.getItem("user_id"),
     users: userReducer.users,
     status: userReducer.status,
     message: userReducer.message,
@@ -566,6 +568,7 @@ const mapStateToProps = ({ loginReducer, userReducer }) => {
 const mapDispatchToProps = {
   createProfile,
   updateAccount,
+  updateUser,
   deleteAccount,
   createUser,
   deleteUser,

@@ -32,6 +32,7 @@ export const login = (user) => async (dispatch) => {
     const result = await axios.post(`${baseUrl}/api/auth/login`, user);
     localStorage.setItem("token", result.data.token);
     localStorage.setItem("account_id", result.data.account_id);
+    localStorage.setItem("user_id", result.data.user_id);
     dispatch({ type: LOGIN_SUCCESS, payload: result.data });
   } catch (error) {
     dispatch({ type: LOGIN_FAILURE, payload: error });

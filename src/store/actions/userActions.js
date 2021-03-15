@@ -8,6 +8,10 @@ export const CREATE_USER_START = "CREATE_USER_START";
 export const CREATE_USER_SUCCESS = "CREATE_USER_SUCCESS";
 export const CREATE_USER_FAILURE = "CREATE_USER_FAILURE";
 
+export const UPDATE_USER_START = "UPDATE_USER_START";
+export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
+export const UPDATE_USER_FAILURE = "UPDATE_USER_FAILURE";
+
 export const DELETE_USER_START = "DELETE_USER_START";
 export const DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS";
 export const DELETE_USER_FAILURE = "DELETE_USER_FAILURE";
@@ -32,6 +36,7 @@ export const getUsers = (accountId) => async (dispatch) => {
   } catch (error) {
     dispatch({ type: GET_USERS_FAILURE, payload: error });
   }
+  timeOut(dispatch);
 };
 
 export const createUser = (newUser) => async (dispatch) => {
@@ -48,6 +53,20 @@ export const createUser = (newUser) => async (dispatch) => {
   timeOut(dispatch);
 };
 
+export const updateUser = ({ email, password, userId }) => async (dispatch) => {
+  dispatch({ type: UPDATE_USER_START });
+  try {
+    const result = await axiosWithAuth().put(`${baseUrl}/api/users/${userId}`, {
+      email,
+      password,
+    });
+    dispatch({ type: UPDATE_USER_SUCCESS, payload: result.data });
+  } catch (error) {
+    dispatch({ type: UPDATE_USER_FAILURE, payload: error });
+  }
+  timeOut(dispatch);
+};
+
 export const deleteUser = (userId) => async (dispatch) => {
   dispatch({ type: DELETE_USER_START });
   try {
@@ -59,4 +78,5 @@ export const deleteUser = (userId) => async (dispatch) => {
   } catch (error) {
     dispatch({ type: DELETE_USER_FAILURE, payload: error });
   }
+  timeOut(dispatch);
 };
