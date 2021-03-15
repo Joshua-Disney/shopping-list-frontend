@@ -462,6 +462,7 @@ const Settings = (props) => {
                 ...(state.updatedValue && { password: state.updatedValue }),
                 userId: props.user_id,
               });
+              setState({ ...initialState });
             }}
           >
             <h3 className="text-lg leading-6 font-medium text-gray-900">
