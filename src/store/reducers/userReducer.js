@@ -5,18 +5,24 @@ import {
   CREATE_USER_START,
   CREATE_USER_SUCCESS,
   CREATE_USER_FAILURE,
+  UPDATE_USER_START,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAILURE,
   DELETE_USER_START,
   DELETE_USER_SUCCESS,
   DELETE_USER_FAILURE,
+  REMOVE_STATUS,
 } from "../actions";
 
 const initialState = {
   isGetting: false,
   isCreating: false,
+  isUpdating: false,
   isDeleting: false,
   users: [],
   messge: "",
   error: null,
+  status: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -44,7 +50,13 @@ const userReducer = (state = initialState, action) => {
         error: action.payload.error,
       };
     case CREATE_USER_START:
-      return { ...state, isCreating: true, message: "", error: null };
+      return {
+        ...state,
+        isCreating: true,
+        message: "",
+        error: null,
+        status: null,
+      };
     case CREATE_USER_SUCCESS:
       return {
         ...state,
@@ -52,6 +64,7 @@ const userReducer = (state = initialState, action) => {
         users: action.payload.users,
         message: action.payload.message,
         error: null,
+        status: action.payload.status,
       };
     case CREATE_USER_FAILURE:
       return {
@@ -59,6 +72,31 @@ const userReducer = (state = initialState, action) => {
         isCreating: false,
         message: action.payload.message,
         error: action.payload.error,
+        status: action.payload.status,
+      };
+    case UPDATE_USER_START:
+      return {
+        ...state,
+        isUpdating: true,
+        message: "",
+        error: null,
+        status: null,
+      };
+    case UPDATE_USER_SUCCESS:
+      return {
+        ...state,
+        isUpdating: false,
+        message: action.payload.message,
+        error: null,
+        status: action.payload.status,
+      };
+    case UPDATE_USER_FAILURE:
+      return {
+        ...state,
+        isUpdating: false,
+        message: action.payload.message,
+        error: action.payload.error,
+        status: action.payload.status,
       };
     case DELETE_USER_START:
       return {
@@ -80,6 +118,11 @@ const userReducer = (state = initialState, action) => {
         isDeleting: false,
         message: action.payload.message,
         error: action.payload.error,
+      };
+    case REMOVE_STATUS:
+      return {
+        ...state,
+        status: null,
       };
     default:
       return state;
