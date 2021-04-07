@@ -12,6 +12,8 @@ import {
 
 const initialState = {
   isCreating: false,
+  isEditing: false,
+  isDeleting: false,
   message: "",
   error: null,
 };
@@ -36,6 +38,48 @@ const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         isCreating: false,
+        message: action.payload.message,
+        error: action.payload.error,
+      };
+    case EDIT_PROFILE_START:
+      return {
+        ...state,
+        isEditing: true,
+        message: "",
+        error: null,
+      };
+    case EDIT_PROFILE_SUCCESS:
+      return {
+        ...state,
+        isEditing: false,
+        message: action.payload.message,
+        error: null,
+      };
+    case EDIT_PROFILE_FAILURE:
+      return {
+        ...state,
+        isEditing: false,
+        message: action.payload.message,
+        error: action.payload.error,
+      };
+    case DELETE_PROFILE_START:
+      return {
+        ...state,
+        isDeleting: true,
+        message: "",
+        error: null,
+      };
+    case DELETE_PROFILE_SUCCESS:
+      return {
+        ...state,
+        isDeleting: false,
+        message: action.payload.message,
+        error: null,
+      };
+    case DELETE_PROFILE_FAILURE:
+      return {
+        ...state,
+        isDeleting: false,
         message: action.payload.message,
         error: action.payload.error,
       };
