@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import ListEditor from "../listEditor";
+
 import { deleteNeed, deleteWant } from "../../store/actions";
 import ButtonLink from "../../ui/ButtonLink";
 import Close from "../../ui/Close";
@@ -28,6 +30,7 @@ const Profile = (props) => {
     <section>
       <div className="border-b border-gray-200 space-y-3 sm:flex sm:items-center sm:justify-between sm:space-x-4 sm:space-y-0">
         <H3>{name}</H3>
+        <ListEditor name={name} />
         <div className="flex justify-end">
           <ButtonLink
             to={{
