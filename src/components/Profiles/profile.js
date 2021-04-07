@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import ListEditor from "../listEditor";
+
 import { deleteNeed, deleteWant } from "../../store/actions";
 import ButtonLink from "../../ui/ButtonLink";
 import Close from "../../ui/Close";
@@ -22,11 +24,13 @@ const Profile = (props) => {
   // Grid format?
 
   const { needs, wants, name } = props.profile || {};
+  //comment to push to Github.  It's ok.  You can do this.  Take a deep breath.  I believe in you.
 
   return (
     <section>
       <div className="border-b border-gray-200 space-y-3 sm:flex sm:items-center sm:justify-between sm:space-x-4 sm:space-y-0">
         <H3>{name}</H3>
+        <ListEditor name={name} />
         <div className="flex justify-end">
           <ButtonLink
             to={{
@@ -62,7 +66,9 @@ const Profile = (props) => {
                         event.preventDefault();
                         props.deleteNeed(need.id);
                       }}
-                      className={`cursor-pointer rounded-full ${isScreenSmall ? 'p-2' : 'p-4'} hover:bg-green-100 hover:text-red-500 transition duration-200`}
+                      className={`cursor-pointer rounded-full ${
+                        isScreenSmall ? "p-2" : "p-4"
+                      } hover:bg-green-100 hover:text-red-500 transition duration-200`}
                     >
                       <Close className="w-3.5 h-3.5 fill-current" />
                     </div>
@@ -86,7 +92,9 @@ const Profile = (props) => {
                         event.preventDefault();
                         props.deleteWant(want.id);
                       }}
-                      className={`cursor-pointer rounded-full ${isScreenSmall ? 'p-2' : 'p-4'} hover:bg-green-100 hover:text-red-500 transition duration-200`}
+                      className={`cursor-pointer rounded-full ${
+                        isScreenSmall ? "p-2" : "p-4"
+                      } hover:bg-green-100 hover:text-red-500 transition duration-200`}
                     >
                       <Close className="w-3.5 h-3.5 fill-current" />
                     </div>
