@@ -22,6 +22,7 @@ const Profile = (props) => {
   // Grid format?
 
   const { needs, wants, name } = props.profile || {};
+  //comment to push to Github.  It's ok.  You can do this.  Take a deep breath.  I believe in you.
 
   return (
     <section>
@@ -62,7 +63,9 @@ const Profile = (props) => {
                         event.preventDefault();
                         props.deleteNeed(need.id);
                       }}
-                      className={`cursor-pointer rounded-full ${isScreenSmall ? 'p-2' : 'p-4'} hover:bg-green-100 hover:text-red-500 transition duration-200`}
+                      className={`cursor-pointer rounded-full ${
+                        isScreenSmall ? "p-2" : "p-4"
+                      } hover:bg-green-100 hover:text-red-500 transition duration-200`}
                     >
                       <Close className="w-3.5 h-3.5 fill-current" />
                     </div>
@@ -86,7 +89,9 @@ const Profile = (props) => {
                         event.preventDefault();
                         props.deleteWant(want.id);
                       }}
-                      className={`cursor-pointer rounded-full ${isScreenSmall ? 'p-2' : 'p-4'} hover:bg-green-100 hover:text-red-500 transition duration-200`}
+                      className={`cursor-pointer rounded-full ${
+                        isScreenSmall ? "p-2" : "p-4"
+                      } hover:bg-green-100 hover:text-red-500 transition duration-200`}
                     >
                       <Close className="w-3.5 h-3.5 fill-current" />
                     </div>
