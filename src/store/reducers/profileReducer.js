@@ -14,6 +14,7 @@ const initialState = {
   isCreating: false,
   isEditing: false,
   isDeleting: false,
+  name: "",
   message: "",
   error: null,
 };
@@ -46,12 +47,14 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         isEditing: true,
         message: "",
+        name: "",
         error: null,
       };
     case EDIT_PROFILE_SUCCESS:
       return {
         ...state,
         isEditing: false,
+        name: action.payload.name,
         message: action.payload.message,
         error: null,
       };
@@ -59,6 +62,7 @@ const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         isEditing: false,
+        name: "",
         message: action.payload.message,
         error: action.payload.error,
       };

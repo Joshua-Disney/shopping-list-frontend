@@ -29,7 +29,6 @@ const Profile = (props) => {
   return (
     <section>
       <div className="border-b border-gray-200 space-y-3 sm:flex sm:items-center sm:justify-between sm:space-x-4 sm:space-y-0">
-        <H3>{name}</H3>
         <ListEditor name={name} id={id} />
         <div className="flex justify-end">
           <ButtonLink

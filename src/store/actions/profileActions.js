@@ -1,5 +1,7 @@
 import axiosWithAuth from "../../components/Helpers/axiosWithAuth";
 
+import { getAccount } from "./index";
+
 const baseUrl = `${process.env.REACT_APP_SERVER}/api/profiles`;
 
 export const CREATE_PROFILE_START = "CREATE_PROFILE_START";
@@ -27,11 +29,14 @@ export const createProfile = (newProfile) => async (dispatch) => {
 export const editProfile = (editedProfile, id) => async (dispatch) => {
   dispatch({ type: EDIT_PROFILE_START });
   try {
-    const result = await axiosWithAuth().put(`${baseUrl}/${id}`, editedProfile);
+    const result = await axiosWithAuth().put(`${baseUrl}/${id}`, {
+      name: editedProfile,
+    });
     dispatch({ type: EDIT_PROFILE_SUCCESS, payload: result.data });
   } catch (error) {
     dispatch({ type: EDIT_PROFILE_FAILURE, payload: error });
   }
+  getAccount(localStorage.getItem("account_id"))(dispatch);
 };
 
 export const deleteProfile = (id) => async (dispatch) => {

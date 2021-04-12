@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { connect } from "react-redux"
 
-import { editProfile, deleteProfile } from "../store/actions"
+import { editProfile, deleteProfile, getAccount } from "../store/actions"
 import { H3 } from "../ui/Titles"
 
 const ListEditor = (props) => {
@@ -22,21 +22,20 @@ const ListEditor = (props) => {
     }
 
     const sendEdit = async () => {
-        await editProfile(value, props.id)
+        await props.editProfile(value, props.id)
         setState({ ...state, isEditing: false })
     }
 
     return (
         <div className="flex???">
             {state.isEditing ? 
-                <form>
+                <div>
                     <input autoFocus onChange={(event) => setValue(event.target.value)} value={value} placeholder={props.name} />
                     <button onClick={sendEdit}>Confirm</button>
                     <button onClick={cancelEdit}>Cancel</button>
-                </form>
+                </div>
             : <div>
                 <H3>{props.name}</H3>
-                <H3>{props.id}</H3>
                 <button>Pencil button</button>
                 <section className="hidden-p-tag">
                     <button onClick={changeToTrue} name="isEditing">Edit</button>
