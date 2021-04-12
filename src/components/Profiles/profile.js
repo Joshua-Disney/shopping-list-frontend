@@ -23,14 +23,14 @@ const Profile = (props) => {
   // Lists as two columns or one?
   // Grid format?
 
-  const { needs, wants, name } = props.profile || {};
+  const { needs, wants, name, id } = props.profile || {};
   //comment to push to Github.  It's ok.  You can do this.  Take a deep breath.  I believe in you.
 
   return (
     <section>
       <div className="border-b border-gray-200 space-y-3 sm:flex sm:items-center sm:justify-between sm:space-x-4 sm:space-y-0">
         <H3>{name}</H3>
-        <ListEditor name={name} />
+        <ListEditor name={name} id={id} />
         <div className="flex justify-end">
           <ButtonLink
             to={{

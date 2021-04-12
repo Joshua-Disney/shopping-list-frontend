@@ -17,16 +17,26 @@ const ListEditor = (props) => {
         setState({ ...state, [event.target.name] : true })
     }
 
+    const cancelEdit = () => {
+        setState({ ...state, isEditing : false })
+    }
+
+    const sendEdit = async () => {
+        await editProfile(value, props.id)
+        setState({ ...state, isEditing: false })
+    }
+
     return (
         <div className="flex???">
             {state.isEditing ? 
                 <form>
-                    <input onChange={(event) => setValue(event.target.value)} value={value} placeholder={props.name} />
-                    <button>Confirm</button>
-                    <button>Cancel</button>
+                    <input autoFocus onChange={(event) => setValue(event.target.value)} value={value} placeholder={props.name} />
+                    <button onClick={sendEdit}>Confirm</button>
+                    <button onClick={cancelEdit}>Cancel</button>
                 </form>
             : <div>
                 <H3>{props.name}</H3>
+                <H3>{props.id}</H3>
                 <button>Pencil button</button>
                 <section className="hidden-p-tag">
                     <button onClick={changeToTrue} name="isEditing">Edit</button>
