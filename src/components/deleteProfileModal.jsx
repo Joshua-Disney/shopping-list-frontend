@@ -11,7 +11,7 @@ const DeleteProfileModal = (props) => {
         await props.deleteProfile(props.id)
     }
     return (
-        < Modal>
+        < Modal showModal handleClose={props.handleClose}>
             <p>Are you sure you want to delete this list?</p>
             <button onClick={confirmDelete}>Confirm</button>
         </Modal>

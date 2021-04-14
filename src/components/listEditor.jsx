@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { connect } from "react-redux"
 
-import { editProfile, deleteProfile, getAccount } from "../store/actions"
+import { editProfile, deleteProfile } from "../store/actions"
 import { H3 } from "../ui/Titles"
 
 import DeleteProfileModal from "./deleteProfileModal"
@@ -16,6 +16,7 @@ const ListEditor = (props) => {
     const [value, setValue] = useState(props.name || "")
 
     const changeToTrue = (event) => {
+        console.log(event.target)
         setState({ ...state, [event.target.name] : true })
     }
 
@@ -25,8 +26,9 @@ const ListEditor = (props) => {
 
     const sendEdit = async () => {
         await props.editProfile(value, props.id)
-        setState({ ...state, isEditing: false })
+        setState({ ...state, isEditing : false })
     }
+
 
     return (
         <div className="flex???">
@@ -36,15 +38,15 @@ const ListEditor = (props) => {
                     <button onClick={sendEdit}>Confirm</button>
                     <button onClick={cancelEdit}>Cancel</button>
                 </div>
-            : state.idDeleting ? 
-                <DeleteProfileModal id={props.id} />
+            : state.isDeleting ? 
+                <DeleteProfileModal id={props.id} handleClose={() => setState({ ...state, isDeleting : false })}/>
             :
             <div>
                 <H3>{props.name}</H3>
                 <button>Pencil button</button>
                 <section className="hidden-p-tag">
                     <button onClick={changeToTrue} name="isEditing">Edit</button>
-                    <button name="isDeleting">Delete</button>
+                    <button onClick={changeToTrue} name="isDeleting">Delete</button>
                 </section>
             </div>
             }
