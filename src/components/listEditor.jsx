@@ -4,6 +4,8 @@ import { connect } from "react-redux"
 import { editProfile, deleteProfile, getAccount } from "../store/actions"
 import { H3 } from "../ui/Titles"
 
+import DeleteProfileModal from "./deleteProfileModal"
+
 const ListEditor = (props) => {
 
     const [state, setState] = useState({
@@ -34,7 +36,10 @@ const ListEditor = (props) => {
                     <button onClick={sendEdit}>Confirm</button>
                     <button onClick={cancelEdit}>Cancel</button>
                 </div>
-            : <div>
+            : state.idDeleting ? 
+                <DeleteProfileModal id={props.id} />
+            :
+            <div>
                 <H3>{props.name}</H3>
                 <button>Pencil button</button>
                 <section className="hidden-p-tag">
